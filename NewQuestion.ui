@@ -19,6 +19,9 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -69,7 +72,10 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Question:</string>
+        <string>&amp;Question:</string>
+       </property>
+       <property name="buddy">
+        <cstring>textEdit_2</cstring>
        </property>
       </widget>
      </item>
@@ -92,7 +98,10 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Answer:</string>
+        <string>&amp;Answer:</string>
+       </property>
+       <property name="buddy">
+        <cstring>textEdit</cstring>
        </property>
       </widget>
      </item>
@@ -156,6 +165,14 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>textEdit_2</tabstop>
+  <tabstop>textEdit</tabstop>
+  <tabstop>okButton</tabstop>
+  <tabstop>cancelButton</tabstop>
+  <tabstop>imageAddButton</tabstop>
+  <tabstop>soundAddButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
