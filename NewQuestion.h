@@ -14,9 +14,17 @@ class NewQuestion : public QDialog
 public:
     explicit NewQuestion(QWidget *parent = nullptr);
     ~NewQuestion();
+    QString getQuestion();
+    QString getAnswer();
+
+private slots:
+    void on_okButton_clicked();
+
 
 private:
     Ui::NewQuestion *ui;
+    QString question;
+    QString answer;
 };
 
 #endif // NEWQUESTION_H

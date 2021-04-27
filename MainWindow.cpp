@@ -1,7 +1,7 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
-#include "NewQuestion.h"
-
+#include "Card.h"
+#include <iostream>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     //ui->imageLabel->setPixmap(img);
     ui->imageLabel->setScaledContents(true);
     //ui->imageLabel->setPixmap(img.scaled(rect.height(), rect.height()));
+
 }
 
 MainWindow::~MainWindow()
@@ -25,9 +26,18 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionNew_question_triggered()
 {
-    NewQuestion *nq = new NewQuestion;
+    //NewQuestion *nq = new NewQuestion();
+    //nq->show();
+    nq = new NewQuestion(this);
     nq->show();
+    QString x = nq->getAnswer();
+    QString y = nq->getQuestion();
+    std::cout<<x.toStdString()<<" "<<y.toStdString()<<std::endl;
+    ui->label->setText(x);
+    ui->label_2->setText(y);
+    //nq->visi
 }
+
 
 void MainWindow::on_actionExit_triggered()
 {
