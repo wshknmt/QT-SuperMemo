@@ -17,6 +17,9 @@ public:
     QString getQuestion();
     QString getAnswer();
 
+signals:
+    void newQuestionReady(QString, QString);
+
 private slots:
     void on_okButton_clicked();
 

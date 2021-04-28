@@ -8,5 +8,6 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.setWindowTitle("SuperMemo");
     w.show();
+    w.setDefaultImage();
     return a.exec();
 }

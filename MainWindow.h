@@ -15,12 +15,17 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void setDefaultImage();
 
 private slots:
 
     void on_actionNew_question_triggered();
 
     void on_actionExit_triggered();
+
+    void on_showAnswerButton_clicked();
+
+    void on_newQuestionAdded(QString, QString);
 
 private:
     Ui::MainWindow *ui;

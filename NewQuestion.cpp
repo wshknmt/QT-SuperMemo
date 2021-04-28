@@ -29,5 +29,6 @@ void NewQuestion::on_okButton_clicked()
 {
     answer = ui->textEdit->toPlainText();
     question = ui->textEdit_2->toPlainText();
+    emit newQuestionReady(question, answer);
     close();
 }
