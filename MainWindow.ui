@@ -166,7 +166,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QTextBrowser" name="textBrowser">
+           <widget class="QTextBrowser" name="questionTextBrowser">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
               <horstretch>0</horstretch>
@@ -203,7 +203,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QTextBrowser" name="textBrowser_2">
+           <widget class="QTextBrowser" name="answerTextBrowser">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
               <horstretch>0</horstretch>

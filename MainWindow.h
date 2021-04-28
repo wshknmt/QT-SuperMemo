@@ -3,7 +3,8 @@
 
 #include <QMainWindow>
 #include "NewQuestion.h"
-
+#include "Card.h"
+#include "Course.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -16,7 +17,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void setDefaultImage();
-
+    void updateProgressBar();
+signals:
+    void questionAvailable();
 private slots:
 
     void on_actionNew_question_triggered();
@@ -27,8 +30,17 @@ private slots:
 
     void on_newQuestionAdded(QString, QString);
 
+    void on_startLearning();
+
+    void on_yesButton_clicked();
+
+    void on_noButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     NewQuestion *nq;
+    Card *newCard;
+    Card *card;
+    Course *course;
 };
 #endif // MAINWINDOW_H
