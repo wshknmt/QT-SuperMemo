@@ -16,6 +16,7 @@ NewQuestion::NewQuestion(QWidget *parent) :
     ui->okButton->setEnabled(false);
     answer = "";
     question = "";
+    soundPath.clear();
 }
 
 NewQuestion::~NewQuestion()
@@ -37,7 +38,7 @@ void NewQuestion::on_okButton_clicked()
 {
     answer = ui->textEdit->toPlainText();
     question = ui->textEdit_2->toPlainText();
-    emit newQuestionReady(question, answer, image);
+    emit newQuestionReady(question, answer, image, soundPath);
     close();
 }
 
@@ -76,5 +77,13 @@ void NewQuestion::on_imageAddButton_clicked()
         "Open image", QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("JPG file (*.jpg *.jpeg);; PNG fils (*.png);; BMP file (*.bmp)") );
     QPixmap imagee(imagePath);
     image = imagee;
+
+}
+
+void NewQuestion::on_soundAddButton_clicked()
+{
+    ui->soundAddButton->setEnabled(false);
+    ui->soundAddButton->setText("Sound added");
+    soundPath = QFileDialog::getOpenFileName(this, "Open Sound", QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("Wav file (*.wav)") );
 
 }

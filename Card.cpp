@@ -1,11 +1,12 @@
 #include "Card.h"
 //#include <QPixmap>
 
-Card::Card(QString q, QString a, QPixmap i /* QSound &s*/)
+Card::Card(QString q, QString a, QPixmap i, QString s)
 {
     m_question = q;
     m_answer = a;
     m_image = i;
+    m_soundPath = s;
    // m_sound = s;
 }
 
@@ -22,4 +23,9 @@ QString Card::answer() const
 QPixmap Card::image() const
 {
     return m_image;
+}
+
+QString Card::soundPath() const
+{
+    return m_soundPath;
 }

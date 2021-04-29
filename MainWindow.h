@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QtMultimedia/QSound>
 #include "NewQuestion.h"
 #include "Card.h"
 #include "Course.h"
@@ -30,7 +31,7 @@ private slots:
 
     void on_showAnswerButton_clicked();
 
-    void on_newQuestionAdded(QString, QString, QPixmap);
+    void on_newQuestionAdded(QString, QString, QPixmap, QString);
 
     void on_startLearning();
 
@@ -39,6 +40,8 @@ private slots:
     void on_noButton_clicked();
 
     void on_actionDelete_Question_triggered();
+
+    void on_playButton_clicked();
 
 private:
     Ui::MainWindow *ui;

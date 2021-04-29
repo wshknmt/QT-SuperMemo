@@ -2,6 +2,8 @@
 #include "ui_MainWindow.h"
 #include "Card.h"
 #include <iostream>
+
+#include <unistd.h>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -44,9 +46,9 @@ void MainWindow::on_showAnswerButton_clicked()
     ui->actionDelete_Question->setEnabled(false);
 }
 
-void MainWindow::on_newQuestionAdded(QString question, QString answer, QPixmap image)
+void MainWindow::on_newQuestionAdded(QString question, QString answer, QPixmap image, QString soundPath)
 {
-    newCard = new Card(question, answer, image);
+    newCard = new Card(question, answer, image, soundPath);
     course->addCardToRepeat(newCard);
     course->incrementCardsCounter();
     updateProgressBar();
@@ -98,6 +100,12 @@ void MainWindow::on_startLearning()
         setImage(card->image());
     else
         setDefaultImage();
+    if(!card->soundPath().isEmpty())
+    {
+        //QSound sound(card->soundPath());
+        ui->playButton->setEnabled(true);
+        ui->progressSlider->setEnabled(true);
+    }
 
 }
 
@@ -148,4 +156,19 @@ void MainWindow::on_actionDelete_Question_triggered()
         if (course->getSizeCardsToRepeat() >= 1)
             emit questionAvailable();
     }
+}
+
+void MainWindow::on_playButton_clicked()
+{
+    QSound::play(card->soundPath());
+    //sleep(2);
+    //QSound::stop(card->soundPath());
+   // QSound::stop();
+   // QSound sound(card->soundPath());
+   // sound.play();
+   // sleep(3);
+   // if(!sound.isFinished())
+   //     ui->label->setText("trwa");
+
+    ui->playButton->setEnabled(false);
 }
