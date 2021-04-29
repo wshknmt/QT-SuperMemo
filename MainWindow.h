@@ -36,6 +36,8 @@ private slots:
 
     void on_noButton_clicked();
 
+    void on_actionDelete_Question_triggered();
+
 private:
     Ui::MainWindow *ui;
     NewQuestion *nq;

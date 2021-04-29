@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->yesButton->setEnabled(false);
     ui->noButton->setEnabled(false);
     ui->progressSlider->setEnabled(false);
+    ui->actionDelete_Question->setEnabled(false);
     connect(this, &MainWindow::questionAvailable, this, &MainWindow::on_startLearning);
    // QPixmap img(":/images/default_image.jpg");
    // QRect rect = ui->verticalLayout_4->geometry();
@@ -58,6 +59,7 @@ void MainWindow::on_showAnswerButton_clicked()
     ui->answerTextBrowser->setText(card->answer());
     ui->yesButton->setEnabled(true);
     ui->noButton->setEnabled(true);
+    ui->actionDelete_Question->setEnabled(false);
 }
 
 void MainWindow::on_newQuestionAdded(QString question, QString answer)
@@ -93,6 +95,7 @@ void MainWindow::on_startLearning()
     card = course->getFirstCardToRepeat();
     ui->showAnswerButton->setEnabled(true);
     ui->questionTextBrowser->setText(card->question());
+    ui->actionDelete_Question->setEnabled(true);
 
 }
 
@@ -118,4 +121,26 @@ void MainWindow::on_noButton_clicked()
     ui->questionTextBrowser->clear();
     ui->answerTextBrowser->clear();
     emit questionAvailable();
+}
+
+void MainWindow::on_actionDelete_Question_triggered()
+{
+    QMessageBox msg;
+    msg.setText("Are you sure you want to delete this question?");
+    msg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    msg.setDefaultButton(QMessageBox::No);
+    int ret = msg.exec();
+    if (ret == QMessageBox::Yes)
+    {
+        course->removeFirstCardToRepeat();
+        course->decrementCardsCounter();
+        ui->showAnswerButton->setEnabled(false);
+        updateProgressBar();
+        ui->questionTextBrowser->clear();
+        ui->answerTextBrowser->clear();
+        if (course->getSizeCardsToRepeat() >= 1)
+            emit questionAvailable();
+    }
+
+
 }

@@ -52,3 +52,8 @@ void Course::incrementCardsCounter()
 {
     cardsCounter++;
 }
+
+void Course::decrementCardsCounter()
+{
+    cardsCounter--;
+}

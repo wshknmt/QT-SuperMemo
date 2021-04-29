@@ -2,6 +2,7 @@
 #define NEWQUESTION_H
 
 #include <QDialog>
+#include <QMessageBox>
 
 namespace Ui {
 class NewQuestion;
@@ -23,6 +24,12 @@ signals:
 private slots:
     void on_okButton_clicked();
 
+
+    void on_cancelButton_clicked();
+
+    void on_textEdit_2_textChanged();
+
+    void on_textEdit_textChanged();
 
 private:
     Ui::NewQuestion *ui;
