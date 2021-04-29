@@ -21,6 +21,7 @@ public:
     int getCardsCounter();
     Card* getFirstCardToRepeat();
     int getSizeCardsToRepeat();
+    int getSizeCardsRepeated();
     void incrementCardsCounter();
     void decrementCardsCounter();
 

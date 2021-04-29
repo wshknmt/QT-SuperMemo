@@ -24,7 +24,6 @@ signals:
 private slots:
     void on_okButton_clicked();
 
-
     void on_cancelButton_clicked();
 
     void on_textEdit_2_textChanged();

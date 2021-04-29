@@ -18,6 +18,7 @@ public:
     ~MainWindow();
     void setDefaultImage();
     void updateProgressBar();
+    void updateStatusLabel();
 signals:
     void questionAvailable();
 private slots:

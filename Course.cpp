@@ -8,19 +8,11 @@ Course::Course(QObject *parent) : QObject(parent)
 void Course::addCardToRepeat(Card* card)
 {
     cardsToRepeat.append(card);
-    //cardsCounter++;
-    //if (cardsToRepeat.length() == 1)
-       // emit
-        //return;
 }
 
 void Course::addCardRepeated(Card* card)
 {
     cardsRepeated.append(card);
-    //cardsCounter++;
-    //if (cardsToRepeat.length() == 1)
-       // emit
-        //return;
 }
 
 void Course::removeFirstCardToRepeat()
@@ -46,6 +38,11 @@ Card* Course::getFirstCardToRepeat()
 int Course::getSizeCardsToRepeat()
 {
     return cardsToRepeat.length();
+}
+
+int Course::getSizeCardsRepeated()
+{
+    return cardsRepeated.length();
 }
 
 void Course::incrementCardsCounter()
