@@ -44,9 +44,9 @@ void MainWindow::on_showAnswerButton_clicked()
     ui->actionDelete_Question->setEnabled(false);
 }
 
-void MainWindow::on_newQuestionAdded(QString question, QString answer)
+void MainWindow::on_newQuestionAdded(QString question, QString answer, QPixmap image)
 {
-    newCard = new Card(question, answer);
+    newCard = new Card(question, answer, image);
     course->addCardToRepeat(newCard);
     course->incrementCardsCounter();
     updateProgressBar();
@@ -61,6 +61,12 @@ void MainWindow::setDefaultImage()
     ui->imageLabel->setPixmap(img.scaled(rect.height(), rect.height()));
 }
 
+void MainWindow::setImage(QPixmap image)
+{
+    QRect rect = ui->verticalLayout_4->geometry();
+    ui->imageLabel->setPixmap(image.scaled(rect.height(), rect.height()));
+}
+
 void MainWindow::updateProgressBar()
 {
     int val = 100 - course->getSizeCardsToRepeat() * 100 / course->getCardsCounter();
@@ -70,7 +76,13 @@ void MainWindow::updateProgressBar()
 void MainWindow::updateStatusLabel()
 {
     if(course->getCardsCounter() == course->getSizeCardsRepeated() && course->getCardsCounter() != 0)
+    {
         ui->statusLabel->setText("Congratulations, you learned all today :)");
+        QPixmap img(":/images/123.png");
+        setImage(img);
+    }
+
+
     else
         ui->statusLabel->setText(QString("All Questions: " + QString::number(course->getCardsCounter()) + " Not remembered: " + QString::number(course->getSizeCardsToRepeat()) +
                                          " Remembered: " + QString::number(course->getSizeCardsRepeated())));
@@ -82,6 +94,11 @@ void MainWindow::on_startLearning()
     ui->showAnswerButton->setEnabled(true);
     ui->questionTextBrowser->setText(card->question());
     ui->actionDelete_Question->setEnabled(true);
+    if(!card->image().isNull())
+        setImage(card->image());
+    else
+        setDefaultImage();
+
 }
 
 void MainWindow::on_yesButton_clicked()
@@ -90,6 +107,7 @@ void MainWindow::on_yesButton_clicked()
     ui->noButton->setEnabled(false);
     course->removeFirstCardToRepeat();
     course->addCardRepeated(card);
+    setDefaultImage();
     updateProgressBar();
     updateStatusLabel();
     ui->questionTextBrowser->clear();
@@ -104,6 +122,7 @@ void MainWindow::on_noButton_clicked()
     ui->noButton->setEnabled(false);
     course->removeFirstCardToRepeat();
     course->addCardToRepeat(card);
+    setDefaultImage();
     ui->questionTextBrowser->clear();
     ui->answerTextBrowser->clear();
     emit questionAvailable();
@@ -125,6 +144,7 @@ void MainWindow::on_actionDelete_Question_triggered()
         updateStatusLabel();
         ui->questionTextBrowser->clear();
         ui->answerTextBrowser->clear();
+        setDefaultImage();
         if (course->getSizeCardsToRepeat() >= 1)
             emit questionAvailable();
     }

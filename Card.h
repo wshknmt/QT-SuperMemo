@@ -4,21 +4,22 @@
 #include <QObject>
 #include <QtMultimedia/QSound>
 #include <QImage>
+#include <QPixmap>
 
 class Card : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString question READ question)
     Q_PROPERTY(QString answer READ answer)
-   // Q_PROPERTY(QImage image READ image)
+    Q_PROPERTY(QPixmap image READ image)
    // Q_PROPERTY(QSound sound READ sound)
 
 
 public:
-    explicit Card(QString q, QString a/*, QImage i, QSound &s*/);
+    explicit Card(QString q, QString a, QPixmap i /*, QSound &s*/);
     QString question() const;
     QString answer() const;
-    //QImage image() const;
+    QPixmap image() const;
     //QSound sound() const;
 
 signals:
@@ -26,7 +27,7 @@ signals:
 private:
     QString m_question;
     QString m_answer;
-    //QImage m_image;
+    QPixmap m_image;
     //QSound m_sound;
 
 };

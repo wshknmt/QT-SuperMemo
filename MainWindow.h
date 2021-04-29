@@ -17,6 +17,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void setDefaultImage();
+    void setImage(QPixmap image);
     void updateProgressBar();
     void updateStatusLabel();
 signals:
@@ -29,7 +30,7 @@ private slots:
 
     void on_showAnswerButton_clicked();
 
-    void on_newQuestionAdded(QString, QString);
+    void on_newQuestionAdded(QString, QString, QPixmap);
 
     void on_startLearning();
 

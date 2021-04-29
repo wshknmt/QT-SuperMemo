@@ -1,5 +1,8 @@
+#include <QFileDialog>
 #include "NewQuestion.h"
 #include "ui_NewQuestion.h"
+#include <QStandardPaths>
+
 
 NewQuestion::NewQuestion(QWidget *parent) :
     QDialog(parent),
@@ -34,7 +37,7 @@ void NewQuestion::on_okButton_clicked()
 {
     answer = ui->textEdit->toPlainText();
     question = ui->textEdit_2->toPlainText();
-    emit newQuestionReady(question, answer);
+    emit newQuestionReady(question, answer, image);
     close();
 }
 
@@ -63,4 +66,15 @@ void NewQuestion::on_textEdit_textChanged()
         ui->okButton->setEnabled(true);
     else
         ui->okButton->setEnabled(false);
+}
+
+void NewQuestion::on_imageAddButton_clicked()
+{
+    ui->imageAddButton->setEnabled(false);
+    ui->imageAddButton->setText("Image added");
+    imagePath = QFileDialog::getOpenFileName(this,
+        "Open image", QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("JPG file (*.jpg *.jpeg);; PNG fils (*.png);; BMP file (*.bmp)") );
+    QPixmap imagee(imagePath);
+    image = imagee;
+
 }

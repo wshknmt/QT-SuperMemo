@@ -3,5 +3,7 @@
         <file>default_image.jpg</file>
         <file>Icons/photo.png</file>
         <file>Icons/sound.png</file>
+        <file>123.png</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>

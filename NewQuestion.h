@@ -19,7 +19,7 @@ public:
     QString getAnswer();
 
 signals:
-    void newQuestionReady(QString, QString);
+    void newQuestionReady(QString, QString, QPixmap);
 
 private slots:
     void on_okButton_clicked();
@@ -30,10 +30,14 @@ private slots:
 
     void on_textEdit_textChanged();
 
+    void on_imageAddButton_clicked();
+
 private:
     Ui::NewQuestion *ui;
     QString question;
     QString answer;
+    QString imagePath;
+    QPixmap image;
 };
 
 #endif // NEWQUESTION_H
