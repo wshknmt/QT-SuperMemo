@@ -13,9 +13,10 @@ MainWindow::MainWindow(QWidget *parent)
     //statusBar()->showMessage(tr("All Questions: 0 Remembered: 0 Not Remembered: 0"));
     ui->showAnswerButton->setEnabled(false);
     ui->playButton->setEnabled(false);
+    ui->stopButton->setEnabled(false);
     ui->yesButton->setEnabled(false);
     ui->noButton->setEnabled(false);
-    ui->progressSlider->setEnabled(false);
+    //ui->progressSlider->setEnabled(false);
     ui->actionDelete_Question->setEnabled(false);
     connect(this, &MainWindow::questionAvailable, this, &MainWindow::on_startLearning);
 }
@@ -104,7 +105,7 @@ void MainWindow::on_startLearning()
     {
         //QSound sound(card->soundPath());
         ui->playButton->setEnabled(true);
-        ui->progressSlider->setEnabled(true);
+       // ui->progressSlider->setEnabled(true);
     }
 
 }
@@ -113,6 +114,10 @@ void MainWindow::on_yesButton_clicked()
 {
     ui->yesButton->setEnabled(false);
     ui->noButton->setEnabled(false);
+    if(card->soundPath().length() != 0)
+        sound->stop();
+    ui->stopButton->setEnabled(false);
+    ui->playButton->setEnabled(false);
     course->removeFirstCardToRepeat();
     course->addCardRepeated(card);
     setDefaultImage();
@@ -128,6 +133,10 @@ void MainWindow::on_noButton_clicked()
 {
     ui->yesButton->setEnabled(false);
     ui->noButton->setEnabled(false);
+    if(card->soundPath().length() != 0)
+        sound->stop();
+    ui->stopButton->setEnabled(false);
+    ui->playButton->setEnabled(false);
     course->removeFirstCardToRepeat();
     course->addCardToRepeat(card);
     setDefaultImage();
@@ -160,15 +169,20 @@ void MainWindow::on_actionDelete_Question_triggered()
 
 void MainWindow::on_playButton_clicked()
 {
-    QSound::play(card->soundPath());
-    //sleep(2);
-    //QSound::stop(card->soundPath());
-   // QSound::stop();
-   // QSound sound(card->soundPath());
-   // sound.play();
-   // sleep(3);
+    sound = new QSound(card->soundPath());
+    //QSound sound(card->soundPath());
+    sound->play();
    // if(!sound.isFinished())
    //     ui->label->setText("trwa");
 
     ui->playButton->setEnabled(false);
+    ui->stopButton->setEnabled(true);
+}
+
+void MainWindow::on_stopButton_clicked()
+{
+    sound->stop();
+    ui->stopButton->setEnabled(false);
+    ui->playButton->setEnabled(true);
+
 }

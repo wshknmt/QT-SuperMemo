@@ -43,11 +43,14 @@ private slots:
 
     void on_playButton_clicked();
 
+    void on_stopButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     NewQuestion *nq;
     Card *newCard;
     Card *card;
     Course *course;
+    QSound *sound;
 };
 #endif // MAINWINDOW_H
