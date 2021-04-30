@@ -75,8 +75,7 @@ void NewQuestion::on_imageAddButton_clicked()
     ui->imageAddButton->setText("Image added");
     imagePath = QFileDialog::getOpenFileName(this,
         "Open image", QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("JPG file (*.jpg *.jpeg);; PNG fils (*.png);; BMP file (*.bmp)") );
-    QPixmap imagee(imagePath);
-    image = imagee;
+    image.load(imagePath);
 
 }
 

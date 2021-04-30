@@ -80,7 +80,7 @@ void MainWindow::updateStatusLabel()
 {
     if(course->getCardsCounter() == course->getSizeCardsRepeated() && course->getCardsCounter() != 0)
     {
-        ui->statusLabel->setText("Congratulations, you learned all today :)");
+        ui->statusLabel->setText("Congratulations, you learned all for today :)");
         QPixmap img(":/images/123.png");
         setImage(img);
     }
@@ -154,9 +154,13 @@ void MainWindow::on_actionDelete_Question_triggered()
     int ret = msg.exec();
     if (ret == QMessageBox::Yes)
     {
+        if(card->soundPath().length() != 0)
+            sound->stop();
         course->removeFirstCardToRepeat();
         course->decrementCardsCounter();
         ui->showAnswerButton->setEnabled(false);
+        ui->playButton->setEnabled(false);
+        ui->stopButton->setEnabled(false);
         updateProgressBar();
         updateStatusLabel();
         ui->questionTextBrowser->clear();
