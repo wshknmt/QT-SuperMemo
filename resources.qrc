@@ -3,7 +3,8 @@
         <file>default_image.jpg</file>
         <file>Icons/photo.png</file>
         <file>Icons/sound.png</file>
-        <file>123.png</file>
+        <file>congratulations.png</file>
+        <file>Icons/Supermemo-icon.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

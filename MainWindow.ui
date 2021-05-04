@@ -340,6 +340,15 @@
    </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>showAnswerButton</tabstop>
+  <tabstop>yesButton</tabstop>
+  <tabstop>noButton</tabstop>
+  <tabstop>playButton</tabstop>
+  <tabstop>stopButton</tabstop>
+  <tabstop>questionTextBrowser</tabstop>
+  <tabstop>answerTextBrowser</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

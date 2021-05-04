@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     //ui->progressSlider->setEnabled(false);
     ui->actionDelete_Question->setEnabled(false);
     connect(this, &MainWindow::questionAvailable, this, &MainWindow::on_startLearning);
+
 }
 
 MainWindow::~MainWindow()
@@ -81,7 +82,7 @@ void MainWindow::updateStatusLabel()
     if(course->getCardsCounter() == course->getSizeCardsRepeated() && course->getCardsCounter() != 0)
     {
         ui->statusLabel->setText("Congratulations, you learned all for today :)");
-        QPixmap img(":/images/123.png");
+        QPixmap img(":/images/congratulations.png");
         setImage(img);
     }
 
@@ -174,11 +175,8 @@ void MainWindow::on_actionDelete_Question_triggered()
 void MainWindow::on_playButton_clicked()
 {
     sound = new QSound(card->soundPath());
-    //QSound sound(card->soundPath());
+    sound->setLoops(1000);
     sound->play();
-   // if(!sound.isFinished())
-   //     ui->label->setText("trwa");
-
     ui->playButton->setEnabled(false);
     ui->stopButton->setEnabled(true);
 }
