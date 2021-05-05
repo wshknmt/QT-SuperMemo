@@ -32,7 +32,6 @@ private:
     QList <Card*> cardsToRepeat;
     QList <Card*> cardsRepeated;
     int cardsCounter;
-
 };
 
 #endif // COURSE_H

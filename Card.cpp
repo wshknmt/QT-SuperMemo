@@ -7,7 +7,6 @@ Card::Card(QString q, QString a, QPixmap i, QString s)
     m_answer = a;
     m_image = i;
     m_soundPath = s;
-   // m_sound = s;
 }
 
 QString Card::question() const

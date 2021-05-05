@@ -21,7 +21,6 @@ public:
     QString answer() const;
     QPixmap image() const;
     QString soundPath() const;
-    //QSound sound() const;
 
 signals:
 
@@ -30,7 +29,6 @@ private:
     QString m_answer;
     QPixmap m_image;
     QString m_soundPath;
-    //QSound m_sound;
 
 };
 

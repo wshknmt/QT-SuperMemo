@@ -84,5 +84,4 @@ void NewQuestion::on_soundAddButton_clicked()
     ui->soundAddButton->setEnabled(false);
     ui->soundAddButton->setText("Sound added");
     soundPath = QFileDialog::getOpenFileName(this, "Open Sound", QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("Wav file (*.wav)") );
-
 }

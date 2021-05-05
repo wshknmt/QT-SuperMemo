@@ -10,16 +10,15 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     course = new Course(this);
-    //statusBar()->showMessage(tr("All Questions: 0 Remembered: 0 Not Remembered: 0"));
     ui->showAnswerButton->setEnabled(false);
     ui->playButton->setEnabled(false);
     ui->stopButton->setEnabled(false);
     ui->yesButton->setEnabled(false);
     ui->noButton->setEnabled(false);
-    //ui->progressSlider->setEnabled(false);
     ui->actionDelete_Question->setEnabled(false);
+    ui->actionImport->setEnabled(false);
+    ui->actionExport->setEnabled(false);
     connect(this, &MainWindow::questionAvailable, this, &MainWindow::on_startLearning);
-
 }
 
 MainWindow::~MainWindow()
@@ -73,8 +72,13 @@ void MainWindow::setImage(QPixmap image)
 
 void MainWindow::updateProgressBar()
 {
-    int val = 100 - course->getSizeCardsToRepeat() * 100 / course->getCardsCounter();
-    ui->progressBar->setValue(val);
+    if(course->getCardsCounter() > 0)
+    {
+        int val = 100 - course->getSizeCardsToRepeat() * 100 / course->getCardsCounter();
+        ui->progressBar->setValue(val);
+    }
+    else
+        ui->progressBar->setValue(0);
 }
 
 void MainWindow::updateStatusLabel()
@@ -85,8 +89,6 @@ void MainWindow::updateStatusLabel()
         QPixmap img(":/images/congratulations.png");
         setImage(img);
     }
-
-
     else
         ui->statusLabel->setText(QString("All Questions: " + QString::number(course->getCardsCounter()) + " Not remembered: " + QString::number(course->getSizeCardsToRepeat()) +
                                          " Remembered: " + QString::number(course->getSizeCardsRepeated())));
@@ -104,11 +106,8 @@ void MainWindow::on_startLearning()
         setDefaultImage();
     if(!card->soundPath().isEmpty())
     {
-        //QSound sound(card->soundPath());
         ui->playButton->setEnabled(true);
-       // ui->progressSlider->setEnabled(true);
     }
-
 }
 
 void MainWindow::on_yesButton_clicked()
@@ -162,11 +161,12 @@ void MainWindow::on_actionDelete_Question_triggered()
         ui->showAnswerButton->setEnabled(false);
         ui->playButton->setEnabled(false);
         ui->stopButton->setEnabled(false);
+        setDefaultImage();
         updateProgressBar();
         updateStatusLabel();
         ui->questionTextBrowser->clear();
         ui->answerTextBrowser->clear();
-        setDefaultImage();
+
         if (course->getSizeCardsToRepeat() >= 1)
             emit questionAvailable();
     }
@@ -186,5 +186,4 @@ void MainWindow::on_stopButton_clicked()
     sound->stop();
     ui->stopButton->setEnabled(false);
     ui->playButton->setEnabled(true);
-
 }
