@@ -29,8 +29,14 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionNew_question_triggered()
 {
     nq = new NewQuestion(this);
+    nq->setWindowTitle("Add new question");
     connect(nq, &NewQuestion::newQuestionReady, this, &MainWindow::on_newQuestionAdded);
     nq->show();
+    /*NewQuestion dialog(this);
+    if(dialog.exec() )
+    {
+        on_newQuestionAdded({}, {}, {}, {});
+    }*/
 }
 
 void MainWindow::on_actionExit_triggered()
