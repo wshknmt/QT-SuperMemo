@@ -20,6 +20,12 @@ MainWindow::MainWindow(QList <Course*> &coursesList, QWidget *parent)
     setDefaultValues();
     coursesList.append(course);
     courseNumber = coursesList.size()-1;
+    QTextStream(stdout) <<"przed: "<< coursesList.size() << Qt::endl;
+
+    courseList = &coursesList;
+    (*courseList).append(course);
+
+    QTextStream(stdout) <<"po: "<< coursesList.size() << Qt::endl;
 }
 
 MainWindow::MainWindow(QList <Course*> &coursesList, int numberOfSelectedCourse, QWidget *parent)
@@ -29,12 +35,15 @@ MainWindow::MainWindow(QList <Course*> &coursesList, int numberOfSelectedCourse,
     setDefaultValues();
     course = coursesList[numberOfSelectedCourse];
     courseNumber = numberOfSelectedCourse;
+    //courseList = coursesList;
+
 
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+
 }
 
 void MainWindow::on_actionNew_question_triggered()
@@ -66,7 +75,7 @@ void MainWindow::on_showAnswerButton_clicked()
 
 void MainWindow::on_newQuestionAdded(QString question, QString answer, QPixmap image, QString soundPath)
 {
-    newCard = new Card(question, answer, image, soundPath);
+    newCard = new Card(question, answer, image, soundPath, QDate::currentDate());
     course->addCardToRepeat(newCard);
     course->incrementCardsCounter();
     updateProgressBar();

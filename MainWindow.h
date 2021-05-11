@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QtMultimedia/QSound>
+#include <QDate>
+#include <QTextStream>
 #include "NewQuestion.h"
 #include "Card.h"
 #include "Course.h"
@@ -16,9 +18,11 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    MainWindow(Course &loadedCourse, QWidget *parent = nullptr);
+    MainWindow(QList <Course*> &coursesList, QWidget *parent = nullptr);
+    MainWindow(QList <Course*> &coursesList, int numberOfSelectedCourse, QWidget *parent = nullptr);
     ~MainWindow();
     void setDefaultImage();
+    void setDefaultValues();
     void setImage(QPixmap image);
     void updateProgressBar();
     void updateStatusLabel();
@@ -53,5 +57,8 @@ private:
     Card *card;
     Course *course;
     QSound *sound;
+    int courseNumber;
+    QList <Course*> *courseList;
+    //auto *coursesListt;
 };
 #endif // MAINWINDOW_H
