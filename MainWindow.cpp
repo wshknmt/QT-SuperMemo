@@ -8,17 +8,28 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
     course = new Course(this);
-    ui->showAnswerButton->setEnabled(false);
-    ui->playButton->setEnabled(false);
-    ui->stopButton->setEnabled(false);
-    ui->yesButton->setEnabled(false);
-    ui->noButton->setEnabled(false);
-    ui->actionDelete_Question->setEnabled(false);
-    ui->actionImport->setEnabled(false);
-    ui->actionExport->setEnabled(false);
-    connect(this, &MainWindow::questionAvailable, this, &MainWindow::on_startLearning);
+    setDefaultValues();
+}
+
+MainWindow::MainWindow(QList <Course*> &coursesList, QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+{
+    course = new Course(this);
+    setDefaultValues();
+    coursesList.append(course);
+    courseNumber = coursesList.size()-1;
+}
+
+MainWindow::MainWindow(QList <Course*> &coursesList, int numberOfSelectedCourse, QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+{
+    setDefaultValues();
+    course = coursesList[numberOfSelectedCourse];
+    courseNumber = numberOfSelectedCourse;
+
 }
 
 MainWindow::~MainWindow()
@@ -28,15 +39,15 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionNew_question_triggered()
 {
-    nq = new NewQuestion(this);
+    /*nq = new NewQuestion(this);
     nq->setWindowTitle("Add new question");
     connect(nq, &NewQuestion::newQuestionReady, this, &MainWindow::on_newQuestionAdded);
-    nq->show();
-    /*NewQuestion dialog(this);
+    nq->show();*/
+    NewQuestion dialog(this);
     if(dialog.exec() )
     {
-        on_newQuestionAdded({}, {}, {}, {});
-    }*/
+        on_newQuestionAdded(dialog.getQuestion(), dialog.getAnswer(), dialog.getImage(), dialog.getSoundPath());
+    }
 }
 
 void MainWindow::on_actionExit_triggered()
@@ -68,6 +79,21 @@ void MainWindow::setDefaultImage()
     QPixmap img(":/images/default_image.jpg");
     QRect rect = ui->verticalLayout_4->geometry();
     ui->imageLabel->setPixmap(img.scaled(rect.height(), rect.height()));
+}
+
+void MainWindow::setDefaultValues()
+{
+    ui->setupUi(this);
+    ui->showAnswerButton->setEnabled(false);
+    ui->playButton->setEnabled(false);
+    ui->stopButton->setEnabled(false);
+    ui->yesButton->setEnabled(false);
+    ui->noButton->setEnabled(false);
+    ui->actionDelete_Question->setEnabled(false);
+    ui->actionImport->setEnabled(false);
+    ui->actionExport->setEnabled(false);
+    connect(this, &MainWindow::questionAvailable, this, &MainWindow::on_startLearning);
+
 }
 
 void MainWindow::setImage(QPixmap image)

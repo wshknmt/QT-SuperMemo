@@ -16,6 +16,7 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+    MainWindow(Course &loadedCourse, QWidget *parent = nullptr);
     ~MainWindow();
     void setDefaultImage();
     void setImage(QPixmap image);

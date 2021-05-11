@@ -17,9 +17,12 @@ public:
     ~NewQuestion();
     QString getQuestion();
     QString getAnswer();
+    QPixmap getImage();
+    QString getImagePath();
+    QString getSoundPath();
 
 signals:
-    void newQuestionReady(QString, QString, QPixmap, QString);
+   // void newQuestionReady(QString, QString, QPixmap, QString);
 
 private slots:
     void on_okButton_clicked();

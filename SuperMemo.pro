@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     Card.cpp \
     Course.cpp \
+    MainMenuWindow.cpp \
     NewQuestion.cpp \
     main.cpp \
     MainWindow.cpp
@@ -18,10 +19,12 @@ SOURCES += \
 HEADERS += \
     Card.h \
     Course.h \
+    MainMenuWindow.h \
     MainWindow.h \
     NewQuestion.h
 
 FORMS += \
+    MainMenuWindow.ui \
     MainWindow.ui \
     NewQuestion.ui
 

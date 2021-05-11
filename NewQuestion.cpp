@@ -33,12 +33,24 @@ QString NewQuestion::getAnswer()
 {
     return answer;
 }
+QPixmap NewQuestion::getImage()
+{
+    return image;
+}
+QString NewQuestion::getImagePath()
+{
+    return " ";
+}
+QString NewQuestion::getSoundPath()
+{
+    return soundPath;
+}
 
 void NewQuestion::on_okButton_clicked()
 {
     answer = ui->textEdit->toPlainText();
     question = ui->textEdit_2->toPlainText();
-    emit newQuestionReady(question, answer, image, soundPath);
+    //emit newQuestionReady(question, answer, image, soundPath);
     close();
 }
 
