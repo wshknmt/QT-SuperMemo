@@ -12,32 +12,30 @@ MainWindow::MainWindow(QWidget *parent)
     setDefaultValues();
 }
 
-MainWindow::MainWindow(QList <Course*> &coursesList, QWidget *parent)
+MainWindow::MainWindow(QList <Course*> &cList, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     course = new Course(this);
     setDefaultValues();
-    coursesList.append(course);
-    courseNumber = coursesList.size()-1;
-    QTextStream(stdout) <<"przed: "<< coursesList.size() << Qt::endl;
-
-    courseList = &coursesList;
-    (*courseList).append(course);
-
-    QTextStream(stdout) <<"po: "<< coursesList.size() << Qt::endl;
+    coursesList = &cList;
+    (*coursesList).append(course);
+    courseNumber = (*coursesList).size()-1;
 }
 
-MainWindow::MainWindow(QList <Course*> &coursesList, int numberOfSelectedCourse, QWidget *parent)
+MainWindow::MainWindow(QList <Course*> &cList, int numberOfSelectedCourse, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     setDefaultValues();
-    course = coursesList[numberOfSelectedCourse];
+    course = cList[numberOfSelectedCourse];
     courseNumber = numberOfSelectedCourse;
-    //courseList = coursesList;
+    coursesList = &cList;
+}
 
-
+void MainWindow::updateCoursesList()
+{
+    (*coursesList)[courseNumber] = course;
 }
 
 MainWindow::~MainWindow()
@@ -61,7 +59,8 @@ void MainWindow::on_actionNew_question_triggered()
 
 void MainWindow::on_actionExit_triggered()
 {
-    QCoreApplication::quit();
+    //QCoreApplication::quit();
+    close();
 }
 
 void MainWindow::on_showAnswerButton_clicked()

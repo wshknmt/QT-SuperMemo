@@ -26,6 +26,7 @@ public:
     void setImage(QPixmap image);
     void updateProgressBar();
     void updateStatusLabel();
+    void updateCoursesList();
 signals:
     void questionAvailable();
 private slots:
@@ -58,7 +59,7 @@ private:
     Course *course;
     QSound *sound;
     int courseNumber;
-    QList <Course*> *courseList;
-    //auto *coursesListt;
+    QList <Course*> *coursesList;
+
 };
 #endif // MAINWINDOW_H
