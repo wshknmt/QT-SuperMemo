@@ -53,6 +53,7 @@ void MainWindow::on_actionNew_question_triggered()
     NewQuestion dialog(this);
     if(dialog.exec() )
     {
+        //QTextStream(stdout) << "otwarto ekran pytania" << Qt::endl;
         on_newQuestionAdded(dialog.getQuestion(), dialog.getAnswer(), dialog.getImage(), dialog.getSoundPath());
     }
 }

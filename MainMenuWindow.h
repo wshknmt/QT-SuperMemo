@@ -5,6 +5,7 @@
 #include "Card.h"
 #include "Course.h"
 #include "MainWindow.h"
+#include "LearningWindow.h"
 
 namespace Ui {
 class MainMenuWindow;
