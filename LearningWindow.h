@@ -1,26 +1,28 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef LEARNINGWINDOW_H
+#define LEARNINGWINDOW_H
 
-#include <QMainWindow>
+#include <QDialog>
 #include <QtMultimedia/QSound>
 #include <QDate>
 #include <QTextStream>
+#include <QMenu>
 #include "NewQuestion.h"
 #include "Card.h"
 #include "Course.h"
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
+namespace Ui {
+class LearningWindow;
+}
+
+class LearningWindow : public QDialog
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    MainWindow(QList <Course*> &coursesList, QWidget *parent = nullptr);
-    MainWindow(QList <Course*> &coursesList, int numberOfSelectedCourse, QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit LearningWindow(QWidget *parent = nullptr);
+    LearningWindow(QList <Course*> &coursesList, QWidget *parent = nullptr);
+    LearningWindow(QList <Course*> &coursesList, int numberOfSelectedCourse, QWidget *parent = nullptr);
+    ~LearningWindow();
     void setDefaultImage();
     void setDefaultValues();
     void setImage(QPixmap image);
@@ -31,9 +33,9 @@ signals:
     void questionAvailable();
 private slots:
 
-    void on_actionNew_question_triggered();
+   // void on_actionNew_question_triggered();
 
-    void on_actionExit_triggered();
+   // void on_actionExit_triggered();
 
     void on_showAnswerButton_clicked();
 
@@ -45,14 +47,24 @@ private slots:
 
     void on_noButton_clicked();
 
-    void on_actionDelete_Question_triggered();
+    //void on_actionDelete_Question_triggered();
 
     void on_playButton_clicked();
 
     void on_stopButton_clicked();
 
+    //void on_pushButton_clicked();
+
+    //void on_actionImport_triggered();
+
+    void on_newQuestionButton_clicked();
+
+    void on_deleteButton_clicked();
+
+    void on_endButton_clicked();
+
 private:
-    Ui::MainWindow *ui;
+    Ui::LearningWindow *ui;
     NewQuestion *nq;
     Card *newCard;
     Card *card;
@@ -60,6 +72,6 @@ private:
     QSound *sound;
     int courseNumber;
     QList <Course*> *coursesList;
-
 };
-#endif // MAINWINDOW_H
+
+#endif // LEARNINGWINDOW_H

@@ -11,21 +11,21 @@ CONFIG += c++11
 SOURCES += \
     Card.cpp \
     Course.cpp \
+    LearningWindow.cpp \
     MainMenuWindow.cpp \
     NewQuestion.cpp \
-    main.cpp \
-    MainWindow.cpp
+    main.cpp
 
 HEADERS += \
     Card.h \
     Course.h \
+    LearningWindow.h \
     MainMenuWindow.h \
-    MainWindow.h \
     NewQuestion.h
 
 FORMS += \
+    LearningWindow.ui \
     MainMenuWindow.ui \
-    MainWindow.ui \
     NewQuestion.ui
 
 # Default rules for deployment.

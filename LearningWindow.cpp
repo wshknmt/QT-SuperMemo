@@ -1,20 +1,20 @@
-#include "MainWindow.h"
-#include "ui_MainWindow.h"
+#include "LearningWindow.h"
+#include "ui_LearningWindow.h"
 #include "Card.h"
 #include <iostream>
 
 #include <unistd.h>
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+LearningWindow::LearningWindow(QWidget *parent)
+    : QDialog(parent)
+    , ui(new Ui::LearningWindow)
 {
     course = new Course(this);
     setDefaultValues();
 }
 
-MainWindow::MainWindow(QList <Course*> &cList, QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+LearningWindow::LearningWindow(QList <Course*> &cList, QWidget *parent)
+    : QDialog(parent)
+    , ui(new Ui::LearningWindow)
 {
     course = new Course(this);
     setDefaultValues();
@@ -23,9 +23,9 @@ MainWindow::MainWindow(QList <Course*> &cList, QWidget *parent)
     courseNumber = (*coursesList).size()-1;
 }
 
-MainWindow::MainWindow(QList <Course*> &cList, int numberOfSelectedCourse, QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+LearningWindow::LearningWindow(QList <Course*> &cList, int numberOfSelectedCourse, QWidget *parent)
+    : QDialog(parent)
+    , ui(new Ui::LearningWindow)
 {
     setDefaultValues();
     course = cList[numberOfSelectedCourse];
@@ -33,46 +33,48 @@ MainWindow::MainWindow(QList <Course*> &cList, int numberOfSelectedCourse, QWidg
     coursesList = &cList;
 }
 
-void MainWindow::updateCoursesList()
+void LearningWindow::updateCoursesList()
 {
     (*coursesList)[courseNumber] = course;
 }
 
-MainWindow::~MainWindow()
+LearningWindow::~LearningWindow()
 {
     delete ui;
 
 }
 
-void MainWindow::on_actionNew_question_triggered()
+/*void LearningWindow::on_actionNew_question_triggered()
 {
-    /*nq = new NewQuestion(this);
+    nq = new NewQuestion(this);
     nq->setWindowTitle("Add new question");
-    connect(nq, &NewQuestion::newQuestionReady, this, &MainWindow::on_newQuestionAdded);
-    nq->show();*/
+    connect(nq, &NewQuestion::newQuestionReady, this, &LearningWindow::on_newQuestionAdded);
+    nq->show();
     NewQuestion dialog(this);
     if(dialog.exec() )
     {
+        //QTextStream(stdout) << "otwarto ekran pytania" << Qt::endl;
         on_newQuestionAdded(dialog.getQuestion(), dialog.getAnswer(), dialog.getImage(), dialog.getSoundPath());
     }
-}
+}*/
 
-void MainWindow::on_actionExit_triggered()
+/*void LearningWindow::on_actionExit_triggered()
 {
     //QCoreApplication::quit();
     close();
-}
+}*/
 
-void MainWindow::on_showAnswerButton_clicked()
+void LearningWindow::on_showAnswerButton_clicked()
 {
     ui->showAnswerButton->setEnabled(false);
     ui->answerTextBrowser->setText(card->answer());
     ui->yesButton->setEnabled(true);
     ui->noButton->setEnabled(true);
-    ui->actionDelete_Question->setEnabled(false);
+    ui->deleteButton->setEnabled(false);
+    //ui->actionDelete_Question->setEnabled(false);
 }
 
-void MainWindow::on_newQuestionAdded(QString question, QString answer, QPixmap image, QString soundPath)
+void LearningWindow::on_newQuestionAdded(QString question, QString answer, QPixmap image, QString soundPath)
 {
     newCard = new Card(question, answer, image, soundPath, QDate::currentDate());
     course->addCardToRepeat(newCard);
@@ -82,14 +84,14 @@ void MainWindow::on_newQuestionAdded(QString question, QString answer, QPixmap i
     if (course->getSizeCardsToRepeat() == 1)
         emit questionAvailable();
 }
-void MainWindow::setDefaultImage()
+void LearningWindow::setDefaultImage()
 {
     QPixmap img(":/images/default_image.jpg");
     QRect rect = ui->verticalLayout_4->geometry();
     ui->imageLabel->setPixmap(img.scaled(rect.height(), rect.height()));
 }
 
-void MainWindow::setDefaultValues()
+void LearningWindow::setDefaultValues()
 {
     ui->setupUi(this);
     ui->showAnswerButton->setEnabled(false);
@@ -97,20 +99,24 @@ void MainWindow::setDefaultValues()
     ui->stopButton->setEnabled(false);
     ui->yesButton->setEnabled(false);
     ui->noButton->setEnabled(false);
-    ui->actionDelete_Question->setEnabled(false);
-    ui->actionImport->setEnabled(false);
-    ui->actionExport->setEnabled(false);
-    connect(this, &MainWindow::questionAvailable, this, &MainWindow::on_startLearning);
+    ui->deleteButton->setEnabled(false);
+
+   // ui->actionDelete_Question->setEnabled(false);
+   // ui->actionImport->setEnabled(false);
+    //ui->actionExport->setEnabled(false);
+    connect(this, &LearningWindow::questionAvailable, this, &LearningWindow::on_startLearning);
+
+
 
 }
 
-void MainWindow::setImage(QPixmap image)
+void LearningWindow::setImage(QPixmap image)
 {
     QRect rect = ui->verticalLayout_4->geometry();
     ui->imageLabel->setPixmap(image.scaled(rect.height(), rect.height()));
 }
 
-void MainWindow::updateProgressBar()
+void LearningWindow::updateProgressBar()
 {
     if(course->getCardsCounter() > 0)
     {
@@ -121,7 +127,7 @@ void MainWindow::updateProgressBar()
         ui->progressBar->setValue(0);
 }
 
-void MainWindow::updateStatusLabel()
+void LearningWindow::updateStatusLabel()
 {
     if(course->getCardsCounter() == course->getSizeCardsRepeated() && course->getCardsCounter() != 0)
     {
@@ -134,12 +140,13 @@ void MainWindow::updateStatusLabel()
                                          " Remembered: " + QString::number(course->getSizeCardsRepeated())));
 }
 
-void MainWindow::on_startLearning()
+void LearningWindow::on_startLearning()
 {
     card = course->getFirstCardToRepeat();
     ui->showAnswerButton->setEnabled(true);
     ui->questionTextBrowser->setText(card->question());
-    ui->actionDelete_Question->setEnabled(true);
+    //ui->actionDelete_Question->setEnabled(true);
+    ui->deleteButton->setEnabled(true);
     if(!card->image().isNull())
         setImage(card->image());
     else
@@ -150,7 +157,7 @@ void MainWindow::on_startLearning()
     }
 }
 
-void MainWindow::on_yesButton_clicked()
+void LearningWindow::on_yesButton_clicked()
 {
     ui->yesButton->setEnabled(false);
     ui->noButton->setEnabled(false);
@@ -169,7 +176,7 @@ void MainWindow::on_yesButton_clicked()
         emit questionAvailable();
 }
 
-void MainWindow::on_noButton_clicked()
+void LearningWindow::on_noButton_clicked()
 {
     ui->yesButton->setEnabled(false);
     ui->noButton->setEnabled(false);
@@ -185,7 +192,60 @@ void MainWindow::on_noButton_clicked()
     emit questionAvailable();
 }
 
-void MainWindow::on_actionDelete_Question_triggered()
+/*void LearningWindow::on_actionDelete_Question_triggered()
+{
+    QMessageBox msg;
+    msg.setText("Are you sure you want to delete this question?");
+    msg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    msg.setDefaultButton(QMessageBox::No);
+    int ret = msg.exec();
+    if (ret == QMessageBox::Yes)
+    {
+        if(card->soundPath().length() != 0)
+            sound->stop();
+        course->removeFirstCardToRepeat();
+        course->decrementCardsCounter();
+        ui->showAnswerButton->setEnabled(false);
+        ui->playButton->setEnabled(false);
+        ui->stopButton->setEnabled(false);
+        setDefaultImage();
+        updateProgressBar();
+        updateStatusLabel();
+        ui->questionTextBrowser->clear();
+        ui->answerTextBrowser->clear();
+
+        if (course->getSizeCardsToRepeat() >= 1)
+            emit questionAvailable();
+    }
+}*/
+
+void LearningWindow::on_playButton_clicked()
+{
+    sound = new QSound(card->soundPath());
+    sound->setLoops(1000);
+    sound->play();
+    ui->playButton->setEnabled(false);
+    ui->stopButton->setEnabled(true);
+}
+
+void LearningWindow::on_stopButton_clicked()
+{
+    sound->stop();
+    ui->stopButton->setEnabled(false);
+    ui->playButton->setEnabled(true);
+}
+
+void LearningWindow::on_newQuestionButton_clicked()
+{
+    NewQuestion dialog(this);
+    if(dialog.exec() )
+    {
+        //QTextStream(stdout) << "otwarto ekran pytania" << Qt::endl;
+        on_newQuestionAdded(dialog.getQuestion(), dialog.getAnswer(), dialog.getImage(), dialog.getSoundPath());
+    }
+}
+
+void LearningWindow::on_deleteButton_clicked()
 {
     QMessageBox msg;
     msg.setText("Are you sure you want to delete this question?");
@@ -212,18 +272,8 @@ void MainWindow::on_actionDelete_Question_triggered()
     }
 }
 
-void MainWindow::on_playButton_clicked()
+void LearningWindow::on_endButton_clicked()
 {
-    sound = new QSound(card->soundPath());
-    sound->setLoops(1000);
-    sound->play();
-    ui->playButton->setEnabled(false);
-    ui->stopButton->setEnabled(true);
-}
-
-void MainWindow::on_stopButton_clicked()
-{
-    sound->stop();
-    ui->stopButton->setEnabled(false);
-    ui->playButton->setEnabled(true);
+    //QCoreApplication::quit();
+    close();
 }
