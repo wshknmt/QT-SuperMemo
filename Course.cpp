@@ -1,8 +1,15 @@
 #include "Course.h"
 
+Course::Course(QString n, QObject *parent) : QObject(parent)
+{
+    cardsCounter = 0;
+    name = n;
+}
+
 Course::Course(QObject *parent) : QObject(parent)
 {
     cardsCounter = 0;
+    name = "default_course_name";
 }
 
 void Course::addCardToRepeat(Card* card)
@@ -53,4 +60,8 @@ void Course::incrementCardsCounter()
 void Course::decrementCardsCounter()
 {
     cardsCounter--;
+}
+QString Course::getName()
+{
+    return name;
 }

@@ -13,6 +13,7 @@ class Course : public QObject
 {
     Q_OBJECT
 public:
+    explicit Course(QString n, QObject *parent = nullptr);
     explicit Course(QObject *parent = nullptr);
     void addCardToRepeat(Card* card);
     void addCardRepeated(Card* card);
@@ -24,6 +25,7 @@ public:
     int getSizeCardsRepeated();
     void incrementCardsCounter();
     void decrementCardsCounter();
+    QString getName();
 
 
 signals:
@@ -31,6 +33,7 @@ signals:
 private:
     QList <Card*> cardsToRepeat;
     QList <Card*> cardsRepeated;
+    QString name;
     int cardsCounter;
 };
 

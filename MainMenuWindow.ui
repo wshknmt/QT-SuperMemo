@@ -13,7 +13,54 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QComboBox" name="coursesComboBox">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>80</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>50</y>
+      <width>301</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Choose existing course from list or create new</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="courseNameTextEdit">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>80</y>
+      <width>104</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="newCourseButton">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>80</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>New course</string>
+    </property>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -37,7 +84,14 @@
     <addaction name="actionHelp"/>
     <addaction name="actionExit"/>
    </widget>
+   <widget class="QMenu" name="menuUpdateCB">
+    <property name="title">
+     <string>UpdateCB</string>
+    </property>
+    <addaction name="actionUpdateCB"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuUpdateCB"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionNew_course">
@@ -73,6 +127,11 @@
   <action name="actionSave">
    <property name="text">
     <string>Save</string>
+   </property>
+  </action>
+  <action name="actionUpdateCB">
+   <property name="text">
+    <string>UpdateCB</string>
    </property>
   </action>
  </widget>

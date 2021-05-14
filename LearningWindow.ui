@@ -333,6 +333,18 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>newQuestionButton</tabstop>
+  <tabstop>deleteButton</tabstop>
+  <tabstop>playButton</tabstop>
+  <tabstop>stopButton</tabstop>
+  <tabstop>showAnswerButton</tabstop>
+  <tabstop>endButton</tabstop>
+  <tabstop>questionTextBrowser</tabstop>
+  <tabstop>answerTextBrowser</tabstop>
+  <tabstop>yesButton</tabstop>
+  <tabstop>noButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
