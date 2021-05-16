@@ -20,7 +20,7 @@ class LearningWindow : public QDialog
 
 public:
     explicit LearningWindow(QWidget *parent = nullptr);
-    LearningWindow(QList <Course*> &coursesList, QWidget *parent = nullptr);
+    LearningWindow(QList <Course*> &coursesList, QString courseName, QWidget *parent = nullptr);
     LearningWindow(QList <Course*> &coursesList, int numberOfSelectedCourse, QWidget *parent = nullptr);
     ~LearningWindow();
     void setDefaultImage();

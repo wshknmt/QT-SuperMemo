@@ -13,17 +13,23 @@ LearningWindow::LearningWindow(QWidget *parent)
     setDefaultValues();
 }
 
-LearningWindow::LearningWindow(QList <Course*> &cList, QWidget *parent)
+LearningWindow::LearningWindow(QList <Course*> &cList, QString courseName, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::LearningWindow)
 {
     QTextStream(stdout) << "1 learn win" << Qt::endl;
+    if(courseName.isEmpty())
+        course = new Course(this);
+    else
+        course = new Course(courseName, this);
     //course = new Course("default_course_name", this);
-    course = (*coursesList)[(*coursesList).size()-1];
+    //course = (*coursesList)[(*coursesList).size()-1];
     setDefaultValues();
+    QTextStream(stdout) << "set def val" << Qt::endl;
     coursesList = &cList;
-   // (*coursesList).append(course);
+    (*coursesList).append(course);
     courseNumber = (*coursesList).size()-1;
+    QTextStream(stdout) << "added cousre: " << (*coursesList)[(*coursesList).size()-1]->getName() << Qt::endl;
 
 }
 
@@ -233,6 +239,6 @@ void LearningWindow::on_deleteButton_clicked()
 void LearningWindow::on_endButton_clicked()
 {
     //QCoreApplication::quit();
-    updateCoursesList();
+    //updateCoursesList();
     close();
 }

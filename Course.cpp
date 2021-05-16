@@ -1,4 +1,5 @@
 #include "Course.h"
+#include <QTextStream>
 
 Course::Course(QString n, QObject *parent) : QObject(parent)
 {
@@ -63,5 +64,6 @@ void Course::decrementCardsCounter()
 }
 QString Course::getName()
 {
+    QTextStream(stdout) << "nameeeeeeee :          "<< name << Qt::endl;
     return name;
 }
