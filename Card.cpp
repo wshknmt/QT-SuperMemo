@@ -1,5 +1,5 @@
 #include "Card.h"
-//#include <QPixmap>
+#include <QTextStream>
 
 Card::Card(QString q, QString a, QPixmap i, QString s, QDate r)
 {
@@ -36,4 +36,9 @@ QDate Card::repeatDate()
 void Card::setRepeatDate(QDate repeatDate)
 {
     m_repeatDate = repeatDate;
+}
+
+void Card::printCard()
+{
+    QTextStream(stdout) <<" Question: "<< m_question <<" Answer: "<< m_answer<<" Repeat_date: "<< m_repeatDate.toString(Qt::RFC2822Date) << Qt::endl;
 }

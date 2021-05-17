@@ -60,6 +60,32 @@
      <string>New course</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="openCourseButton">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>120</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Open Course</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="warpTimeButton">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>340</y>
+      <width>271</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Warp Time by 7 days</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -89,6 +115,7 @@
      <string>UpdateCB</string>
     </property>
     <addaction name="actionUpdateCB"/>
+    <addaction name="actionPrint_Courses_to_console"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuUpdateCB"/>
@@ -132,6 +159,11 @@
   <action name="actionUpdateCB">
    <property name="text">
     <string>UpdateCB</string>
+   </property>
+  </action>
+  <action name="actionPrint_Courses_to_console">
+   <property name="text">
+    <string>Print Courses to console</string>
    </property>
   </action>
  </widget>

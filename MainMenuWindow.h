@@ -18,6 +18,7 @@ public:
     explicit MainMenuWindow(QWidget *parent = nullptr);
     ~MainMenuWindow();
     void updateCoursesInComboBox();
+    void printCourses();
 
 private slots:
     void on_actionNew_course_triggered();
@@ -25,6 +26,14 @@ private slots:
     void on_newCourseButton_clicked();
 
     void on_actionUpdateCB_triggered();
+
+    void on_actionPrint_Courses_to_console_triggered();
+
+    void on_openCourseButton_clicked();
+
+    void on_actionExit_triggered();
+
+    void on_warpTimeButton_clicked();
 
 private:
     Ui::MainMenuWindow *ui;

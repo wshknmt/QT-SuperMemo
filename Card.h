@@ -24,6 +24,7 @@ public:
     QString soundPath() const;
     QDate repeatDate();
     void setRepeatDate(QDate repeatDate);
+    void printCard();
 
 signals:
 

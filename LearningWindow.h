@@ -24,11 +24,13 @@ public:
     LearningWindow(QList <Course*> &coursesList, int numberOfSelectedCourse, QWidget *parent = nullptr);
     ~LearningWindow();
     void setDefaultImage();
+    void checkImage();
     void setDefaultValues();
     void setImage(QPixmap image);
     void updateProgressBar();
     void updateStatusLabel();
     void updateCoursesList();
+    bool isEqualToCurrentDate(QDate date);
 signals:
     void questionAvailable();
 private slots:

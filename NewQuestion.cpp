@@ -51,7 +51,7 @@ void NewQuestion::on_okButton_clicked()
     answer = ui->textEdit->toPlainText();
     question = ui->textEdit_2->toPlainText();
     //emit newQuestionReady(question, answer, image, soundPath);
-    close();
+    accept();
 }
 
 void NewQuestion::on_cancelButton_clicked()
@@ -62,7 +62,7 @@ void NewQuestion::on_cancelButton_clicked()
     msg.setDefaultButton(QMessageBox::No);
     int ret = msg.exec();
     if (ret == QMessageBox::Yes)
-        close();
+        reject();
 }
 
 void NewQuestion::on_textEdit_2_textChanged()

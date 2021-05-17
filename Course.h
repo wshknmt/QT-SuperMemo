@@ -25,8 +25,11 @@ public:
     int getSizeCardsRepeated();
     void incrementCardsCounter();
     void decrementCardsCounter();
+    void printCourse();
     QString getName();
-
+    bool isEqualToCurrentDate(QDate date);
+    void checkCards();
+    void simulateTime(qint64 days);
 
 signals:
 

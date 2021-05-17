@@ -41,11 +41,19 @@ LearningWindow::LearningWindow(QList <Course*> &cList, int numberOfSelectedCours
     : QDialog(parent)
     , ui(new Ui::LearningWindow)
 {
-    QTextStream(stdout) << "2 learn win" << Qt::endl;
+   // QTextStream(stdout) << "2 learn win" << Qt::endl;
     setDefaultValues();
     course = cList[numberOfSelectedCourse];
     courseNumber = numberOfSelectedCourse;
     coursesList = &cList;
+    updateProgressBar();
+    updateStatusLabel();
+    if (course->getSizeCardsToRepeat() >= 1)
+    {
+
+        emit questionAvailable();
+    }
+
 }
 
 void LearningWindow::updateCoursesList()
@@ -96,6 +104,7 @@ void LearningWindow::setDefaultValues()
     ui->noButton->setEnabled(false);
     ui->deleteButton->setEnabled(false);
     connect(this, &LearningWindow::questionAvailable, this, &LearningWindow::on_startLearning);
+    checkImage();
 
 
 
@@ -109,7 +118,11 @@ void LearningWindow::setImage(QPixmap image)
 
 void LearningWindow::updateProgressBar()
 {
-    if(course->getCardsCounter() > 0)
+    if(course->getCardsCounter() > 0 && course->getCardsCounter() == course->getSizeCardsRepeated())
+    {
+         ui->progressBar->setValue(100);
+    }
+    else if (course->getCardsCounter() > 0)
     {
         int val = 100 - course->getSizeCardsToRepeat() * 100 / course->getCardsCounter();
         ui->progressBar->setValue(val);
@@ -150,6 +163,10 @@ void LearningWindow::on_startLearning()
 
 void LearningWindow::on_yesButton_clicked()
 {
+    if(isEqualToCurrentDate(card->repeatDate()))
+    //if(card->repeatDate() != QDate::currentDate())
+        card->setRepeatDate(card->repeatDate().addDays(5));
+
     ui->yesButton->setEnabled(false);
     ui->noButton->setEnabled(false);
     if(card->soundPath().length() != 0)
@@ -169,6 +186,9 @@ void LearningWindow::on_yesButton_clicked()
 
 void LearningWindow::on_noButton_clicked()
 {
+    //if(card->repeatDate() != QDate::currentDate())
+    if(isEqualToCurrentDate(card->repeatDate()))
+        card->setRepeatDate(card->repeatDate().addDays(2));
     ui->yesButton->setEnabled(false);
     ui->noButton->setEnabled(false);
     if(card->soundPath().length() != 0)
@@ -240,5 +260,26 @@ void LearningWindow::on_endButton_clicked()
 {
     //QCoreApplication::quit();
     //updateCoursesList();
-    close();
+    //close();
+    accept();
+}
+void LearningWindow::checkImage()
+{
+//    if(course->getSizeCardsToRepeat() >= 1)
+//    {
+//        if(!course->getFirstCardToRepeat()->image().isNull())
+//        {
+//            setImage(course->getFirstCardToRepeat()->image());
+//            return;
+//        }
+//    }
+//    setDefaultImage();
+}
+
+bool LearningWindow::isEqualToCurrentDate(QDate date)
+{
+    QDate current = QDate::currentDate();
+    if(current.day() == date.day() && current.month() == date.month() && current.year() == date.year())
+        return true;
+    return false;
 }
