@@ -17,19 +17,23 @@ LearningWindow::LearningWindow(QList <Course*> &cList, QString courseName, QWidg
     : QDialog(parent)
     , ui(new Ui::LearningWindow)
 {
-    QTextStream(stdout) << "1 learn win" << Qt::endl;
+   // QTextStream(stdout) << "1 learn win" << Qt::endl;
     if(courseName.isEmpty())
-        course = new Course(this);
+        course = new Course();
+        //Course course(this);
     else
-        course = new Course(courseName, this);
+        course = new Course(courseName);
+        //Course course(courseName, this);
     //course = new Course("default_course_name", this);
     //course = (*coursesList)[(*coursesList).size()-1];
     setDefaultValues();
-    QTextStream(stdout) << "set def val" << Qt::endl;
     coursesList = &cList;
-    (*coursesList).append(course);
-    courseNumber = (*coursesList).size()-1;
-    QTextStream(stdout) << "added cousre: " << (*coursesList)[(*coursesList).size()-1]->getName() << Qt::endl;
+    //(*coursesList).append(course);
+    (cList).append(course);
+   // cList.append(course);
+    //courseNumber = (*coursesList).size()-1;
+    courseNumber = cList.size()-1;
+    //QTextStream(stdout) << "added cousre: " << (*coursesList)[(*coursesList).size()-1]->getName() << Qt::endl;
 
 }
 
@@ -91,10 +95,6 @@ void LearningWindow::setDefaultValues()
     ui->yesButton->setEnabled(false);
     ui->noButton->setEnabled(false);
     ui->deleteButton->setEnabled(false);
-
-   // ui->actionDelete_Question->setEnabled(false);
-   // ui->actionImport->setEnabled(false);
-    //ui->actionExport->setEnabled(false);
     connect(this, &LearningWindow::questionAvailable, this, &LearningWindow::on_startLearning);
 
 

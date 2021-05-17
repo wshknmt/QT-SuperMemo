@@ -64,6 +64,6 @@ void Course::decrementCardsCounter()
 }
 QString Course::getName()
 {
-    QTextStream(stdout) << "nameeeeeeee :          "<< name << Qt::endl;
+    QTextStream(stdout) << "nameeeeeeee : "<< name << Qt::endl;
     return name;
 }
