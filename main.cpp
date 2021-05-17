@@ -9,6 +9,5 @@ int main(int argc, char *argv[])
     w.setWindowTitle("SuperMemo");
     w.setWindowIcon(QIcon(":/images/Icons/Supermemo-icon.png"));
     w.show();
-    //w.setDefaultImage();
     return a.exec();
 }

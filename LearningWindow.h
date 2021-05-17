@@ -35,10 +35,6 @@ signals:
     void questionAvailable();
 private slots:
 
-   // void on_actionNew_question_triggered();
-
-   // void on_actionExit_triggered();
-
     void on_showAnswerButton_clicked();
 
     void on_newQuestionAdded(QString, QString, QPixmap, QString);
@@ -49,15 +45,9 @@ private slots:
 
     void on_noButton_clicked();
 
-    //void on_actionDelete_Question_triggered();
-
     void on_playButton_clicked();
 
     void on_stopButton_clicked();
-
-    //void on_pushButton_clicked();
-
-    //void on_actionImport_triggered();
 
     void on_newQuestionButton_clicked();
 

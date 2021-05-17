@@ -17,43 +17,31 @@ LearningWindow::LearningWindow(QList <Course*> &cList, QString courseName, QWidg
     : QDialog(parent)
     , ui(new Ui::LearningWindow)
 {
-   // QTextStream(stdout) << "1 learn win" << Qt::endl;
     if(courseName.isEmpty())
         course = new Course();
-        //Course course(this);
     else
         course = new Course(courseName);
-        //Course course(courseName, this);
-    //course = new Course("default_course_name", this);
-    //course = (*coursesList)[(*coursesList).size()-1];
     setDefaultValues();
     coursesList = &cList;
-    //(*coursesList).append(course);
     (cList).append(course);
-   // cList.append(course);
-    //courseNumber = (*coursesList).size()-1;
     courseNumber = cList.size()-1;
-    //QTextStream(stdout) << "added cousre: " << (*coursesList)[(*coursesList).size()-1]->getName() << Qt::endl;
-
 }
 
 LearningWindow::LearningWindow(QList <Course*> &cList, int numberOfSelectedCourse, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::LearningWindow)
 {
-   // QTextStream(stdout) << "2 learn win" << Qt::endl;
     setDefaultValues();
     course = cList[numberOfSelectedCourse];
     courseNumber = numberOfSelectedCourse;
     coursesList = &cList;
+    course->checkCards();
     updateProgressBar();
     updateStatusLabel();
     if (course->getSizeCardsToRepeat() >= 1)
     {
-
         emit questionAvailable();
     }
-
 }
 
 void LearningWindow::updateCoursesList()
@@ -64,7 +52,6 @@ void LearningWindow::updateCoursesList()
 LearningWindow::~LearningWindow()
 {
     delete ui;
-
 }
 
 void LearningWindow::on_showAnswerButton_clicked()
@@ -74,7 +61,6 @@ void LearningWindow::on_showAnswerButton_clicked()
     ui->yesButton->setEnabled(true);
     ui->noButton->setEnabled(true);
     ui->deleteButton->setEnabled(false);
-    //ui->actionDelete_Question->setEnabled(false);
 }
 
 void LearningWindow::on_newQuestionAdded(QString question, QString answer, QPixmap image, QString soundPath)
@@ -105,9 +91,6 @@ void LearningWindow::setDefaultValues()
     ui->deleteButton->setEnabled(false);
     connect(this, &LearningWindow::questionAvailable, this, &LearningWindow::on_startLearning);
     checkImage();
-
-
-
 }
 
 void LearningWindow::setImage(QPixmap image)
@@ -149,7 +132,6 @@ void LearningWindow::on_startLearning()
     card = course->getFirstCardToRepeat();
     ui->showAnswerButton->setEnabled(true);
     ui->questionTextBrowser->setText(card->question());
-    //ui->actionDelete_Question->setEnabled(true);
     ui->deleteButton->setEnabled(true);
     if(!card->image().isNull())
         setImage(card->image());
@@ -163,9 +145,8 @@ void LearningWindow::on_startLearning()
 
 void LearningWindow::on_yesButton_clicked()
 {
-    if(isEqualToCurrentDate(card->repeatDate()))
-    //if(card->repeatDate() != QDate::currentDate())
-        card->setRepeatDate(card->repeatDate().addDays(5));
+    if(card->repeatDate() <= QDate::currentDate())
+        card->setRepeatDate(QDate::currentDate().addDays(5));
 
     ui->yesButton->setEnabled(false);
     ui->noButton->setEnabled(false);
@@ -186,9 +167,8 @@ void LearningWindow::on_yesButton_clicked()
 
 void LearningWindow::on_noButton_clicked()
 {
-    //if(card->repeatDate() != QDate::currentDate())
-    if(isEqualToCurrentDate(card->repeatDate()))
-        card->setRepeatDate(card->repeatDate().addDays(2));
+    if(card->repeatDate() <= QDate::currentDate())
+        card->setRepeatDate(QDate::currentDate().addDays(2));
     ui->yesButton->setEnabled(false);
     ui->noButton->setEnabled(false);
     if(card->soundPath().length() != 0)
@@ -224,7 +204,6 @@ void LearningWindow::on_newQuestionButton_clicked()
     NewQuestion dialog(this);
     if(dialog.exec() )
     {
-        //QTextStream(stdout) << "otwarto ekran pytania" << Qt::endl;
         on_newQuestionAdded(dialog.getQuestion(), dialog.getAnswer(), dialog.getImage(), dialog.getSoundPath());
     }
 }
@@ -250,7 +229,6 @@ void LearningWindow::on_deleteButton_clicked()
         updateStatusLabel();
         ui->questionTextBrowser->clear();
         ui->answerTextBrowser->clear();
-
         if (course->getSizeCardsToRepeat() >= 1)
             emit questionAvailable();
     }
@@ -258,9 +236,6 @@ void LearningWindow::on_deleteButton_clicked()
 
 void LearningWindow::on_endButton_clicked()
 {
-    //QCoreApplication::quit();
-    //updateCoursesList();
-    //close();
     accept();
 }
 void LearningWindow::checkImage()

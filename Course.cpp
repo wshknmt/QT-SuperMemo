@@ -76,7 +76,6 @@ void Course::printCourse()
         QTextStream(stdout) <<"    "<< i+1 <<". ";
         cardsToRepeat[i]->printCard();
     }
-    //QTextStream(stdout)<<" "<<Qt::endl;
     QTextStream(stdout) <<"Cards Repeated:  "<< Qt::endl;
     for(int i=0; i < cardsRepeated.size(); i++)
     {
@@ -95,13 +94,13 @@ bool Course::isEqualToCurrentDate(QDate date)
 
 void Course::checkCards()
 {
-    for(int i=0; i < cardsRepeated.size(); i++)
+    for(int i = 0; i < cardsRepeated.size(); i++)
     {
-        //if(isEqualToCurrentDate(cardsRepeated[i]->repeatDate()))
-        if(cardsRepeated[i]->repeatDate() < QDate::currentDate())
+        if(cardsRepeated[i]->repeatDate() <= QDate::currentDate())
         {
             cardsToRepeat.append(cardsRepeated[i]);
             cardsRepeated.removeAt(i);
+            i--;
         }
     }
 }
@@ -112,6 +111,6 @@ void Course::simulateTime(qint64 days)
     {
         cardsRepeated[i]->setRepeatDate(cardsRepeated[i]->repeatDate().addDays(days));
 
-        QTextStream(stdout)<<"tu: "<<cardsRepeated[i]->repeatDate().toString(Qt::RFC2822Date)<<Qt::endl;
+        //QTextStream(stdout)<<"tu: "<<cardsRepeated[i]->repeatDate().toString(Qt::RFC2822Date)<<Qt::endl;
     }
 }
