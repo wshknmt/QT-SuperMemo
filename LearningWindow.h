@@ -55,6 +55,8 @@ private slots:
 
     void on_endButton_clicked();
 
+    void on_almostButton_clicked();
+
 private:
     Ui::LearningWindow *ui;
     NewQuestion *nq;

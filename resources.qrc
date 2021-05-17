@@ -5,6 +5,9 @@
         <file>Icons/sound.png</file>
         <file>congratulations.png</file>
         <file>Icons/Supermemo-icon.png</file>
+        <file>Icons/neutral.png</file>
+        <file>Icons/sad.png</file>
+        <file>Icons/smile.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

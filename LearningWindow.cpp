@@ -60,6 +60,7 @@ void LearningWindow::on_showAnswerButton_clicked()
     ui->answerTextBrowser->setText(card->answer());
     ui->yesButton->setEnabled(true);
     ui->noButton->setEnabled(true);
+    ui->almostButton->setEnabled(true);
     ui->deleteButton->setEnabled(false);
 }
 
@@ -88,9 +89,22 @@ void LearningWindow::setDefaultValues()
     ui->stopButton->setEnabled(false);
     ui->yesButton->setEnabled(false);
     ui->noButton->setEnabled(false);
+    ui->almostButton->setEnabled(false);
     ui->deleteButton->setEnabled(false);
     connect(this, &LearningWindow::questionAvailable, this, &LearningWindow::on_startLearning);
     checkImage();
+    QPixmap img1(":/images/Icons/smile.png");
+    QPixmap img2(":/images/Icons/neutral.png");
+    QPixmap img3(":/images/Icons/sad.png");
+    ui->yesButton->setIcon(img1);
+    ui->almostButton->setIcon(img2);
+    ui->noButton->setIcon(img3);
+    QSize iconSize(ui->noButton->height(),ui->noButton->height());
+    ui->yesButton->setIconSize(iconSize);
+    ui->almostButton->setIconSize(iconSize);
+    ui->noButton->setIconSize(iconSize);
+
+
 }
 
 void LearningWindow::setImage(QPixmap image)
@@ -150,6 +164,7 @@ void LearningWindow::on_yesButton_clicked()
 
     ui->yesButton->setEnabled(false);
     ui->noButton->setEnabled(false);
+    ui->almostButton->setEnabled(false);
     if(card->soundPath().length() != 0)
         sound->stop();
     ui->stopButton->setEnabled(false);
@@ -171,6 +186,7 @@ void LearningWindow::on_noButton_clicked()
         card->setRepeatDate(QDate::currentDate().addDays(2));
     ui->yesButton->setEnabled(false);
     ui->noButton->setEnabled(false);
+    ui->almostButton->setEnabled(false);
     if(card->soundPath().length() != 0)
         sound->stop();
     ui->stopButton->setEnabled(false);
@@ -181,6 +197,29 @@ void LearningWindow::on_noButton_clicked()
     ui->questionTextBrowser->clear();
     ui->answerTextBrowser->clear();
     emit questionAvailable();
+}
+
+void LearningWindow::on_almostButton_clicked()
+{
+    if(card->repeatDate() <= QDate::currentDate())
+        card->setRepeatDate(QDate::currentDate().addDays(3));
+
+    ui->yesButton->setEnabled(false);
+    ui->noButton->setEnabled(false);
+    ui->almostButton->setEnabled(false);
+    if(card->soundPath().length() != 0)
+        sound->stop();
+    ui->stopButton->setEnabled(false);
+    ui->playButton->setEnabled(false);
+    course->removeFirstCardToRepeat();
+    course->addCardRepeated(card);
+    setDefaultImage();
+    updateProgressBar();
+    updateStatusLabel();
+    ui->questionTextBrowser->clear();
+    ui->answerTextBrowser->clear();
+    if (course->getSizeCardsToRepeat() >= 1)
+        emit questionAvailable();
 }
 
 void LearningWindow::on_playButton_clicked()
@@ -258,3 +297,5 @@ bool LearningWindow::isEqualToCurrentDate(QDate date)
         return true;
     return false;
 }
+
+

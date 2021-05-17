@@ -21,11 +21,8 @@ public:
     void printCourses();
 
 private slots:
-   // void on_actionNew_course_triggered();
 
     void on_newCourseButton_clicked();
-
-    //void on_actionUpdateCB_triggered();
 
     void on_actionPrint_Courses_to_console_triggered();
 
