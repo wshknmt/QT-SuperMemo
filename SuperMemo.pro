@@ -14,6 +14,7 @@ SOURCES += \
     LearningWindow.cpp \
     MainMenuWindow.cpp \
     NewQuestion.cpp \
+    User.cpp \
     main.cpp
 
 HEADERS += \
@@ -21,7 +22,8 @@ HEADERS += \
     Course.h \
     LearningWindow.h \
     MainMenuWindow.h \
-    NewQuestion.h
+    NewQuestion.h \
+    User.h
 
 FORMS += \
     LearningWindow.ui \

@@ -103,8 +103,6 @@ void LearningWindow::setDefaultValues()
     ui->yesButton->setIconSize(iconSize);
     ui->almostButton->setIconSize(iconSize);
     ui->noButton->setIconSize(iconSize);
-
-
 }
 
 void LearningWindow::setImage(QPixmap image)

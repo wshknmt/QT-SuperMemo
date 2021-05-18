@@ -5,6 +5,7 @@
 #include "Card.h"
 #include "Course.h"
 #include "LearningWindow.h"
+#include "User.h"
 
 namespace Ui {
 class MainMenuWindow;
@@ -18,7 +19,7 @@ public:
     explicit MainMenuWindow(QWidget *parent = nullptr);
     ~MainMenuWindow();
     void updateCoursesInComboBox();
-    void printCourses();
+    //void printCourses();
 
 private slots:
 
@@ -34,8 +35,10 @@ private slots:
 
 private:
     Ui::MainMenuWindow *ui;
-    QList <Course*> coursesList;
-    int coursesCounter;
+    //QList <Course*> coursesList;
+    QList <User*> users;
+    User *user;
+    //int coursesCounter;
 };
 
 #endif // MAINMENUWINDOW_H
