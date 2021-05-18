@@ -1,6 +1,7 @@
 #include "MainMenuWindow.h"
 #include "ui_MainMenuWindow.h"
 #include <unistd.h>
+
 MainMenuWindow::MainMenuWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainMenuWindow)
@@ -8,9 +9,19 @@ MainMenuWindow::MainMenuWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->coursesComboBox->setEnabled(false);
     ui->openCourseButton->setEnabled(false);
-    User *new_user = new User();
-    users.append(new_user);
-    user = users[0];
+    //if(!isSaveEmpty())
+    if(false)
+    {
+        readFromFile();//crashuje sie
+    }
+    else
+    {
+       // QTextStream(stdout) <<"Plik byl pusty "<< Qt::endl;
+        User *new_user = new User();
+        users.append(new_user);
+        user = users[0];
+    }
+
     //coursesCounter = 0;
 }
 
@@ -108,7 +119,9 @@ void MainMenuWindow::on_actionChange_User_triggered()
 
 void MainMenuWindow::userChanged()
 {
+    //QTextStream(stdout) <<"tu "<< Qt::endl;
     updateCoursesInComboBox();
+    //QTextStream(stdout) <<"tu "<< Qt::endl;
     ui->courseNameTextEdit->clear();
     if(ui->coursesComboBox->count() == 0)
     {
@@ -120,4 +133,55 @@ void MainMenuWindow::userChanged()
         ui->coursesComboBox->setEnabled(true);
         ui->openCourseButton->setEnabled(true);
     }
+}
+
+void MainMenuWindow::saveToFile()
+{
+    std::ofstream output_file;
+    output_file.open("save.txt", std::ios::trunc);
+
+    for(int i=0; i< users.size(); i++)
+    {
+        output_file.write((char*)&users[i], sizeof(User));
+        QTextStream(stdout) <<"Saved: "<< users[i]->getName() <<" "<< Qt::endl;
+    }
+    output_file.close();
+}
+
+void MainMenuWindow::readFromFile()
+{
+
+    std::ifstream input_file;
+    input_file.open("save.txt", std::ios::in);
+
+    //user = new User();
+    //User usr;
+    while(!input_file.eof())
+    {
+
+        input_file.read((char*)&user, sizeof(User));
+        users.append(user);
+        QTextStream(stdout) <<"name user: "<<user->getCoursesListSize()<< Qt::endl;
+        QTextStream(stdout) <<"xxx"<< Qt::endl;
+    }
+
+    input_file.close();
+    user = users[0];
+
+    userChanged();
+
+}
+
+bool MainMenuWindow::isSaveEmpty()
+{
+    std::ifstream input_file;
+    input_file.open("save.txt", std::ios::in);
+    bool result = (input_file.peek() == std::ifstream::traits_type::eof());
+    input_file.close();
+    return result;
+}
+
+void MainMenuWindow::on_actionSave_triggered()
+{
+    saveToFile();
 }

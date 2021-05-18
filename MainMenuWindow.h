@@ -2,6 +2,7 @@
 #define MAINMENUWINDOW_H
 
 #include <QMainWindow>
+#include <fstream>
 #include "Card.h"
 #include "Course.h"
 #include "LearningWindow.h"
@@ -23,6 +24,9 @@ public:
     //void printCourses();
     QList <User*> &getUsersList();
     void userChanged();
+    void saveToFile();
+    void readFromFile();
+    bool isSaveEmpty();
 
 private slots:
 
@@ -37,6 +41,8 @@ private slots:
     void on_warpTimeButton_clicked();
 
     void on_actionChange_User_triggered();
+
+    void on_actionSave_triggered();
 
 private:
     Ui::MainMenuWindow *ui;
