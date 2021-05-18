@@ -36,3 +36,12 @@ QString User::getName()
 {
     return name;
 }
+
+void User::setName(QString n)
+{
+    name = n;
+}
+void User::setCoursesList(QList <Course*> &cList)
+{
+    coursesList = cList;
+}

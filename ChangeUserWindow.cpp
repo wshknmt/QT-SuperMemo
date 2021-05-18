@@ -12,6 +12,7 @@ ChangeUserWindow::ChangeUserWindow(QList <User*> &usersList, QWidget *parent) :
     ui->usersComboBox->setEnabled(false);
     ui->chooseButton->setEnabled(false);
     users = &usersList;
+
     if(usersList.size() == 1)
     {
         ui->usersComboBox->addItem(usersList[0]->getName());

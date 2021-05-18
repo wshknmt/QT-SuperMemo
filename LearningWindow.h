@@ -20,8 +20,8 @@ class LearningWindow : public QDialog
 
 public:
     explicit LearningWindow(QWidget *parent = nullptr);
-    LearningWindow(QList <Course*> &coursesList, QString courseName, QWidget *parent = nullptr);
-    LearningWindow(QList <Course*> &coursesList, int numberOfSelectedCourse, QWidget *parent = nullptr);
+    LearningWindow(QList <Course*> &coursesList, QString courseName, QFont font, QWidget *parent = nullptr);
+    LearningWindow(QList <Course*> &coursesList, int numberOfSelectedCourse, QFont font, QWidget *parent = nullptr);
     ~LearningWindow();
     void setDefaultImage();
     void checkImage();
@@ -66,6 +66,7 @@ private:
     QSound *sound;
     int courseNumber;
     QList <Course*> *coursesList;
+    QFont font;
 };
 
 #endif // LEARNINGWINDOW_H

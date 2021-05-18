@@ -9,6 +9,11 @@ MainMenuWindow::MainMenuWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->coursesComboBox->setEnabled(false);
     ui->openCourseButton->setEnabled(false);
+    ui->actionDelete_selected_course->setEnabled(false);
+    ui->actionImport->setEnabled(false);
+    ui->actionExport->setEnabled(false);
+    ui->actionHelp->setEnabled(false);
+    font = QFont( "MS Shell Dlg 2", 15 );
     //if(!isSaveEmpty())
     if(false)
     {
@@ -16,10 +21,14 @@ MainMenuWindow::MainMenuWindow(QWidget *parent) :
     }
     else
     {
-       // QTextStream(stdout) <<"Plik byl pusty "<< Qt::endl;
+        QTextStream(stdout) <<"Plik byl pusty "<< Qt::endl;
         User *new_user = new User();
         users.append(new_user);
         user = users[0];
+        ui->userDisplayLabel->setText(user->getName());
+        QFont f;
+        f.setBold(true);
+        ui->userDisplayLabel->setFont(f);
     }
 
     //coursesCounter = 0;
@@ -42,8 +51,9 @@ void MainMenuWindow::updateCoursesInComboBox()
 
 void MainMenuWindow::on_newCourseButton_clicked()
 {
+
     //LearningWindow dialog(coursesList, ui->courseNameTextEdit->toPlainText(), this);
-    LearningWindow dialog(user->getCoursesList(), ui->courseNameTextEdit->toPlainText(), this);
+    LearningWindow dialog(user->getCoursesList(), ui->courseNameTextEdit->toPlainText(), font, this);
     dialog.setWindowTitle("SuperMemo");
     if(dialog.exec())
     {
@@ -51,6 +61,7 @@ void MainMenuWindow::on_newCourseButton_clicked()
         ui->openCourseButton->setEnabled(true);
         updateCoursesInComboBox();
     }
+    ui->courseNameTextEdit->clear();
 }
 
 /*void MainMenuWindow::printCourses()
@@ -73,7 +84,7 @@ void MainMenuWindow::on_actionPrint_Courses_to_console_triggered()
 
 void MainMenuWindow::on_openCourseButton_clicked()
 {
-    LearningWindow dialog(user->getCoursesList(), ui->coursesComboBox->currentIndex(), this);
+    LearningWindow dialog(user->getCoursesList(), ui->coursesComboBox->currentIndex(), font, this);
     dialog.setWindowTitle("SuperMemo");
     if(dialog.exec())
     {
@@ -123,6 +134,7 @@ void MainMenuWindow::userChanged()
     updateCoursesInComboBox();
     //QTextStream(stdout) <<"tu "<< Qt::endl;
     ui->courseNameTextEdit->clear();
+    ui->userDisplayLabel->setText(user->getName());
     if(ui->coursesComboBox->count() == 0)
     {
         ui->coursesComboBox->setEnabled(false);
@@ -139,13 +151,16 @@ void MainMenuWindow::saveToFile()
 {
     std::ofstream output_file;
     output_file.open("save.txt", std::ios::trunc);
-
-    for(int i=0; i< users.size(); i++)
+    for(int i=0; i < users.size(); i++)
     {
-        output_file.write((char*)&users[i], sizeof(User));
-        QTextStream(stdout) <<"Saved: "<< users[i]->getName() <<" "<< Qt::endl;
+        User u;
+        u.setName(users[i]->getName());
+        //u.setCoursesList(users[i]->getCoursesList());
+        output_file.write((char*)&u, sizeof(User));
+
     }
     output_file.close();
+    QTextStream(stdout) <<"saved"<< Qt::endl;
 }
 
 void MainMenuWindow::readFromFile()
@@ -156,13 +171,18 @@ void MainMenuWindow::readFromFile()
 
     //user = new User();
     //User usr;
+    QTextStream(stdout) <<"file opened"<< Qt::endl;
     while(!input_file.eof())
     {
+        User u;
+        input_file.read((char*)&u, sizeof(User));
 
-        input_file.read((char*)&user, sizeof(User));
+        user = new User();
+        user->setName(u.getName());
+        QTextStream(stdout) <<"xx"<< Qt::endl;
+       // user->setCoursesList(u.getCoursesList());
         users.append(user);
-        QTextStream(stdout) <<"name user: "<<user->getCoursesListSize()<< Qt::endl;
-        QTextStream(stdout) <<"xxx"<< Qt::endl;
+        QTextStream(stdout) <<"name user: "<<user->getName()<< Qt::endl;
     }
 
     input_file.close();
@@ -183,5 +203,21 @@ bool MainMenuWindow::isSaveEmpty()
 
 void MainMenuWindow::on_actionSave_triggered()
 {
-    saveToFile();
+    //saveToFile();
+    QTextStream(stdout) <<"font: "<<font.family()<< Qt::endl;
 }
+
+void MainMenuWindow::on_actionSettings_triggered()
+{
+    SettingsWindow dialog(this);
+    dialog.setWindowTitle("Settings");
+    if(dialog.exec())
+    {
+        font = dialog.getFont();
+    }
+}
+
+/*void MainMenuWindow::fontSet(QFont font)
+{
+    this->font = font;
+}*/

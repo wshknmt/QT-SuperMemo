@@ -15,6 +15,8 @@ public:
     QString getName();
     void printCourses();
     QList <Course*> &getCoursesList();
+    void setName(QString n);
+    void setCoursesList(QList <Course*> &cList);
 private:
     QList <Course*> coursesList;
     QString name;

@@ -15,6 +15,7 @@ SOURCES += \
     LearningWindow.cpp \
     MainMenuWindow.cpp \
     NewQuestion.cpp \
+    SettingsWindow.cpp \
     User.cpp \
     main.cpp
 
@@ -25,13 +26,15 @@ HEADERS += \
     LearningWindow.h \
     MainMenuWindow.h \
     NewQuestion.h \
+    SettingsWindow.h \
     User.h
 
 FORMS += \
     ChangeUserWindow.ui \
     LearningWindow.ui \
     MainMenuWindow.ui \
-    NewQuestion.ui
+    NewQuestion.ui \
+    SettingsWindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

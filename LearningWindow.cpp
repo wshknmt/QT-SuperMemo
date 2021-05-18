@@ -11,9 +11,10 @@ LearningWindow::LearningWindow(QWidget *parent)
     course = new Course("default_course_name", this);
     QTextStream(stdout) << "0 learn win" << Qt::endl;
     setDefaultValues();
+
 }
 
-LearningWindow::LearningWindow(QList <Course*> &cList, QString courseName, QWidget *parent)
+LearningWindow::LearningWindow(QList <Course*> &cList, QString courseName, QFont font, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::LearningWindow)
 {
@@ -21,16 +22,21 @@ LearningWindow::LearningWindow(QList <Course*> &cList, QString courseName, QWidg
         course = new Course();
     else
         course = new Course(courseName);
+    this->font = font;
     setDefaultValues();
     coursesList = &cList;
     (cList).append(course);
     courseNumber = cList.size()-1;
+    /*QWidget *p = parent;
+    QTextStream(stdout) <<" FONT: "<<parent->font.family()<< Qt::endl;*/
+
 }
 
-LearningWindow::LearningWindow(QList <Course*> &cList, int numberOfSelectedCourse, QWidget *parent)
+LearningWindow::LearningWindow(QList <Course*> &cList, int numberOfSelectedCourse, QFont font, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::LearningWindow)
 {
+    this->font = font;
     setDefaultValues();
     course = cList[numberOfSelectedCourse];
     courseNumber = numberOfSelectedCourse;
@@ -103,6 +109,8 @@ void LearningWindow::setDefaultValues()
     ui->yesButton->setIconSize(iconSize);
     ui->almostButton->setIconSize(iconSize);
     ui->noButton->setIconSize(iconSize);
+    ui->answerTextBrowser->setFont(font);
+    ui->questionTextBrowser->setFont(font);
 }
 
 void LearningWindow::setImage(QPixmap image)

@@ -8,6 +8,7 @@
 #include "LearningWindow.h"
 #include "User.h"
 #include "ChangeUserWindow.h"
+#include "SettingsWindow.h"
 
 namespace Ui {
 class MainMenuWindow;
@@ -27,6 +28,7 @@ public:
     void saveToFile();
     void readFromFile();
     bool isSaveEmpty();
+   // void fontSet(QFont font);
 
 private slots:
 
@@ -44,11 +46,14 @@ private slots:
 
     void on_actionSave_triggered();
 
+    void on_actionSettings_triggered();
+
 private:
     Ui::MainMenuWindow *ui;
     //QList <Course*> coursesList;
     QList <User*> users;
     User *user;
+    QFont font;
     //int coursesCounter;
 };
 
