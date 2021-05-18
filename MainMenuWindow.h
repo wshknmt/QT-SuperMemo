@@ -50,11 +50,9 @@ private slots:
 
 private:
     Ui::MainMenuWindow *ui;
-    //QList <Course*> coursesList;
     QList <User*> users;
     User *user;
     QFont font;
-    //int coursesCounter;
 };
 
 #endif // MAINMENUWINDOW_H

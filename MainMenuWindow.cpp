@@ -30,8 +30,6 @@ MainMenuWindow::MainMenuWindow(QWidget *parent) :
         f.setBold(true);
         ui->userDisplayLabel->setFont(f);
     }
-
-    //coursesCounter = 0;
 }
 
 MainMenuWindow::~MainMenuWindow()
@@ -43,7 +41,6 @@ void MainMenuWindow::updateCoursesInComboBox()
     ui->coursesComboBox->clear();
     for(int i = 0; i < user->getCoursesListSize(); i++)
     {   
-       // QString courseName = coursesList[i]->getName();
         QString courseName = user->getCourse(i)->getName();
         ui->coursesComboBox->addItem(courseName);
     }
@@ -51,8 +48,6 @@ void MainMenuWindow::updateCoursesInComboBox()
 
 void MainMenuWindow::on_newCourseButton_clicked()
 {
-
-    //LearningWindow dialog(coursesList, ui->courseNameTextEdit->toPlainText(), this);
     LearningWindow dialog(user->getCoursesList(), ui->courseNameTextEdit->toPlainText(), font, this);
     dialog.setWindowTitle("SuperMemo");
     if(dialog.exec())
@@ -64,17 +59,8 @@ void MainMenuWindow::on_newCourseButton_clicked()
     ui->courseNameTextEdit->clear();
 }
 
-/*void MainMenuWindow::printCourses()
-{
-    for(int i = 0; i < user->getCoursesListSize(); i++)
-    {
-        coursesList[i]->printCourse();
-    }
-}*/
-
 void MainMenuWindow::on_actionPrint_Courses_to_console_triggered()
 {
-   // printCourses();
     for(int i=0; i < users.size(); i++)
     {
         QTextStream(stdout) <<"---------- User: "<< users[i]->getName() <<" ------------------"<< Qt::endl;
@@ -101,7 +87,6 @@ void MainMenuWindow::on_warpTimeButton_clicked()
 {
     for(int i = 0; i < user->getCoursesListSize(); i++)
     {
-       // coursesList[i]->simulateTime(-7);
         user->getCourse(i)->simulateTime(-7);
     }
 }
@@ -130,9 +115,7 @@ void MainMenuWindow::on_actionChange_User_triggered()
 
 void MainMenuWindow::userChanged()
 {
-    //QTextStream(stdout) <<"tu "<< Qt::endl;
     updateCoursesInComboBox();
-    //QTextStream(stdout) <<"tu "<< Qt::endl;
     ui->courseNameTextEdit->clear();
     ui->userDisplayLabel->setText(user->getName());
     if(ui->coursesComboBox->count() == 0)
@@ -204,7 +187,7 @@ bool MainMenuWindow::isSaveEmpty()
 void MainMenuWindow::on_actionSave_triggered()
 {
     //saveToFile();
-    QTextStream(stdout) <<"font: "<<font.family()<< Qt::endl;
+
 }
 
 void MainMenuWindow::on_actionSettings_triggered()
@@ -216,8 +199,3 @@ void MainMenuWindow::on_actionSettings_triggered()
         font = dialog.getFont();
     }
 }
-
-/*void MainMenuWindow::fontSet(QFont font)
-{
-    this->font = font;
-}*/

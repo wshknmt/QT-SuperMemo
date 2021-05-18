@@ -110,7 +110,5 @@ void Course::simulateTime(qint64 days)
     for(int i=0; i < cardsRepeated.size(); i++)
     {
         cardsRepeated[i]->setRepeatDate(cardsRepeated[i]->repeatDate().addDays(days));
-
-        //QTextStream(stdout)<<"tu: "<<cardsRepeated[i]->repeatDate().toString(Qt::RFC2822Date)<<Qt::endl;
     }
 }

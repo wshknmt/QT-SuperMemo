@@ -27,8 +27,6 @@ LearningWindow::LearningWindow(QList <Course*> &cList, QString courseName, QFont
     coursesList = &cList;
     (cList).append(course);
     courseNumber = cList.size()-1;
-    /*QWidget *p = parent;
-    QTextStream(stdout) <<" FONT: "<<parent->font.family()<< Qt::endl;*/
 
 }
 

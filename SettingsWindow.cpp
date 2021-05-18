@@ -16,7 +16,6 @@ SettingsWindow::~SettingsWindow()
     delete ui;
 }
 
-
 void SettingsWindow::on_chooseFontButton_clicked()
 {
     bool ok;
