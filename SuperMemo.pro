@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     Card.cpp \
+    ChangeUserWindow.cpp \
     Course.cpp \
     LearningWindow.cpp \
     MainMenuWindow.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
 
 HEADERS += \
     Card.h \
+    ChangeUserWindow.h \
     Course.h \
     LearningWindow.h \
     MainMenuWindow.h \
@@ -26,6 +28,7 @@ HEADERS += \
     User.h
 
 FORMS += \
+    ChangeUserWindow.ui \
     LearningWindow.ui \
     MainMenuWindow.ui \
     NewQuestion.ui

@@ -239,6 +239,7 @@ void LearningWindow::on_stopButton_clicked()
 void LearningWindow::on_newQuestionButton_clicked()
 {
     NewQuestion dialog(this);
+    dialog.setWindowTitle("Add new question");
     if(dialog.exec() )
     {
         on_newQuestionAdded(dialog.getQuestion(), dialog.getAnswer(), dialog.getImage(), dialog.getSoundPath());

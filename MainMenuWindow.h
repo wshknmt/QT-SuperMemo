@@ -6,6 +6,7 @@
 #include "Course.h"
 #include "LearningWindow.h"
 #include "User.h"
+#include "ChangeUserWindow.h"
 
 namespace Ui {
 class MainMenuWindow;
@@ -20,6 +21,8 @@ public:
     ~MainMenuWindow();
     void updateCoursesInComboBox();
     //void printCourses();
+    QList <User*> &getUsersList();
+    void userChanged();
 
 private slots:
 
@@ -32,6 +35,8 @@ private slots:
     void on_actionExit_triggered();
 
     void on_warpTimeButton_clicked();
+
+    void on_actionChange_User_triggered();
 
 private:
     Ui::MainMenuWindow *ui;

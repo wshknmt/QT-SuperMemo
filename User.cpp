@@ -26,7 +26,13 @@ void User::printCourses()
         coursesList[i]->printCourse();
     }
 }
+
 QList <Course*> &User::getCoursesList()
 {
     return coursesList;
+}
+
+QString User::getName()
+{
+    return name;
 }

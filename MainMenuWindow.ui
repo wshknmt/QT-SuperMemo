@@ -114,6 +114,7 @@
      <string>Testing</string>
     </property>
     <addaction name="actionPrint_Courses_to_console"/>
+    <addaction name="actionChange_User"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuUpdateCB"/>
@@ -152,6 +153,11 @@
   <action name="actionPrint_Courses_to_console">
    <property name="text">
     <string>Print Courses to console</string>
+   </property>
+  </action>
+  <action name="actionChange_User">
+   <property name="text">
+    <string>Change User</string>
    </property>
   </action>
  </widget>

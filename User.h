@@ -12,6 +12,7 @@ public:
     explicit User(QString name, QObject *parent = nullptr);
     int getCoursesListSize();
     Course* getCourse(int i);
+    QString getName();
     void printCourses();
     QList <Course*> &getCoursesList();
 private:
