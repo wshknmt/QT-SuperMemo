@@ -69,17 +69,17 @@ QString Course::getName()
 
 void Course::printCourse()
 {
-    QTextStream(stdout) <<"CourseName:  "<< name <<" cards counter "<< cardsCounter<< Qt::endl;
-    QTextStream(stdout) <<"Cards To Repeat:  "<< Qt::endl;
+    //QTextStream(stdout) <<"CourseName:  "<< name <<" cards counter "<< cardsCounter<< std::endl;
+    //QTextStream(stdout) <<"Cards To Repeat:  "<< std::endl;
     for(int i=0; i < cardsToRepeat.size(); i++)
     {
-        QTextStream(stdout) <<"    "<< i+1 <<". ";
+        //QTextStream(stdout) <<"    "<< i+1 <<". ";
         cardsToRepeat[i]->printCard();
     }
-    QTextStream(stdout) <<"Cards Repeated:  "<< Qt::endl;
+    //QTextStream(stdout) <<"Cards Repeated:  "<< std::endl;
     for(int i=0; i < cardsRepeated.size(); i++)
     {
-        QTextStream(stdout) <<"    "<< i+1 <<". ";
+        //QTextStream(stdout) <<"    "<< i+1 <<". ";
         cardsRepeated[i]->printCard();
     }
 }

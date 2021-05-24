@@ -10,31 +10,43 @@ CONFIG += c++11
 
 SOURCES += \
     Card.cpp \
+    CardUserStats.cc \
     ChangeUserWindow.cpp \
     Course.cpp \
+    CourseProgress.cc \
     LearningWindow.cpp \
     MainMenuWindow.cpp \
     NewQuestion.cpp \
+    Settings.cc \
     SettingsWindow.cpp \
     User.cpp \
+    UserCalendar.cc \
+    UserCalendarWindow.cc \
     main.cpp
 
 HEADERS += \
+    AnswerType.h \
     Card.h \
+    CardUserStats.h \
     ChangeUserWindow.h \
     Course.h \
+    CourseProgress.h \
     LearningWindow.h \
     MainMenuWindow.h \
     NewQuestion.h \
+    Settings.h \
     SettingsWindow.h \
-    User.h
+    User.h \
+    UserCalendar.h \
+    UserCalendarWindow.h
 
 FORMS += \
     ChangeUserWindow.ui \
     LearningWindow.ui \
     MainMenuWindow.ui \
     NewQuestion.ui \
-    SettingsWindow.ui
+    SettingsWindow.ui \
+    UserCalendarWindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

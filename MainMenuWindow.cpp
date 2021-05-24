@@ -1,5 +1,6 @@
 #include "MainMenuWindow.h"
 #include "ui_MainMenuWindow.h"
+#include "UserCalendarWindow.h"
 #include <unistd.h>
 
 MainMenuWindow::MainMenuWindow(QWidget *parent) :
@@ -21,7 +22,7 @@ MainMenuWindow::MainMenuWindow(QWidget *parent) :
     }
     else
     {
-        QTextStream(stdout) <<"Plik byl pusty "<< Qt::endl;
+        //QTextStream(stdout) <<"Plik byl pusty "<< std::endl;
         User *new_user = new User();
         users.append(new_user);
         user = users[0];
@@ -63,7 +64,7 @@ void MainMenuWindow::on_actionPrint_Courses_to_console_triggered()
 {
     for(int i=0; i < users.size(); i++)
     {
-        QTextStream(stdout) <<"---------- User: "<< users[i]->getName() <<" ------------------"<< Qt::endl;
+        //QTextStream(stdout) <<"---------- User: "<< users[i]->getName() <<" ------------------"<< std::endl;
         users[i]->printCourses();
     }
 }
@@ -132,6 +133,7 @@ void MainMenuWindow::userChanged()
 
 void MainMenuWindow::saveToFile()
 {
+    QTextStream(stdout) <<"SIEMA ENIU ;PPP";
     std::ofstream output_file;
     output_file.open("save.txt", std::ios::trunc);
     for(int i=0; i < users.size(); i++)
@@ -143,7 +145,7 @@ void MainMenuWindow::saveToFile()
 
     }
     output_file.close();
-    QTextStream(stdout) <<"saved"<< Qt::endl;
+    //QTextStream(stdout) <<"saved"<< std::endl;
 }
 
 void MainMenuWindow::readFromFile()
@@ -154,7 +156,7 @@ void MainMenuWindow::readFromFile()
 
     //user = new User();
     //User usr;
-    QTextStream(stdout) <<"file opened"<< Qt::endl;
+    //QTextStream(stdout) <<"file opened"<< std::endl;
     while(!input_file.eof())
     {
         User u;
@@ -162,10 +164,10 @@ void MainMenuWindow::readFromFile()
 
         user = new User();
         user->setName(u.getName());
-        QTextStream(stdout) <<"xx"<< Qt::endl;
+        //QTextStream(stdout) <<"xx"<< std::endl;
        // user->setCoursesList(u.getCoursesList());
         users.append(user);
-        QTextStream(stdout) <<"name user: "<<user->getName()<< Qt::endl;
+        //QTextStream(stdout) <<"name user: "<<user->getName()<< std::endl;
     }
 
     input_file.close();
@@ -186,7 +188,7 @@ bool MainMenuWindow::isSaveEmpty()
 
 void MainMenuWindow::on_actionSave_triggered()
 {
-    //saveToFile();
+    saveToFile();
 
 }
 
@@ -197,5 +199,14 @@ void MainMenuWindow::on_actionSettings_triggered()
     if(dialog.exec())
     {
         font = dialog.getFont();
+    }
+}
+
+void MainMenuWindow::on_pushButton_clicked()
+{
+    UserCalendarWindow dialog(this);
+    dialog.setWindowTitle("Kalendarz nauki");
+    if(dialog.exec())
+    {
     }
 }

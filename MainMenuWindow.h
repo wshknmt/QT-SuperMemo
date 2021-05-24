@@ -48,6 +48,8 @@ private slots:
 
     void on_actionSettings_triggered();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::MainMenuWindow *ui;
     QList <User*> users;

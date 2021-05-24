@@ -1,5 +1,6 @@
 #include "LearningWindow.h"
 #include "ui_LearningWindow.h"
+#include "MainMenuWindow.h"
 #include "Card.h"
 #include <iostream>
 
@@ -9,9 +10,8 @@ LearningWindow::LearningWindow(QWidget *parent)
     , ui(new Ui::LearningWindow)
 {
     course = new Course("default_course_name", this);
-    QTextStream(stdout) << "0 learn win" << Qt::endl;
+    //QTextStream(stdout) << "0 learn win" << std::endl;
     setDefaultValues();
-
 }
 
 LearningWindow::LearningWindow(QList <Course*> &cList, QString courseName, QFont font, QWidget *parent)

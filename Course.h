@@ -9,9 +9,9 @@
 #include <QModelIndex>
 #include <QVariant>
 
-class Course : public QObject
-{
+class Course : public QObject {
     Q_OBJECT
+
 public:
     explicit Course(QString n, QObject *parent = nullptr);
     explicit Course(QObject *parent = nullptr);

@@ -7,14 +7,12 @@
 #include <QPixmap>
 #include <QDate>
 
-class Card : public QObject
-{
+class Card : public QObject{
     Q_OBJECT
     Q_PROPERTY(QString question READ question)
     Q_PROPERTY(QString answer READ answer)
     Q_PROPERTY(QPixmap image READ image)
     Q_PROPERTY(QString soundPath READ soundPath)
-
 
 public:
     explicit Card(QString q, QString a, QPixmap i, QString s, QDate r);
@@ -34,7 +32,6 @@ private:
     QPixmap m_image;
     QString m_soundPath;
     QDate m_repeatDate;
-
 };
 
 #endif // CARD_H

@@ -1,5 +1,6 @@
 #include "SettingsWindow.h"
 #include "ui_SettingsWindow.h"
+#include "Settings.h"
 
 SettingsWindow::SettingsWindow(QWidget *parent) :
     QDialog(parent),
@@ -34,8 +35,11 @@ void SettingsWindow::on_closeButton_clicked()
 
 void SettingsWindow::on_fullscreenCheckBox_stateChanged(int arg1)
 {
-    if(arg1 == 2)
+    if(arg1 == 2){
+        Settings::getInstance().setFullScreen(true);
         parent->setWindowState(Qt::WindowFullScreen);
-    else if(arg1 == 0)
+    } else if(arg1 == 0) {
+        Settings::getInstance().setFullScreen(false);
         parent->setWindowState(Qt::WindowNoState);
+    }
 }

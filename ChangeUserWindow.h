@@ -5,11 +5,10 @@
 #include "User.h"
 
 namespace Ui {
-class ChangeUserWindow;
+    class ChangeUserWindow;
 }
 
-class ChangeUserWindow : public QDialog
-{
+class ChangeUserWindow : public QDialog{
     Q_OBJECT
 
 public:
@@ -19,11 +18,8 @@ public:
 
 private slots:
     void on_nameTextEdit_textChanged();
-
     void on_cancelButton_clicked();
-
     void on_createButton_clicked();
-
     void on_chooseButton_clicked();
 
 private:
