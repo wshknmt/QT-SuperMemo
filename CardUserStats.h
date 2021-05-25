@@ -13,7 +13,7 @@ class CardUserStats{
 public:
     CardUserStats();
     std::shared_ptr<Card> getCardPtr() const;
-    void setCardPtr(const std::shared_ptr<Card> &cardPtr);
+    void setCardPtr(const std::shared_ptr<Card>& cardPtr);
     QDate getNextReviewDate() const;
 
 private:

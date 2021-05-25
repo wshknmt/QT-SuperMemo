@@ -14,6 +14,7 @@ SOURCES += \
     ChangeUserWindow.cpp \
     Course.cpp \
     CourseProgress.cc \
+    CoursesManager.cc \
     LearningWindow.cpp \
     MainMenuWindow.cpp \
     NewQuestion.cpp \
@@ -31,6 +32,7 @@ HEADERS += \
     ChangeUserWindow.h \
     Course.h \
     CourseProgress.h \
+    CoursesManager.h \
     LearningWindow.h \
     MainMenuWindow.h \
     NewQuestion.h \

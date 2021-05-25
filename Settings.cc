@@ -1,7 +1,7 @@
 #include "Settings.h"
 #include <QMutex>
 
-static QMutex mutex;
+static QMutex mutexSettings;
 Settings* Settings::pInstance_ = nullptr;
 
 Settings::Settings() : isFullScreen_(false)
@@ -11,10 +11,10 @@ Settings::Settings() : isFullScreen_(false)
 Settings& Settings::getInstance()
 {
     if(!pInstance_) {
-        mutex.lock();
+        mutexSettings.lock();
         if(!pInstance_)
             pInstance_ = new Settings();
-        mutex.unlock();
+        mutexSettings.unlock();
     }
     return *pInstance_;
 }
