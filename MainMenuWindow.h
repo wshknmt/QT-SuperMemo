@@ -41,6 +41,8 @@ private slots:
 
     void on_courseNameTextEdit_textChanged();
 
+    void on_statsButton_clicked();
+
 private:
     Ui::MainMenuWindow *ui_;
     QList <User*> users_;

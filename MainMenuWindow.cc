@@ -41,7 +41,7 @@ void MainMenuWindow::updateCoursesInComboBox() {
 }
 
 void MainMenuWindow::on_newCourseButton_clicked() {
-    LearningWindow dialog(user_->getCourseManager(), ui_->courseNameTextEdit->toPlainText(), font_, this);
+    LearningWindow dialog(user_->getCourseManager(), user_->getUserStats(), ui_->courseNameTextEdit->toPlainText(), font_, this);
     dialog.setWindowTitle("SuperMemo");
     if(dialog.exec()) {
         ui_->coursesComboBox->setEnabled(true);
@@ -59,7 +59,7 @@ void MainMenuWindow::on_actionPrint_Courses_to_console_triggered() {
 }
 
 void MainMenuWindow::on_openCourseButton_clicked() {
-    LearningWindow dialog(user_->getCourseManager(), ui_->coursesComboBox->currentIndex(), font_, this);
+    LearningWindow dialog(user_->getCourseManager(), user_->getUserStats(), ui_->coursesComboBox->currentIndex(), font_, this);
     dialog.setWindowTitle("SuperMemo");
     if(dialog.exec()) {
 
@@ -168,7 +168,7 @@ void MainMenuWindow::on_actionSettings_triggered() {
 }
 
 void MainMenuWindow::on_openCalendarButton_clicked() {
-    UserCalendarWindow dialog(user_->getCourseManager(), this);
+    UserCalendarWindow dialog(user_->getCourseManager(), user_->getUserStats(), this);
     dialog.setWindowTitle("Kalendarz kursów");
     if(dialog.exec()) {
 
@@ -191,4 +191,9 @@ void MainMenuWindow::on_courseNameTextEdit_textChanged() {
         }
     }
     ui_->newCourseButton->setEnabled(false);
+}
+
+void MainMenuWindow::on_statsButton_clicked()
+{
+    QTextStream(stdout) <<" Size: "<< user_->getUserStats().getSize()<< Qt::endl;
 }

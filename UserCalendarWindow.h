@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QTextCharFormat>
 #include "CoursesManager.h"
+#include "UserStats.h"
 
 namespace Ui {
 class UserCalendarWindow;
@@ -14,7 +15,7 @@ class UserCalendarWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit UserCalendarWindow(CoursesManager &cManager, QWidget *parent = nullptr);
+    explicit UserCalendarWindow(CoursesManager &cManager, UserStats &uStats, QWidget *parent = nullptr);
     ~UserCalendarWindow();
     void markDate(QDate date);
     void markDates();
@@ -32,6 +33,7 @@ private slots:
 private:
     Ui::UserCalendarWindow *ui_;
     CoursesManager *coursesManager_;
+    UserStats *userStats_;
     QTextCharFormat repeatHighlight_;
 };
 

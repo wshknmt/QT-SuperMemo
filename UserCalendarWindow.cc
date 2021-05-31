@@ -4,13 +4,14 @@
 #include "LearningWindow.h"
 #include "Settings.h"
 
-UserCalendarWindow::UserCalendarWindow(CoursesManager &cManager, QWidget *parent) :
+UserCalendarWindow::UserCalendarWindow(CoursesManager &cManager, UserStats &uStats, QWidget *parent) :
     QDialog(parent),
     ui_(new Ui::UserCalendarWindow)
 {
     ui_->setupUi(this);
     ui_->repeatButton->setEnabled(false);
     coursesManager_ = &cManager;
+    userStats_ = &uStats;
     repeatHighlight_.setBackground(QColor(102,255,102));
     markDates();
     /*ui_->repeatListWidget->addItem("Test");
@@ -140,7 +141,7 @@ void UserCalendarWindow::on_repeatButton_clicked() {
         }
     }
     Settings *s = s->getInstance();
-    LearningWindow dialog(*coursesManager_, index, s->getFont(), this);
+    LearningWindow dialog(*coursesManager_, *userStats_, index, s->getFont(), this);
     dialog.setWindowTitle("SuperMemo");
     if(dialog.exec()) {
 

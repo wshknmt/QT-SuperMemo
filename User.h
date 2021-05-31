@@ -4,6 +4,7 @@
 #include <QObject>
 #include "Course.h"
 #include "CoursesManager.h"
+#include "UserStats.h"
 
 
 class User : public QObject
@@ -16,9 +17,11 @@ public:
     void print();
     void setName(QString n);
     CoursesManager &getCourseManager();
+    UserStats &getUserStats();
 private:
     QString name_;
     CoursesManager coursesManager_;
+    UserStats userStats_;
 
 signals:
 

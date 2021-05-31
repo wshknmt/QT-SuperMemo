@@ -10,6 +10,7 @@
 #include "Card.h"
 #include "Course.h"
 #include "CoursesManager.h"
+#include "UserStats.h"
 
 namespace Ui {
     class LearningWindow;
@@ -19,8 +20,8 @@ class LearningWindow : public QDialog {
     Q_OBJECT
 
 public:
-    LearningWindow(CoursesManager &cManager, QString courseName, QFont font, QWidget *parent = nullptr);
-    LearningWindow(CoursesManager &cManager, int numberOfSelectedCourse, QFont font, QWidget *parent = nullptr);
+    LearningWindow(CoursesManager &cManager, UserStats &uStats, QString courseName, QFont font, QWidget *parent = nullptr);
+    LearningWindow(CoursesManager &cManager, UserStats &uStats, int numberOfSelectedCourse, QFont font, QWidget *parent = nullptr);
     ~LearningWindow();
     void setDefaultImage();
     void checkImage();
@@ -55,6 +56,7 @@ private:
    // int courseNumber_;
     //QList <Course*> *coursesList_;
     CoursesManager *coursesManager_;
+    UserStats *userStats_;
     QFont font_;
 };
 

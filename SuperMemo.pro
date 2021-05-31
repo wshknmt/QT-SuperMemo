@@ -1,5 +1,6 @@
 QT       += core gui
 
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia
 
 CONFIG += c++11
@@ -18,11 +19,14 @@ SOURCES += \
     NewQuestion.cc \
     Settings.cc \
     SettingsWindow.cc \
+    StatisticsWindow.cc \
     User.cc \
     UserCalendarWindow.cc \
+    UserStats.cc \
     main.cpp
 
 HEADERS += \
+    AnswerType.h \
     Card.h \
     ChangeUserWindow.h \
     Course.h \
@@ -32,8 +36,10 @@ HEADERS += \
     NewQuestion.h \
     Settings.h \
     SettingsWindow.h \
+    StatisticsWindow.h \
     User.h \
-    UserCalendarWindow.h
+    UserCalendarWindow.h \
+    UserStats.h
 
 FORMS += \
     ChangeUserWindow.ui \
@@ -41,6 +47,7 @@ FORMS += \
     MainMenuWindow.ui \
     NewQuestion.ui \
     SettingsWindow.ui \
+    StatisticsWindow.ui \
     UserCalendarWindow.ui
 
 # Default rules for deployment.

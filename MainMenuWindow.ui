@@ -131,6 +131,19 @@
      <string>Otwórz kalendarz</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="statsButton">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>210</y>
+      <width>191</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Statystyki</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

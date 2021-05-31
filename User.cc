@@ -23,3 +23,7 @@ void User::setName(QString n) {
 CoursesManager &User::getCourseManager() {
     return coursesManager_;
 }
+
+UserStats &User::getUserStats() {
+    return userStats_;
+}

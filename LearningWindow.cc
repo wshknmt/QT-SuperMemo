@@ -3,11 +3,12 @@
 #include "Card.h"
 #include "CoursesManager.h"
 
-LearningWindow::LearningWindow(CoursesManager &cManager, QString courseName, QFont font, QWidget *parent)
+LearningWindow::LearningWindow(CoursesManager &cManager, UserStats &uStats, QString courseName, QFont font, QWidget *parent)
     : QDialog(parent)
     , ui_(new Ui::LearningWindow)
 {
     coursesManager_ = &cManager;
+    userStats_ = &uStats;
     if(courseName.isEmpty())
         course_ = coursesManager_->createCourse();
     else
@@ -16,11 +17,12 @@ LearningWindow::LearningWindow(CoursesManager &cManager, QString courseName, QFo
     setDefaultValues();
 }
 
-LearningWindow::LearningWindow(CoursesManager &cManager, int numberOfSelectedCourse, QFont font, QWidget *parent)
+LearningWindow::LearningWindow(CoursesManager &cManager, UserStats &uStats, int numberOfSelectedCourse, QFont font, QWidget *parent)
     : QDialog(parent)
     , ui_(new Ui::LearningWindow)
 {
     coursesManager_ = &cManager;
+    userStats_ = &uStats;
     this->font_ = font;
     setDefaultValues();
     course_ = coursesManager_->getCourse(numberOfSelectedCourse);
@@ -127,6 +129,8 @@ void LearningWindow::on_startLearning() {
 void LearningWindow::on_yesButton_clicked() {
     if(card_->getRepeatDate() <= QDate::currentDate())
         card_->setRepeatDate(QDate::currentDate().addDays(5));
+    Stat stat = std::make_pair(QDate::currentDate(), AnswerType::GOOD);
+    userStats_->addStat(stat);
     ui_->yesButton->setEnabled(false);
     ui_->noButton->setEnabled(false);
     ui_->almostButton->setEnabled(false);
@@ -148,6 +152,8 @@ void LearningWindow::on_yesButton_clicked() {
 void LearningWindow::on_noButton_clicked() {
     if(card_->getRepeatDate() <= QDate::currentDate())
         card_->setRepeatDate(QDate::currentDate().addDays(2));
+    Stat stat = std::make_pair(QDate::currentDate(), AnswerType::WRONG);
+    userStats_->addStat(stat);
     ui_->yesButton->setEnabled(false);
     ui_->noButton->setEnabled(false);
     ui_->almostButton->setEnabled(false);
@@ -166,6 +172,8 @@ void LearningWindow::on_noButton_clicked() {
 void LearningWindow::on_almostButton_clicked() {
     if(card_->getRepeatDate() <= QDate::currentDate())
         card_->setRepeatDate(QDate::currentDate().addDays(3));
+    Stat stat = std::make_pair(QDate::currentDate(), AnswerType::MIXED);
+    userStats_->addStat(stat);
     ui_->yesButton->setEnabled(false);
     ui_->noButton->setEnabled(false);
     ui_->almostButton->setEnabled(false);
