@@ -3,8 +3,9 @@
 
 #include <QDialog>
 #include <QFontDialog>
+#include "Settings.h"
 namespace Ui {
-class SettingsWindow;
+    class SettingsWindow;
 }
 
 class SettingsWindow : public QDialog
@@ -17,17 +18,13 @@ public:
     QFont getFont();
 
 private slots:
-
     void on_chooseFontButton_clicked();
-
     void on_closeButton_clicked();
-
     void on_fullscreenCheckBox_stateChanged(int arg1);
 
 private:
-    Ui::SettingsWindow *ui;
-    QWidget *parent;
-    QFont font;
+    Ui::SettingsWindow *ui_;
+    Settings *settings_;
 };
 
 #endif // SETTINGSWINDOW_H

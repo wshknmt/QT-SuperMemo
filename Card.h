@@ -7,7 +7,7 @@
 #include <QPixmap>
 #include <QDate>
 
-class Card : public QObject{
+class Card : public QObject {
     Q_OBJECT
     Q_PROPERTY(QString question READ question)
     Q_PROPERTY(QString answer READ answer)
@@ -16,22 +16,23 @@ class Card : public QObject{
 
 public:
     explicit Card(QString q, QString a, QPixmap i, QString s, QDate r);
-    QString question() const;
-    QString answer() const;
-    QPixmap image() const;
-    QString soundPath() const;
-    QDate repeatDate();
+    QString getQuestion() const;
+    QString getAnswer() const;
+    QPixmap getImage() const;
+    QString getSoundPath() const;
+    QDate getRepeatDate();
     void setRepeatDate(QDate repeatDate);
     void printCard();
 
 signals:
 
 private:
-    QString m_question;
-    QString m_answer;
-    QPixmap m_image;
-    QString m_soundPath;
-    QDate m_repeatDate;
+    QString question_;
+    QString answer_;
+    QPixmap image_;
+    QString soundPath_;
+    QDate repeatDate_;
+
 };
 
 #endif // CARD_H

@@ -34,7 +34,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Add image</string>
+        <string>Dodaj zdjęcie</string>
        </property>
        <property name="icon">
         <iconset>
@@ -51,7 +51,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Add sound</string>
+        <string>Dodaj dźwięk</string>
        </property>
        <property name="icon">
         <iconset>
@@ -72,7 +72,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>&amp;Question:</string>
+        <string>Pytanie:</string>
        </property>
        <property name="buddy">
         <cstring>textEdit_2</cstring>
@@ -98,7 +98,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>&amp;Answer:</string>
+        <string>Odpowiedź</string>
        </property>
        <property name="buddy">
         <cstring>textEdit</cstring>
@@ -157,7 +157,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Cancel</string>
+        <string>Anuluj</string>
        </property>
       </widget>
      </item>

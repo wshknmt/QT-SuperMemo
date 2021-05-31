@@ -8,7 +8,7 @@ namespace Ui {
     class ChangeUserWindow;
 }
 
-class ChangeUserWindow : public QDialog{
+class ChangeUserWindow : public QDialog {
     Q_OBJECT
 
 public:
@@ -23,10 +23,9 @@ private slots:
     void on_chooseButton_clicked();
 
 private:
-    Ui::ChangeUserWindow *ui;
-    User *new_user;
-    User *current_user;
-    QList <User*> *users;
+    Ui::ChangeUserWindow *ui_;
+    User *current_user_;
+    QList <User*> *users_;
 };
 
 #endif // CHANGEUSERWINDOW_H

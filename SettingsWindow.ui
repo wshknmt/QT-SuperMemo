@@ -28,7 +28,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Close</string>
+    <string>Zamknij</string>
    </property>
   </widget>
   <widget class="QPushButton" name="chooseFontButton">
@@ -41,10 +41,10 @@
     </rect>
    </property>
    <property name="text">
-    <string>Choose font</string>
+    <string>Wybierz czcionke</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>90</x>
@@ -57,7 +57,7 @@
     <item>
      <widget class="QLabel" name="label">
       <property name="text">
-       <string>FullScreen Mode</string>
+       <string>Tryb pełnoekranowy</string>
       </property>
      </widget>
     </item>

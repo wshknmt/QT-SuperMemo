@@ -9,8 +9,7 @@
 #include <QModelIndex>
 #include <QVariant>
 
-class Course : public QObject
-{
+class Course : public QObject {
     Q_OBJECT
 public:
     explicit Course(QString n, QObject *parent = nullptr);
@@ -21,6 +20,8 @@ public:
     void removeFirstCardRepeated();
     int getCardsCounter();
     Card* getFirstCardToRepeat();
+    Card* getCardToRepeat(int number);
+    Card* getCardRepeated(int number);
     int getSizeCardsToRepeat();
     int getSizeCardsRepeated();
     void incrementCardsCounter();
@@ -34,10 +35,10 @@ public:
 signals:
 
 private:
-    QList <Card*> cardsToRepeat;
-    QList <Card*> cardsRepeated;
-    QString name;
-    int cardsCounter;
+    QList <Card*> cardsToRepeat_;
+    QList <Card*> cardsRepeated_;
+    QString name_;
+    int cardsCounter_;
 };
 
 #endif // COURSE_H

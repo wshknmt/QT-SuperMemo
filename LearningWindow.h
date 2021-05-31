@@ -9,6 +9,7 @@
 #include "NewQuestion.h"
 #include "Card.h"
 #include "Course.h"
+#include "CoursesManager.h"
 
 namespace Ui {
     class LearningWindow;
@@ -18,9 +19,8 @@ class LearningWindow : public QDialog {
     Q_OBJECT
 
 public:
-    explicit LearningWindow(QWidget *parent = nullptr);
-    LearningWindow(QList <Course*> &coursesList, QString courseName, QFont font, QWidget *parent = nullptr);
-    LearningWindow(QList <Course*> &coursesList, int numberOfSelectedCourse, QFont font, QWidget *parent = nullptr);
+    LearningWindow(CoursesManager &cManager, QString courseName, QFont font, QWidget *parent = nullptr);
+    LearningWindow(CoursesManager &cManager, int numberOfSelectedCourse, QFont font, QWidget *parent = nullptr);
     ~LearningWindow();
     void setDefaultImage();
     void checkImage();
@@ -28,7 +28,6 @@ public:
     void setImage(QPixmap image);
     void updateProgressBar();
     void updateStatusLabel();
-    void updateCoursesList();
     bool isEqualToCurrentDate(QDate date);
 
 signals:
@@ -48,15 +47,15 @@ private slots:
     void on_almostButton_clicked();
 
 private:
-    Ui::LearningWindow *ui;
-    NewQuestion *nq;
-    Card *newCard;
-    Card *card;
-    Course *course;
-    QSound *sound;
-    int courseNumber;
-    QList <Course*> *coursesList;
-    QFont font;
+    Ui::LearningWindow *ui_;
+
+    Card *card_;
+    Course *course_;
+    QSound *sound_;
+   // int courseNumber_;
+    //QList <Course*> *coursesList_;
+    CoursesManager *coursesManager_;
+    QFont font_;
 };
 
 #endif // LEARNINGWINDOW_H

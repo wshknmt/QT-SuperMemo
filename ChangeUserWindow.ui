@@ -54,20 +54,20 @@
     </rect>
    </property>
    <property name="text">
-    <string>Choose existing user from list</string>
+    <string>Wybierz użytkownika z listy</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>310</x>
+     <x>280</x>
      <y>10</y>
-     <width>80</width>
+     <width>171</width>
      <height>16</height>
     </rect>
    </property>
    <property name="text">
-    <string>Create new user</string>
+    <string>Stwórz nowego użytkownika</string>
    </property>
   </widget>
   <widget class="QPushButton" name="chooseButton">
@@ -86,7 +86,7 @@
     </size>
    </property>
    <property name="text">
-    <string>Choose</string>
+    <string>Wybierz</string>
    </property>
   </widget>
   <widget class="QPushButton" name="createButton">
@@ -99,7 +99,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Create new user</string>
+    <string>Stwórz nowego użytkownika</string>
    </property>
   </widget>
   <widget class="QPushButton" name="cancelButton">
@@ -112,7 +112,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Cancel</string>
+    <string>Anuluj</string>
    </property>
   </widget>
   <widget class="QTextEdit" name="nameTextEdit">

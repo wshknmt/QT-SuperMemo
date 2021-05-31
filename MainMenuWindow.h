@@ -11,50 +11,41 @@
 #include "SettingsWindow.h"
 
 namespace Ui {
-class MainMenuWindow;
+    class MainMenuWindow;
 }
 
-class MainMenuWindow : public QMainWindow
-{
+class MainMenuWindow : public QMainWindow {
     Q_OBJECT
 
 public:
     explicit MainMenuWindow(QWidget *parent = nullptr);
     ~MainMenuWindow();
     void updateCoursesInComboBox();
-    //void printCourses();
     QList <User*> &getUsersList();
     void userChanged();
     void saveToFile();
     void readFromFile();
     bool isSaveEmpty();
-   // void fontSet(QFont font);
 
 private slots:
-
     void on_newCourseButton_clicked();
-
     void on_actionPrint_Courses_to_console_triggered();
-
     void on_openCourseButton_clicked();
-
     void on_actionExit_triggered();
-
     void on_warpTimeButton_clicked();
-
     void on_actionChange_User_triggered();
-
     void on_actionSave_triggered();
-
     void on_actionSettings_triggered();
 
-    void on_pushButton_clicked();
+    void on_openCalendarButton_clicked();
+
+    void on_courseNameTextEdit_textChanged();
 
 private:
-    Ui::MainMenuWindow *ui;
-    QList <User*> users;
-    User *user;
-    QFont font;
+    Ui::MainMenuWindow *ui_;
+    QList <User*> users_;
+    User *user_;
+    QFont font_;
 };
 
 #endif // MAINMENUWINDOW_H

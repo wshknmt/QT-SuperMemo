@@ -44,21 +44,21 @@
            <item>
             <widget class="QPushButton" name="newQuestionButton">
              <property name="text">
-              <string>Add new question</string>
+              <string>Dodaj nowe pytanie</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="deleteButton">
              <property name="text">
-              <string>Delete selected question</string>
+              <string>Usuń zaznaczone pytanie</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="endButton">
              <property name="text">
-              <string>End learning current course</string>
+              <string>Zakończ naukę tego kursu</string>
              </property>
             </widget>
            </item>
@@ -83,7 +83,7 @@
          <item>
           <widget class="QLabel" name="statusLabel">
            <property name="text">
-            <string>All Questions: 0 Not remembered: 0 Remembered: 0</string>
+            <string>Wszystkie pytania: 0 Jeszcze nie zapamiętane: 0 Już zapamiętane: 0</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -142,7 +142,7 @@
                 </sizepolicy>
                </property>
                <property name="text">
-                <string>Play</string>
+                <string>Start</string>
                </property>
               </widget>
              </item>
@@ -198,7 +198,7 @@
          <item>
           <widget class="QPushButton" name="showAnswerButton">
            <property name="text">
-            <string>Show Answer</string>
+            <string>Wyświetl odpowiedź</string>
            </property>
           </widget>
          </item>
@@ -226,7 +226,7 @@
          <item>
           <widget class="QLabel" name="label_2">
            <property name="text">
-            <string>Question:</string>
+            <string>Pytanie:</string>
            </property>
           </widget>
          </item>
@@ -263,7 +263,7 @@
          <item>
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Answer:</string>
+            <string>Odpowiedź:</string>
            </property>
           </widget>
          </item>
@@ -292,7 +292,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Did you answer correctly?</string>
+          <string>Czy odpowiedziałeś poprawnie?</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -316,7 +316,7 @@
             </size>
            </property>
            <property name="text">
-            <string>Yes</string>
+            <string>Tak</string>
            </property>
           </widget>
          </item>
@@ -351,7 +351,7 @@
             </size>
            </property>
            <property name="text">
-            <string>Almost</string>
+            <string>Prawie</string>
            </property>
           </widget>
          </item>
@@ -386,7 +386,7 @@
             </size>
            </property>
            <property name="text">
-            <string>No</string>
+            <string>Nie</string>
            </property>
           </widget>
          </item>

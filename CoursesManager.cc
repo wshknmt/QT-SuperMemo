@@ -1,64 +1,45 @@
+#include <QTextStream>
 #include "CoursesManager.h"
-#include <QMutex>
-#include <fstream>
-
-static QMutex mutexCoursesManager;
-CoursesManager* CoursesManager::instancePtr_ = nullptr;
-
-CoursesManager::CoursesManager(){
+CoursesManager::CoursesManager() {
+    coursesCounter_ = 0;
 }
 
-CoursesManager& CoursesManager::getInstance(){
-    if (!instancePtr_){
-        mutexCoursesManager.lock();
-        if (!instancePtr_)
-            instancePtr_ = new CoursesManager();
-        mutexCoursesManager.unlock();
-    }
-    return *instancePtr_;
+QList <Course*> &CoursesManager::getCoursesList() {
+    return coursesList_;
 }
 
-std::shared_ptr<Course> CoursesManager::loadCourseFromFile(std::string fileName){
-    std::ifstream input;
-    input.open(fileName);
-    std::string courseName;
-    input >> courseName;
-    input.close();
-    return std::shared_ptr<Course>(new Course(QString::fromStdString(courseName)));
+Course* CoursesManager::createCourse() {
+    Course *course = new Course();
+    coursesList_.append(course);
+    coursesCounter_++;
+    return course;
+}
+Course* CoursesManager::createCourse(QString name) {
+    Course *course = new Course(name);
+    coursesList_.append(course);
+    coursesCounter_++;
+    return course;
 }
 
-std::vector<std::shared_ptr<Course>>& CoursesManager::getCoursesVec(){
-    return coursesVec_;
+void CoursesManager::addCourse(Course *course) {
+    coursesList_.append(course);
+    coursesCounter_++;
 }
-
-void CoursesManager::addCourse(std::shared_ptr<Course> coursePtr){
-    for (std::shared_ptr<Course> cp : coursesVec_){
-        if (cp == coursePtr)
-            return;
-    }
-    coursesVec_.push_back(coursePtr);
-}
-void CoursesManager::addCourse(std::string fileName){
+void CoursesManager::addCourse(std::string fileName) {
 
 }
-void CoursesManager::addCourses(std::vector<std::shared_ptr<Course>>& courses){
+void CoursesManager::deleteCourse(int courseNumber) {
 
 }
-void CoursesManager::addCourses(std::vector<std::string>& fileNames){
-
+int CoursesManager::getCoursesNumber() {
+    return coursesList_.size();
 }
-void CoursesManager::deleteCourse(std::shared_ptr<Course> course){
 
+Course* CoursesManager::getCourse(int i) {
+    return coursesList_[i];
 }
-void CoursesManager::deleteCourse(std::string fileName){
 
-}
-void CoursesManager::deleteCourses(std::vector<std::shared_ptr<Course>>& courses){
-
-}
-void CoursesManager::deleteCourses(std::vector<std::string>& fileNames){
-
-}
-unsigned int CoursesManager::getCoursesNumber() const{
-    return coursesVec_.size();
+void CoursesManager::printCourses() {
+    for(int i = 0; i < coursesList_.size(); i++)
+        coursesList_[i]->printCourse();
 }

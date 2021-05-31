@@ -9,29 +9,23 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Card.cpp \
-    CardUserStats.cc \
-    ChangeUserWindow.cpp \
-    Course.cpp \
-    CourseProgress.cc \
+    Card.cc \
+    ChangeUserWindow.cc \
+    Course.cc \
     CoursesManager.cc \
-    LearningWindow.cpp \
-    MainMenuWindow.cpp \
-    NewQuestion.cpp \
+    LearningWindow.cc \
+    MainMenuWindow.cc \
+    NewQuestion.cc \
     Settings.cc \
-    SettingsWindow.cpp \
-    User.cpp \
-    UserCalendar.cc \
+    SettingsWindow.cc \
+    User.cc \
     UserCalendarWindow.cc \
     main.cpp
 
 HEADERS += \
-    AnswerType.h \
     Card.h \
-    CardUserStats.h \
     ChangeUserWindow.h \
     Course.h \
-    CourseProgress.h \
     CoursesManager.h \
     LearningWindow.h \
     MainMenuWindow.h \
@@ -39,7 +33,6 @@ HEADERS += \
     Settings.h \
     SettingsWindow.h \
     User.h \
-    UserCalendar.h \
     UserCalendarWindow.h
 
 FORMS += \

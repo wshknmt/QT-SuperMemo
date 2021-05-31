@@ -1,30 +1,36 @@
 #include "Settings.h"
-#include <QMutex>
 
-static QMutex mutexSettings;
 Settings* Settings::pInstance_ = nullptr;
 
-Settings::Settings() : isFullScreen_(false)
-{
+Settings::Settings(){
+
+}
+Settings* Settings::getInstance() {
+    if(!pInstance_)
+        pInstance_ = new Settings;
+    return pInstance_;
 }
 
-Settings& Settings::getInstance()
-{
-    if(!pInstance_) {
-        mutexSettings.lock();
-        if(!pInstance_)
-            pInstance_ = new Settings();
-        mutexSettings.unlock();
-    }
-    return *pInstance_;
-}
-
-bool Settings::isFullScreen()
-{
+bool Settings::isFullScreen() {
     return isFullScreen_;
 }
 
-void Settings::setFullScreen(bool isFullScreen)
-{
-    isFullScreen_ = isFullScreen;
+void Settings::enableFullScreen() {
+    parent_->setWindowState(Qt::WindowFullScreen);
+    isFullScreen_ = true;
+}
+void Settings::disableFullScreen() {
+    parent_->setWindowState(Qt::WindowNoState);
+    isFullScreen_ = false;
+}
+
+void Settings::setParent(QWidget *parent) {
+    this->parent_ = parent;
+}
+
+QFont Settings::getFont() {
+    return font_;
+}
+void Settings::setFont(QFont font) {
+    this->font_ = font;
 }
