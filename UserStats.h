@@ -13,6 +13,7 @@ public:
     UserStats();
     void addStat(Stat stat);
     int getSize();
+    Stat getStat(int index);
     void updateCounters();
     int getGoodCounter();
     int getMixedCounter();

@@ -16,6 +16,10 @@ int UserStats::getSize() {
     return stats_.size();
 }
 
+Stat UserStats::getStat(int index) {
+    return stats_[index];
+}
+
 void UserStats::updateCounters() {
     for(int i=0; i < getSize(); i++) {
         if(stats_[i].second == AnswerType::GOOD) goodCounter_++;

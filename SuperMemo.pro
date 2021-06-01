@@ -10,6 +10,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    ActivityStatisticsWindow.cc \
     Card.cc \
     ChangeUserWindow.cc \
     Course.cc \
@@ -26,6 +27,7 @@ SOURCES += \
     main.cpp
 
 HEADERS += \
+    ActivityStatisticsWindow.h \
     AnswerType.h \
     Card.h \
     ChangeUserWindow.h \
@@ -42,6 +44,7 @@ HEADERS += \
     UserStats.h
 
 FORMS += \
+    ActivityStatisticsWindow.ui \
     ChangeUserWindow.ui \
     LearningWindow.ui \
     MainMenuWindow.ui \

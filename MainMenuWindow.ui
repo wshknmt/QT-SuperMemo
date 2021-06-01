@@ -134,8 +134,8 @@
    <widget class="QPushButton" name="statsButton">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>360</y>
+      <x>80</x>
+      <y>270</y>
       <width>191</width>
       <height>61</height>
      </rect>
@@ -194,6 +194,19 @@
     </property>
     <property name="text">
      <string>Liczba pytań do powtórzenia w tym kursie: 0</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="activityStatsButton">
+    <property name="geometry">
+     <rect>
+      <x>84</x>
+      <y>342</y>
+      <width>181</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Statystyki aktywności</string>
     </property>
    </widget>
   </widget>

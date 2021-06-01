@@ -2,6 +2,8 @@
 #include "ui_MainMenuWindow.h"
 #include "UserCalendarWindow.h"
 #include "TypesOfAnswerStatisticsWindow.h"
+#include "ActivityStatisticsWindow.h"
+#include "ActivityStatisticWindow.h"
 
 MainMenuWindow::MainMenuWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -203,7 +205,7 @@ void MainMenuWindow::on_courseNameTextEdit_textChanged() {
 
 void MainMenuWindow::on_statsButton_clicked() {
     TypesOfAnswerStatisticsWindow dialog(user_->getUserStats(), this);
-    dialog.setWindowTitle("Statystyki");
+    dialog.setWindowTitle("Statystyki poprawności udzielalnych odpowiedzi");
     if(dialog.exec()) {
 
     }
@@ -236,5 +238,16 @@ void MainMenuWindow::on_extraReviewButton_clicked() {
     dialog.setWindowTitle("SuperMemo");
     if(dialog.exec()) {
         updateProgressBar(ui_->coursesComboBox->currentIndex());
+    }
+}
+
+void MainMenuWindow::on_activityStatsButton_clicked() {
+    //ActivityStatisticWindow dialog(user_->getUserStats());
+
+
+    ActivityStatisticsWindow dialog(user_->getUserStats(), this);
+    dialog.setWindowTitle("Statystyki aktywności użytkownika");
+    if(dialog.exec()) {
+
     }
 }

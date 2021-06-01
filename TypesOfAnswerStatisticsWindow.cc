@@ -26,7 +26,6 @@ TypesOfAnswerStatisticsWindow::TypesOfAnswerStatisticsWindow(UserStats &uStats, 
     QPieSlice *wSlice = series->slices().at(2);
     wSlice->setBrush(Qt::red);
 
-
     QPalette palette;
     palette.setColor(QPalette::WindowText, QColor(50, 205, 50));
     ui_->label1->setPalette(palette);
@@ -39,10 +38,13 @@ TypesOfAnswerStatisticsWindow::TypesOfAnswerStatisticsWindow(UserStats &uStats, 
     ui_->label2->setText(QString("%1%").arg(100*mSlice->percentage(), 0, 'f', 1) + " prawie poprawnych odpowiedzi");
     ui_->label3->setText(QString("%1%").arg(100*wSlice->percentage(), 0, 'f', 1) + " niepoprawnych odpowiedzi");
 
-
     QChart *chart = new QChart();
     chart->addSeries(series);
     chart->setTitle("Wykres poprawności udzielanych odpowiedzi");
+    QFont font = chart->titleFont();
+    font.setPointSize(13);
+    chart->setTitleFont(font);
+    chart->setAnimationOptions(QChart::SeriesAnimations);
 
     if(userStats_->getSize() != 0) {
         QChartView *chartview = new QChartView(chart);

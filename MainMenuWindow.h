@@ -43,6 +43,8 @@ private slots:
     void on_coursesComboBox_highlighted(int index);
     void on_extraReviewButton_clicked();
 
+    void on_activityStatsButton_clicked();
+
 private:
     Ui::MainMenuWindow *ui_;
     QList <User*> users_;
