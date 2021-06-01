@@ -1,7 +1,7 @@
 #include "MainMenuWindow.h"
 #include "ui_MainMenuWindow.h"
 #include "UserCalendarWindow.h"
-#include "StatisticsWindow.h"
+#include "TypesOfAnswerStatisticsWindow.h"
 
 MainMenuWindow::MainMenuWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -10,11 +10,15 @@ MainMenuWindow::MainMenuWindow(QWidget *parent) :
     ui_->setupUi(this);
     ui_->coursesComboBox->setEnabled(false);
     ui_->openCourseButton->setEnabled(false);
+    ui_->extraReviewButton->setEnabled(false);
     ui_->actionDelete_selected_course->setEnabled(false);
     ui_->actionImport->setEnabled(false);
     ui_->actionExport->setEnabled(false);
     ui_->actionHelp->setEnabled(false);
+    ui_->progressBar->setValue(0);
+    ui_->progressBar->setEnabled(false);
     ui_->newCourseButton->setEnabled(false);
+    ui_->questionsToRepeatCounter->setVisible(false);
     font_ = QFont( "MS Shell Dlg 2", 15 );
     //if(!isSaveEmpty())
     if(false)
@@ -39,14 +43,18 @@ void MainMenuWindow::updateCoursesInComboBox() {
         QString courseName = user_->getCourseManager().getCourse(i)->getName();
         ui_->coursesComboBox->addItem(courseName);
     }
+    if(ui_->coursesComboBox->count() > 0)
+        updateProgressBar(0);
 }
 
 void MainMenuWindow::on_newCourseButton_clicked() {
     LearningWindow dialog(user_->getCourseManager(), user_->getUserStats(), ui_->courseNameTextEdit->toPlainText(), font_, this);
     dialog.setWindowTitle("SuperMemo");
+    dialog.setDefaultImage();
     if(dialog.exec()) {
         ui_->coursesComboBox->setEnabled(true);
         ui_->openCourseButton->setEnabled(true);
+        ui_->extraReviewButton->setEnabled(true);
         updateCoursesInComboBox();
     }
     ui_->courseNameTextEdit->clear();
@@ -63,7 +71,7 @@ void MainMenuWindow::on_openCourseButton_clicked() {
     LearningWindow dialog(user_->getCourseManager(), user_->getUserStats(), ui_->coursesComboBox->currentIndex(), font_, this);
     dialog.setWindowTitle("SuperMemo");
     if(dialog.exec()) {
-
+        updateProgressBar(ui_->coursesComboBox->currentIndex());
     }
 }
 
@@ -93,29 +101,32 @@ void MainMenuWindow::on_actionChange_User_triggered() {
 }
 
 void MainMenuWindow::userChanged() {
+    ui_->progressBar->setValue(0);
+    ui_->progressBar->setEnabled(false);
+    ui_->questionsToRepeatCounter->setVisible(false);
     updateCoursesInComboBox();
     ui_->courseNameTextEdit->clear();
     ui_->userDisplayLabel->setText(user_->getName());
     if(ui_->coursesComboBox->count() == 0) {
         ui_->coursesComboBox->setEnabled(false);
         ui_->openCourseButton->setEnabled(false);
+        ui_->extraReviewButton->setEnabled(false);
     }
     else {
         ui_->coursesComboBox->setEnabled(true);
         ui_->openCourseButton->setEnabled(true);
+        ui_->extraReviewButton->setEnabled(true);
     }
 }
 
 void MainMenuWindow::saveToFile() {
     std::ofstream output_file;
     output_file.open("save.txt", std::ios::trunc);
-    for(int i=0; i < users_.size(); i++)
-    {
+    for(int i=0; i < users_.size(); i++) {
         User u;
         u.setName(users_[i]->getName());
         //u.setCoursesList(users[i]->getCoursesList());
         output_file.write((char*)&u, sizeof(User));
-
     }
     output_file.close();
     QTextStream(stdout) <<"saved"<< Qt::endl;
@@ -140,10 +151,8 @@ void MainMenuWindow::readFromFile() {
         users_.append(user_);
         QTextStream(stdout) <<"name user: "<<user_->getName()<< Qt::endl;
     }
-
     input_file.close();
     user_ = users_[0];
-
     userChanged();
 }
 
@@ -157,7 +166,6 @@ bool MainMenuWindow::isSaveEmpty() {
 
 void MainMenuWindow::on_actionSave_triggered() {
     //saveToFile();
-
 }
 
 void MainMenuWindow::on_actionSettings_triggered() {
@@ -172,7 +180,6 @@ void MainMenuWindow::on_openCalendarButton_clicked() {
     UserCalendarWindow dialog(user_->getCourseManager(), user_->getUserStats(), this);
     dialog.setWindowTitle("Kalendarz kursów");
     if(dialog.exec()) {
-
     }
 }
 
@@ -194,12 +201,40 @@ void MainMenuWindow::on_courseNameTextEdit_textChanged() {
     ui_->newCourseButton->setEnabled(false);
 }
 
-void MainMenuWindow::on_statsButton_clicked()
-{
-    StatisticsWindow dialog(user_->getUserStats(), this);
-    dialog.setWindowTitle("Ustawienia");
+void MainMenuWindow::on_statsButton_clicked() {
+    TypesOfAnswerStatisticsWindow dialog(user_->getUserStats(), this);
+    dialog.setWindowTitle("Statystyki");
     if(dialog.exec()) {
 
     }
-    //QTextStream(stdout) <<" Size: "<< user_->getUserStats().getSize()<< Qt::endl;
+}
+
+void MainMenuWindow::updateProgressBar(int number) {
+    Course *course = user_->getCourseManager().getCourse(number);
+    course->countProgress();
+    ui_->progressBar->setValue(course->getProgress());
+    if(course->getSizeCardsToRepeat() == 0)
+        ui_->questionsToRepeatCounter->setVisible(false);
+    else {
+        ui_->questionsToRepeatCounter->setText(QString("Liczba pytań do powtórzenia w tym kursie: " + QString::number(course->getSizeCardsToRepeat())));
+        ui_->questionsToRepeatCounter->setVisible(true);
+    }
+}
+
+void MainMenuWindow::on_coursesComboBox_highlighted(int index) {
+    if(user_->getCourseManager().getCourse(index)->getCardsCounter() == 0)
+        ui_->progressBar->setEnabled(false);
+    else
+        ui_->progressBar->setEnabled(true);
+    updateProgressBar(index);
+}
+
+void MainMenuWindow::on_extraReviewButton_clicked() {
+    user_->getCourseManager().getCourse(ui_->coursesComboBox->currentIndex())->reviewRequest();
+    updateProgressBar(ui_->coursesComboBox->currentIndex());
+    LearningWindow dialog(user_->getCourseManager(), user_->getUserStats(), ui_->coursesComboBox->currentIndex(), font_, this);
+    dialog.setWindowTitle("SuperMemo");
+    if(dialog.exec()) {
+        updateProgressBar(ui_->coursesComboBox->currentIndex());
+    }
 }

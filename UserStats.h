@@ -16,7 +16,7 @@ public:
     void updateCounters();
     int getGoodCounter();
     int getMixedCounter();
-    int getWrongCounter();
+    int getWrongCounter(); 
 private:
     QList <Stat> stats_;
     int goodCounter_;

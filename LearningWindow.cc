@@ -92,14 +92,8 @@ void LearningWindow::setImage(QPixmap image) {
 }
 
 void LearningWindow::updateProgressBar() {
-    if(course_->getCardsCounter() > 0 && course_->getCardsCounter() == course_->getSizeCardsRepeated())
-         ui_->progressBar->setValue(100);
-    else if (course_->getCardsCounter() > 0) {
-        int val = 100 - course_->getSizeCardsToRepeat() * 100 / course_->getCardsCounter();
-        ui_->progressBar->setValue(val);
-    }
-    else
-        ui_->progressBar->setValue(0);
+    course_->countProgress();
+    ui_->progressBar->setValue(course_->getProgress());
 }
 
 void LearningWindow::updateStatusLabel() {
@@ -235,6 +229,9 @@ void LearningWindow::on_deleteButton_clicked() {
         ui_->answerTextBrowser->clear();
         if (course_->getSizeCardsToRepeat() >= 1)
             emit questionAvailable();
+        else {
+            ui_->deleteButton->setEnabled(false);
+        }
     }
 }
 
@@ -258,6 +255,10 @@ bool LearningWindow::isEqualToCurrentDate(QDate date) {
     if(current.day() == date.day() && current.month() == date.month() && current.year() == date.year())
         return true;
     return false;
+}
+
+int LearningWindow::getProgressBarValue() {
+    return ui_->progressBar->value();
 }
 
 

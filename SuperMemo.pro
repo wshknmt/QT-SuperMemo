@@ -19,7 +19,7 @@ SOURCES += \
     NewQuestion.cc \
     Settings.cc \
     SettingsWindow.cc \
-    StatisticsWindow.cc \
+    TypesOfAnswerStatisticsWindow.cc \
     User.cc \
     UserCalendarWindow.cc \
     UserStats.cc \
@@ -36,7 +36,7 @@ HEADERS += \
     NewQuestion.h \
     Settings.h \
     SettingsWindow.h \
-    StatisticsWindow.h \
+    TypesOfAnswerStatisticsWindow.h \
     User.h \
     UserCalendarWindow.h \
     UserStats.h
@@ -47,7 +47,7 @@ FORMS += \
     MainMenuWindow.ui \
     NewQuestion.ui \
     SettingsWindow.ui \
-    StatisticsWindow.ui \
+    TypesOfAnswerStatisticsWindow.ui \
     UserCalendarWindow.ui
 
 # Default rules for deployment.

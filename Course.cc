@@ -4,11 +4,13 @@
 Course::Course(QString n, QObject *parent) : QObject(parent) {
     cardsCounter_ = 0;
     name_ = n;
+    progress_ = 0;
 }
 
 Course::Course(QObject *parent) : QObject(parent) {
     cardsCounter_ = 0;
     name_ = "default_course_name";
+    progress_ = 0;
 }
 
 void Course::addCardToRepeat(Card* card) {
@@ -61,6 +63,19 @@ QString Course::getName() {
     return name_;
 }
 
+void Course::countProgress() {
+    if(getCardsCounter() > 0 && getCardsCounter() == getSizeCardsRepeated())
+        progress_ = 100;
+    else if (getCardsCounter() > 0)
+        progress_ = 100 - getSizeCardsToRepeat() * 100 / getCardsCounter();
+    else
+        progress_ = 0;
+}
+
+int Course::getProgress() {
+    return progress_;
+}
+
 void Course::printCourse() {
     QTextStream(stdout) <<"CourseName:  "<< name_ <<" cards counter "<< cardsCounter_<< Qt::endl;
     QTextStream(stdout) <<"Cards To Repeat:  "<< Qt::endl;
@@ -95,4 +110,10 @@ void Course::checkCards() {
 void Course::simulateTime(qint64 days) {
     for(int i=0; i < cardsRepeated_.size(); i++)
         cardsRepeated_[i]->setRepeatDate(cardsRepeated_[i]->getRepeatDate().addDays(days));
+}
+
+void Course::reviewRequest() {
+    for(int i = 0; i < cardsRepeated_.size(); i++)
+        cardsToRepeat_.append(cardsRepeated_[i]);
+    cardsRepeated_.clear();
 }

@@ -70,16 +70,19 @@ void NewQuestion::on_textEdit_textChanged() {
 }
 
 void NewQuestion::on_imageAddButton_clicked() {
-    ui_->imageAddButton->setEnabled(false);
-    ui_->imageAddButton->setText("Zdjęcie dodane");
     imagePath_ = QFileDialog::getOpenFileName(this,
         "Otwórz zdjęcie", QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("Plik JPG (*.jpg *.jpeg);; Plik PNG  (*.png);; Plik BMP (*.bmp)") );
-    image_.load(imagePath_);
-
+    if(imagePath_.size() != 0) {
+      image_.load(imagePath_);
+      ui_->imageAddButton->setEnabled(false);
+      ui_->imageAddButton->setText("Zdjęcie dodane");
+    }
 }
 
 void NewQuestion::on_soundAddButton_clicked() {
-    ui_->soundAddButton->setEnabled(false);
-    ui_->soundAddButton->setText("Dźwięk dodany");
     soundPath_ = QFileDialog::getOpenFileName(this, "Otwórz dźwięk", QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("Plik Wav (*.wav)") );
+    if(soundPath_.size() != 0) {
+        ui_->soundAddButton->setEnabled(false);
+        ui_->soundAddButton->setText("Dźwięk dodany");
+    }
 }

@@ -30,6 +30,7 @@ public:
     void updateProgressBar();
     void updateStatusLabel();
     bool isEqualToCurrentDate(QDate date);
+    int getProgressBarValue();
 
 signals:
     void questionAvailable();

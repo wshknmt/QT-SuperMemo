@@ -31,6 +31,9 @@ public:
     bool isEqualToCurrentDate(QDate date);
     void checkCards();
     void simulateTime(qint64 days);
+    void countProgress();
+    int getProgress();
+    void reviewRequest();
 
 signals:
 
@@ -38,6 +41,7 @@ private:
     QList <Card*> cardsToRepeat_;
     QList <Card*> cardsRepeated_;
     QString name_;
+    int progress_;
     int cardsCounter_;
 };
 

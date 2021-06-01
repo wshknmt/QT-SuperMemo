@@ -26,6 +26,7 @@ public:
     void saveToFile();
     void readFromFile();
     bool isSaveEmpty();
+    void updateProgressBar(int number);
 
 private slots:
     void on_newCourseButton_clicked();
@@ -36,12 +37,11 @@ private slots:
     void on_actionChange_User_triggered();
     void on_actionSave_triggered();
     void on_actionSettings_triggered();
-
     void on_openCalendarButton_clicked();
-
     void on_courseNameTextEdit_textChanged();
-
     void on_statsButton_clicked();
+    void on_coursesComboBox_highlighted(int index);
+    void on_extraReviewButton_clicked();
 
 private:
     Ui::MainMenuWindow *ui_;
