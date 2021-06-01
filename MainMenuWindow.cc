@@ -1,6 +1,7 @@
 #include "MainMenuWindow.h"
 #include "ui_MainMenuWindow.h"
 #include "UserCalendarWindow.h"
+#include "StatisticsWindow.h"
 
 MainMenuWindow::MainMenuWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -195,5 +196,10 @@ void MainMenuWindow::on_courseNameTextEdit_textChanged() {
 
 void MainMenuWindow::on_statsButton_clicked()
 {
-    QTextStream(stdout) <<" Size: "<< user_->getUserStats().getSize()<< Qt::endl;
+    StatisticsWindow dialog(user_->getUserStats(), this);
+    dialog.setWindowTitle("Ustawienia");
+    if(dialog.exec()) {
+
+    }
+    //QTextStream(stdout) <<" Size: "<< user_->getUserStats().getSize()<< Qt::endl;
 }
