@@ -45,6 +45,8 @@ private slots:
 
     void on_activityStatsButton_clicked();
 
+    void on_actionWarpTime_triggered();
+
 private:
     Ui::MainMenuWindow *ui_;
     QList <User*> users_;

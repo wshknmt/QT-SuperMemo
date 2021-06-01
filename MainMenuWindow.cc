@@ -3,7 +3,6 @@
 #include "UserCalendarWindow.h"
 #include "TypesOfAnswerStatisticsWindow.h"
 #include "ActivityStatisticsWindow.h"
-#include "ActivityStatisticWindow.h"
 
 MainMenuWindow::MainMenuWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -20,7 +19,8 @@ MainMenuWindow::MainMenuWindow(QWidget *parent) :
     ui_->progressBar->setValue(0);
     ui_->progressBar->setEnabled(false);
     ui_->newCourseButton->setEnabled(false);
-    ui_->questionsToRepeatCounter->setVisible(false);
+    //ui_->questionsToRepeatCounter->setVisible(false);
+    ui_->questionsToRepeatCounter->setText(QString(" "));
     font_ = QFont( "MS Shell Dlg 2", 15 );
     //if(!isSaveEmpty())
     if(false)
@@ -82,9 +82,7 @@ void MainMenuWindow::on_actionExit_triggered() {
 }
 
 void MainMenuWindow::on_warpTimeButton_clicked() {
-    for(int i = 0; i < user_->getCourseManager().getCoursesNumber(); i++) {
-        user_->getCourseManager().getCourse(i)->simulateTime(-7);
-    }
+
 }
 
 QList <User*> &MainMenuWindow::getUsersList() {
@@ -105,7 +103,8 @@ void MainMenuWindow::on_actionChange_User_triggered() {
 void MainMenuWindow::userChanged() {
     ui_->progressBar->setValue(0);
     ui_->progressBar->setEnabled(false);
-    ui_->questionsToRepeatCounter->setVisible(false);
+    //ui_->questionsToRepeatCounter->setVisible(false);
+    ui_->questionsToRepeatCounter->setText(QString(" "));
     updateCoursesInComboBox();
     ui_->courseNameTextEdit->clear();
     ui_->userDisplayLabel->setText(user_->getName());
@@ -216,10 +215,11 @@ void MainMenuWindow::updateProgressBar(int number) {
     course->countProgress();
     ui_->progressBar->setValue(course->getProgress());
     if(course->getSizeCardsToRepeat() == 0)
-        ui_->questionsToRepeatCounter->setVisible(false);
+        //ui_->questionsToRepeatCounter->setVisible(false);
+        ui_->questionsToRepeatCounter->setText(QString(" "));
     else {
         ui_->questionsToRepeatCounter->setText(QString("Liczba pytań do powtórzenia w tym kursie: " + QString::number(course->getSizeCardsToRepeat())));
-        ui_->questionsToRepeatCounter->setVisible(true);
+        //ui_->questionsToRepeatCounter->setVisible(true);
     }
 }
 
@@ -249,5 +249,11 @@ void MainMenuWindow::on_activityStatsButton_clicked() {
     dialog.setWindowTitle("Statystyki aktywności użytkownika");
     if(dialog.exec()) {
 
+    }
+}
+
+void MainMenuWindow::on_actionWarpTime_triggered() {
+    for(int i = 0; i < user_->getCourseManager().getCoursesNumber(); i++) {
+        user_->getCourseManager().getCourse(i)->simulateTime(-7);
     }
 }
