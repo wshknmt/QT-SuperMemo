@@ -13,7 +13,7 @@ TypesOfAnswerStatisticsWindow::TypesOfAnswerStatisticsWindow(UserStats &uStats, 
     QPieSeries *series = new QPieSeries();
 
     series->append("Poprawna odpowiedź", userStats_->getGoodCounter());
-    series->append("Prawie poprawna odpowiedź", userStats_->getMixedCounter());
+    series->append("Prawie \npoprawna \nodpowiedź", userStats_->getMixedCounter());
     series->append("Niepoprawna odpowiedź", userStats_->getWrongCounter());
 
     series->setLabelsVisible(true);
@@ -44,7 +44,8 @@ TypesOfAnswerStatisticsWindow::TypesOfAnswerStatisticsWindow(UserStats &uStats, 
     QFont font = chart->titleFont();
     font.setPointSize(13);
     chart->setTitleFont(font);
-    chart->setAnimationOptions(QChart::SeriesAnimations);
+    //chart->setAnimationOptions(QChart::SeriesAnimations);
+    chart->setAnimationOptions(QChart::AllAnimations);
 
     if(userStats_->getSize() != 0) {
         QChartView *chartview = new QChartView(chart);

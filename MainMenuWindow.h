@@ -33,7 +33,7 @@ private slots:
     void on_actionPrint_Courses_to_console_triggered();
     void on_openCourseButton_clicked();
     void on_actionExit_triggered();
-    void on_warpTimeButton_clicked();
+    //void on_warpTimeButton_clicked();
     void on_actionChange_User_triggered();
     void on_actionSave_triggered();
     void on_actionSettings_triggered();

@@ -21,6 +21,7 @@ public:
     void markDates();
     bool isEqualToCurrentDate(QDate date);
     bool areDatesEqual(QDate date1, QDate date2);
+    void clearCalendar();
 
 private slots:
     void on_repeatListWidget_itemSelectionChanged();

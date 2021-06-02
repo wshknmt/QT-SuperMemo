@@ -81,9 +81,9 @@ void MainMenuWindow::on_actionExit_triggered() {
     QCoreApplication::quit();
 }
 
-void MainMenuWindow::on_warpTimeButton_clicked() {
+/*void MainMenuWindow::on_warpTimeButton_clicked() {
 
-}
+}*/
 
 QList <User*> &MainMenuWindow::getUsersList() {
     return users_;
