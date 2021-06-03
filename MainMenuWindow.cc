@@ -13,7 +13,7 @@ MainMenuWindow::MainMenuWindow(QWidget *parent) :
     ui_->openCourseButton->setEnabled(false);
     ui_->extraReviewButton->setEnabled(false);
     ui_->actionDelete_selected_course->setEnabled(false);
-    ui_->actionImport->setEnabled(false);
+    ui_->actionImport->setEnabled(true);
     ui_->actionExport->setEnabled(false);
     ui_->actionHelp->setEnabled(false);
     ui_->progressBar->setValue(0);
@@ -58,6 +58,7 @@ void MainMenuWindow::on_newCourseButton_clicked() {
         ui_->coursesComboBox->setEnabled(true);
         ui_->openCourseButton->setEnabled(true);
         ui_->extraReviewButton->setEnabled(true);
+        ui_->actionExport->setEnabled(true);
         updateCoursesInComboBox();
     }
     ui_->courseNameTextEdit->clear();
@@ -96,12 +97,12 @@ void MainMenuWindow::on_actionChange_User_triggered() {
     if(dialog.exec()) {
         if(user_ != dialog.getCurrentUser()) {
             user_ = dialog.getCurrentUser();
-            userChanged();
+            updateWindow();
         }
     }
 }
 
-void MainMenuWindow::userChanged() {
+void MainMenuWindow::updateWindow() {
     ui_->progressBar->setValue(0);
     ui_->progressBar->setEnabled(false);
     //ui_->questionsToRepeatCounter->setVisible(false);
@@ -113,11 +114,13 @@ void MainMenuWindow::userChanged() {
         ui_->coursesComboBox->setEnabled(false);
         ui_->openCourseButton->setEnabled(false);
         ui_->extraReviewButton->setEnabled(false);
+        ui_->actionExport->setEnabled(false);
     }
     else {
         ui_->coursesComboBox->setEnabled(true);
         ui_->openCourseButton->setEnabled(true);
         ui_->extraReviewButton->setEnabled(true);
+        ui_->actionExport->setEnabled(true);
     }
 }
 
@@ -167,7 +170,7 @@ void MainMenuWindow::readFromFile() {
     }
     input_file.close();
     user_ = users_[0];
-    userChanged();
+    updateWindow();
 }
 
 bool MainMenuWindow::isSaveEmpty() {
@@ -273,4 +276,69 @@ void MainMenuWindow::on_actionWarpTime_triggered() {
 
 void MainMenuWindow::on_exitButton_clicked() {
     QCoreApplication::quit();
+}
+
+void MainMenuWindow::on_actionExport_triggered() {
+    QString outputFileName = QFileDialog::getSaveFileName(nullptr, "Zapisywanie jako", ".", "Plik tekstowy (*.txt)" );
+    std::fstream outputFile;
+    outputFile.open(outputFileName.toStdString(), std::ios::trunc | std::ios::out);
+    Course *selectedCourse = user_->getCourseManager().getCourse(ui_->coursesComboBox->currentIndex());
+    outputFile << selectedCourse->getName().toStdString() << std::endl;
+    for(int i = 0; i < selectedCourse->getSizeCardsToRepeat(); i++) {
+        Card *card = selectedCourse->getCardToRepeat(i);
+        writeObjectsToFile(outputFile, card);
+    }
+    for(int i = 0; i < selectedCourse->getSizeCardsRepeated(); i++) {
+        Card *card = selectedCourse->getCardRepeated(i);
+        writeObjectsToFile(outputFile, card);
+    }
+    outputFile.close();
+}
+
+void MainMenuWindow::writeObjectsToFile(std::fstream &file, Card *card) {
+    file << card->getQuestion().toStdString()<<";"<<card->getAnswer().toStdString()<<";";
+    if(card->getImagePath().isEmpty())
+        file<<"-;";
+    else file <<
+        card->getImagePath().toStdString()<<";";
+    if(card->getSoundPath().isEmpty())
+        file<<"-;"<<std::endl;
+    else
+        file << card->getSoundPath().toStdString()<<";"<<std::endl;
+}
+
+void MainMenuWindow::on_actionImport_triggered() {
+    QString inputFileName = QFileDialog::getOpenFileName(this, "Otwórz plik", "../SuperMemo/example_courses", "Plik tekstowy (*.txt)" );
+    std::fstream inputFile;
+    inputFile.open(inputFileName.toStdString(), std::ios::in);
+    std::string fName;
+    QString name;
+    getline(inputFile, fName);
+    name = QString::fromStdString(fName);
+    if(name.isEmpty()) {
+        QMessageBox msg;
+        msg.setText("Plik jest pusty");
+        msg.setStandardButtons(QMessageBox::Ok);
+        msg.setDefaultButton(QMessageBox::Ok);
+        msg.exec();
+        return;
+    }
+    Course *newCourse = new Course(name);
+    std::string question, answer, imagePath, soundPath;
+    while(!inputFile.eof()) {
+        std::string trash;
+        getline(inputFile, question, ';');
+        getline(inputFile, answer, ';');
+        getline(inputFile, imagePath, ';');
+        getline(inputFile, soundPath, ';');
+        getline(inputFile, trash);
+        if(imagePath == "-") imagePath.clear();
+        if(soundPath == "-") soundPath.clear();
+        Card *newCard = new Card(QString::fromStdString(question), QString::fromStdString(answer), QString::fromStdString(imagePath), QString::fromStdString(soundPath), QDate::currentDate());
+        newCourse->addCardToRepeat(newCard);
+        newCourse->incrementCardsCounter();
+
+    }
+    user_->getCourseManager().addCourse(newCourse);
+    updateWindow();
 }

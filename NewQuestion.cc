@@ -74,6 +74,8 @@ void NewQuestion::on_imageAddButton_clicked() {
       ui_->imageAddButton->setEnabled(false);
       ui_->imageAddButton->setText("Zdjęcie dodane");
     }
+
+
 }
 
 void NewQuestion::on_soundAddButton_clicked() {

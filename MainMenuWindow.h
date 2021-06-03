@@ -22,11 +22,12 @@ public:
     ~MainMenuWindow();
     void updateCoursesInComboBox();
     QList <User*> &getUsersList();
-    void userChanged();
+    void updateWindow();
     void saveToFile();
     void readFromFile();
     bool isSaveEmpty();
     void updateProgressBar(int number);
+    void writeObjectsToFile(std::fstream &file, Card *card);
 
 
 private slots:
@@ -49,6 +50,10 @@ private slots:
     void on_actionWarpTime_triggered();
 
     void on_exitButton_clicked();
+
+    void on_actionExport_triggered();
+
+    void on_actionImport_triggered();
 
 private:
     Ui::MainMenuWindow *ui_;

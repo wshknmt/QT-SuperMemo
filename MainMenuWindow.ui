@@ -442,12 +442,12 @@
   </action>
   <action name="actionImport">
    <property name="text">
-    <string>Import</string>
+    <string>Importuj kurs z pliku</string>
    </property>
   </action>
   <action name="actionExport">
    <property name="text">
-    <string>Export</string>
+    <string>Exportuj zaznaczony kurs do pliku</string>
    </property>
   </action>
   <action name="actionSave">
