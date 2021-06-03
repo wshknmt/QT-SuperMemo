@@ -32,5 +32,5 @@ void Card::setRepeatDate(QDate repeatDate) {
 }
 
 void Card::printCard() {
-    QTextStream(stdout) <<" Question: "<< question_ <<" Answer: "<< answer_<<" Repeat_date: "<< repeatDate_.toString(Qt::RFC2822Date) << Qt::endl;
+   // QTextStream(stdout) <<" Question: "<< question_ <<" Answer: "<< answer_<<" Repeat_date: "<< repeatDate_.toString(Qt::RFC2822Date) << Qt::endl;
 }

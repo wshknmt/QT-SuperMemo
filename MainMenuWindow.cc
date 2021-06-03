@@ -65,10 +65,10 @@ void MainMenuWindow::on_newCourseButton_clicked() {
 }
 
 void MainMenuWindow::on_actionPrint_Courses_to_console_triggered() {
-    for(int i=0; i < users_.size(); i++) {
+    /*for(int i=0; i < users_.size(); i++) {
         QTextStream(stdout) <<"---------- User: "<< users_[i]->getName() <<" ------------------"<< Qt::endl;
         users_[i]->print();
-    }
+    }*/
 }
 
 void MainMenuWindow::on_openCourseButton_clicked() {
@@ -156,17 +156,17 @@ void MainMenuWindow::readFromFile() {
 
     //user = new User();
     //User usr;
-    QTextStream(stdout) <<"file opened"<< Qt::endl;
+    //QTextStream(stdout) <<"file opened"<< Qt::endl;
     while(!input_file.eof()) {
         User u;
         input_file.read((char*)&u, sizeof(User));
 
         user_ = new User();
         user_->setName(u.getName());
-        QTextStream(stdout) <<"xx"<< Qt::endl;
+        //QTextStream(stdout) <<"xx"<< Qt::endl;
        // user->setCoursesList(u.getCoursesList());
         users_.append(user_);
-        QTextStream(stdout) <<"name user: "<<user_->getName()<< Qt::endl;
+      //  QTextStream(stdout) <<"name user: "<<user_->getName()<< Qt::endl;
     }
     input_file.close();
     user_ = users_[0];

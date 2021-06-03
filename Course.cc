@@ -77,7 +77,7 @@ int Course::getProgress() {
 }
 
 void Course::printCourse() {
-    QTextStream(stdout) <<"CourseName:  "<< name_ <<" cards counter "<< cardsCounter_<< Qt::endl;
+   /* QTextStream(stdout) <<"CourseName:  "<< name_ <<" cards counter "<< cardsCounter_<< Qt::endl;
     QTextStream(stdout) <<"Cards To Repeat:  "<< Qt::endl;
     for(int i=0; i < cardsToRepeat_.size(); i++) {
         QTextStream(stdout) <<"    "<< i+1 <<". ";
@@ -87,7 +87,7 @@ void Course::printCourse() {
     for(int i=0; i < cardsRepeated_.size(); i++) {
         QTextStream(stdout) <<"    "<< i+1 <<". ";
         cardsRepeated_[i]->printCard();
-    }
+    }*/
 }
 
 bool Course::isEqualToCurrentDate(QDate date) {
