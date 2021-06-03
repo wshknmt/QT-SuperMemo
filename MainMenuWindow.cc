@@ -55,11 +55,12 @@ void MainMenuWindow::on_newCourseButton_clicked() {
     dialog.setWindowTitle("SuperMemo");
     dialog.setDefaultImage();
     if(dialog.exec()) {
-        ui_->coursesComboBox->setEnabled(true);
+        updateWindow();
+        /*ui_->coursesComboBox->setEnabled(true);
         ui_->openCourseButton->setEnabled(true);
         ui_->extraReviewButton->setEnabled(true);
         ui_->actionExport->setEnabled(true);
-        updateCoursesInComboBox();
+        updateCoursesInComboBox();*/
     }
     ui_->courseNameTextEdit->clear();
 }
@@ -75,7 +76,8 @@ void MainMenuWindow::on_openCourseButton_clicked() {
     LearningWindow dialog(user_->getCourseManager(), user_->getUserStats(), ui_->coursesComboBox->currentIndex(), this);
     dialog.setWindowTitle("SuperMemo");
     if(dialog.exec()) {
-        updateProgressBar(ui_->coursesComboBox->currentIndex());
+        updateWindow();
+        //updateProgressBar(ui_->coursesComboBox->currentIndex());
     }
 }
 
@@ -115,12 +117,14 @@ void MainMenuWindow::updateWindow() {
         ui_->openCourseButton->setEnabled(false);
         ui_->extraReviewButton->setEnabled(false);
         ui_->actionExport->setEnabled(false);
+        ui_->actionDelete_selected_course->setEnabled(false);
     }
     else {
         ui_->coursesComboBox->setEnabled(true);
         ui_->openCourseButton->setEnabled(true);
         ui_->extraReviewButton->setEnabled(true);
         ui_->actionExport->setEnabled(true);
+        ui_->actionDelete_selected_course->setEnabled(true);
     }
 }
 
@@ -197,6 +201,7 @@ void MainMenuWindow::on_openCalendarButton_clicked() {
     UserCalendarWindow dialog(user_->getCourseManager(), user_->getUserStats(), this);
     dialog.setWindowTitle("Kalendarz kursów");
     if(dialog.exec()) {
+        updateWindow();
     }
 }
 
@@ -253,7 +258,8 @@ void MainMenuWindow::on_extraReviewButton_clicked() {
     LearningWindow dialog(user_->getCourseManager(), user_->getUserStats(), ui_->coursesComboBox->currentIndex(), this);
     dialog.setWindowTitle("SuperMemo");
     if(dialog.exec()) {
-        updateProgressBar(ui_->coursesComboBox->currentIndex());
+        updateWindow();
+        //updateProgressBar(ui_->coursesComboBox->currentIndex());
     }
 }
 
@@ -315,12 +321,14 @@ void MainMenuWindow::on_actionImport_triggered() {
     QString name;
     getline(inputFile, fName);
     name = QString::fromStdString(fName);
+    for(int i = 0; i < user_->getCourseManager().getCoursesNumber(); i++) {
+        if(user_->getCourseManager().getCourse(i)->getName() == name) {
+            createErrorMessageBox("Kurs o takiej nazwie już istnieje");
+            return;
+        }
+    }
     if(name.isEmpty()) {
-        QMessageBox msg;
-        msg.setText("Plik jest pusty");
-        msg.setStandardButtons(QMessageBox::Ok);
-        msg.setDefaultButton(QMessageBox::Ok);
-        msg.exec();
+        createErrorMessageBox("Plik jest pusty");
         return;
     }
     Course *newCourse = new Course(name);
@@ -341,4 +349,17 @@ void MainMenuWindow::on_actionImport_triggered() {
     }
     user_->getCourseManager().addCourse(newCourse);
     updateWindow();
+}
+
+void MainMenuWindow::on_actionDelete_selected_course_triggered() {
+    user_->getCourseManager().deleteCourse(ui_->coursesComboBox->currentIndex());
+    updateWindow();
+}
+
+void MainMenuWindow::createErrorMessageBox(QString text) {
+    QMessageBox msg;
+    msg.setText(text);
+    msg.setStandardButtons(QMessageBox::Apply);
+    msg.setDefaultButton(QMessageBox::Apply);
+    msg.exec();
 }

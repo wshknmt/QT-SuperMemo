@@ -69,17 +69,15 @@ void NewQuestion::on_textEdit_textChanged() {
 
 void NewQuestion::on_imageAddButton_clicked() {
     imagePath_ = QFileDialog::getOpenFileName(this,
-        "Otwórz zdjęcie", QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("Plik JPG (*.jpg *.jpeg);; Plik PNG  (*.png);; Plik BMP (*.bmp)") );
+        "Otwórz zdjęcie", "../SuperMemo/example_courses/Images", tr("Plik JPG (*.jpg *.jpeg);; Plik PNG  (*.png);; Plik BMP (*.bmp)") );
     if(imagePath_.size() != 0) {
       ui_->imageAddButton->setEnabled(false);
       ui_->imageAddButton->setText("Zdjęcie dodane");
     }
-
-
 }
 
 void NewQuestion::on_soundAddButton_clicked() {
-    soundPath_ = QFileDialog::getOpenFileName(this, "Otwórz dźwięk", QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("Plik Wav (*.wav)") );
+    soundPath_ = QFileDialog::getOpenFileName(this, "Otwórz dźwięk", "../SuperMemo/example_courses/Sounds", tr("Plik Wav (*.wav)") );
     if(soundPath_.size() != 0) {
         ui_->soundAddButton->setEnabled(false);
         ui_->soundAddButton->setText("Dźwięk dodany");

@@ -39,6 +39,7 @@ ActivityStatisticsWindow::ActivityStatisticsWindow(UserStats &uStats, QWidget *p
     series->setLabelsVisible(true);
     series->setLabelsPosition(QAbstractBarSeries::LabelsCenter);
 
+
     QChart *chart = new QChart();
     chart->addSeries(series);
     chart->setTitle("Aktywność użytkownika w poszczególnych datach");

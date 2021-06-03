@@ -11,7 +11,7 @@ public:
     Course* createCourse();
     Course* createCourse(QString name);
     void addCourse(Course *course);
-    void addCourse(std::string fileName);
+    //void addCourse(std::string fileName);
     //void addCourses(std::vector<std::shared_ptr<Course>>& courses);
    // void addCourses(std::vector<std::string>& fileNames);
     void deleteCourse(int courseNumber);

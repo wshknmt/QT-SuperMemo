@@ -28,6 +28,7 @@ public:
     bool isSaveEmpty();
     void updateProgressBar(int number);
     void writeObjectsToFile(std::fstream &file, Card *card);
+    void createErrorMessageBox(QString text);
 
 
 private slots:
@@ -54,6 +55,8 @@ private slots:
     void on_actionExport_triggered();
 
     void on_actionImport_triggered();
+
+    void on_actionDelete_selected_course_triggered();
 
 private:
     Ui::MainMenuWindow *ui_;

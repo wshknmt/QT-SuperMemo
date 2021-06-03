@@ -25,11 +25,12 @@ void CoursesManager::addCourse(Course *course) {
     coursesList_.append(course);
     coursesCounter_++;
 }
-void CoursesManager::addCourse(std::string fileName) {
+/*void CoursesManager::addCourse(std::string fileName) {
 
-}
+}*/
 void CoursesManager::deleteCourse(int courseNumber) {
-
+    coursesList_.removeAt(courseNumber);
+    coursesCounter_--;
 }
 int CoursesManager::getCoursesNumber() {
     return coursesList_.size();

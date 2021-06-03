@@ -199,7 +199,7 @@ void LearningWindow::on_deleteButton_clicked() {
     msg.setDefaultButton(QMessageBox::No);
     int ret = msg.exec();
     if (ret == QMessageBox::Yes) {
-        if(card_->getSoundPath().length() != 0)
+        if(card_->getSoundPath().length() != 0 && ui_->playButton->isEnabled() == false)
             sound_->stop();
         course_->removeFirstCardToRepeat();
         course_->decrementCardsCounter();
@@ -220,6 +220,8 @@ void LearningWindow::on_deleteButton_clicked() {
 }
 
 void LearningWindow::on_endButton_clicked() {
+    if(card_->getSoundPath().length() != 0 && ui_->playButton->isEnabled() == false)
+        sound_->stop();
     accept();
 }
 void LearningWindow::checkImage() {
