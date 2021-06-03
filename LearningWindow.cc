@@ -2,8 +2,9 @@
 #include "ui_LearningWindow.h"
 #include "Card.h"
 #include "CoursesManager.h"
+#include "Settings.h"
 
-LearningWindow::LearningWindow(CoursesManager &cManager, UserStats &uStats, QString courseName, QFont font, QWidget *parent)
+LearningWindow::LearningWindow(CoursesManager &cManager, UserStats &uStats, QString courseName, QWidget *parent)
     : QDialog(parent)
     , ui_(new Ui::LearningWindow)
 {
@@ -13,17 +14,17 @@ LearningWindow::LearningWindow(CoursesManager &cManager, UserStats &uStats, QStr
         course_ = coursesManager_->createCourse();
     else
         course_ = coursesManager_->createCourse(courseName);
-    this->font_ = font;
+   // this->font_ = font;
     setDefaultValues();
 }
 
-LearningWindow::LearningWindow(CoursesManager &cManager, UserStats &uStats, int numberOfSelectedCourse, QFont font, QWidget *parent)
+LearningWindow::LearningWindow(CoursesManager &cManager, UserStats &uStats, int numberOfSelectedCourse, QWidget *parent)
     : QDialog(parent)
     , ui_(new Ui::LearningWindow)
 {
     coursesManager_ = &cManager;
     userStats_ = &uStats;
-    this->font_ = font;
+   // this->font_ = font;
     setDefaultValues();
     course_ = coursesManager_->getCourse(numberOfSelectedCourse);
     course_->checkCards();
@@ -82,8 +83,9 @@ void LearningWindow::setDefaultValues() {
     ui_->yesButton->setIconSize(iconSize);
     ui_->almostButton->setIconSize(iconSize);
     ui_->noButton->setIconSize(iconSize);
-    ui_->answerTextBrowser->setFont(font_);
-    ui_->questionTextBrowser->setFont(font_);
+    Settings *settings = settings->getInstance();
+    ui_->answerTextBrowser->setFont(settings->getFont());
+    ui_->questionTextBrowser->setFont(settings->getFont());
 }
 
 void LearningWindow::setImage(QPixmap image) {
@@ -125,22 +127,9 @@ void LearningWindow::on_yesButton_clicked() {
         card_->setRepeatDate(QDate::currentDate().addDays(5));
     Stat stat = std::make_pair(QDate::currentDate(), AnswerType::GOOD);
     userStats_->addStat(stat);
-    ui_->yesButton->setEnabled(false);
-    ui_->noButton->setEnabled(false);
-    ui_->almostButton->setEnabled(false);
-    if(card_->getSoundPath().length() != 0)
-        sound_->stop();
-    ui_->stopButton->setEnabled(false);
-    ui_->playButton->setEnabled(false);
     course_->removeFirstCardToRepeat();
     course_->addCardRepeated(card_);
-    setDefaultImage();
-    updateProgressBar();
-    updateStatusLabel();
-    ui_->questionTextBrowser->clear();
-    ui_->answerTextBrowser->clear();
-    if (course_->getSizeCardsToRepeat() >= 1)
-        emit questionAvailable();
+    answerRated();
 }
 
 void LearningWindow::on_noButton_clicked() {
@@ -148,19 +137,9 @@ void LearningWindow::on_noButton_clicked() {
         card_->setRepeatDate(QDate::currentDate().addDays(2));
     Stat stat = std::make_pair(QDate::currentDate(), AnswerType::WRONG);
     userStats_->addStat(stat);
-    ui_->yesButton->setEnabled(false);
-    ui_->noButton->setEnabled(false);
-    ui_->almostButton->setEnabled(false);
-    if(card_->getSoundPath().length() != 0)
-        sound_->stop();
-    ui_->stopButton->setEnabled(false);
-    ui_->playButton->setEnabled(false);
     course_->removeFirstCardToRepeat();
     course_->addCardToRepeat(card_);
-    setDefaultImage();
-    ui_->questionTextBrowser->clear();
-    ui_->answerTextBrowser->clear();
-    emit questionAvailable();
+    answerRated();
 }
 
 void LearningWindow::on_almostButton_clicked() {
@@ -168,15 +147,19 @@ void LearningWindow::on_almostButton_clicked() {
         card_->setRepeatDate(QDate::currentDate().addDays(3));
     Stat stat = std::make_pair(QDate::currentDate(), AnswerType::MIXED);
     userStats_->addStat(stat);
+    course_->removeFirstCardToRepeat();
+    course_->addCardRepeated(card_);
+    answerRated();
+}
+
+void LearningWindow::answerRated() {
     ui_->yesButton->setEnabled(false);
     ui_->noButton->setEnabled(false);
     ui_->almostButton->setEnabled(false);
-    if(card_->getSoundPath().length() != 0)
+    if(card_->getSoundPath().length() != 0 && ui_->playButton->isEnabled() == false)
         sound_->stop();
     ui_->stopButton->setEnabled(false);
     ui_->playButton->setEnabled(false);
-    course_->removeFirstCardToRepeat();
-    course_->addCardRepeated(card_);
     setDefaultImage();
     updateProgressBar();
     updateStatusLabel();

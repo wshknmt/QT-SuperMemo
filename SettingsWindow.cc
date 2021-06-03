@@ -18,12 +18,12 @@ SettingsWindow::~SettingsWindow() {
 
 void SettingsWindow::on_chooseFontButton_clicked() {
     bool ok;
-    settings_->setFont(QFontDialog::getFont(&ok, QFont( "MS Shell Dlg 2", 8 ),this,tr("Wybierz czcionkę") ));
+    settings_->setFont(QFontDialog::getFont(&ok, QFont( "Comic Sans MS", 8 ),this,tr("Wybierz czcionkę") ));
 }
 
-QFont SettingsWindow::getFont() {
+/*QFont SettingsWindow::getFont() {
     return settings_->getFont();
-}
+}*/
 
 void SettingsWindow::on_closeButton_clicked() {
     accept();

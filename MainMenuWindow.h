@@ -47,11 +47,12 @@ private slots:
 
     void on_actionWarpTime_triggered();
 
+    void on_exitButton_clicked();
+
 private:
     Ui::MainMenuWindow *ui_;
     QList <User*> users_;
     User *user_;
-    QFont font_;
 };
 
 #endif // MAINMENUWINDOW_H

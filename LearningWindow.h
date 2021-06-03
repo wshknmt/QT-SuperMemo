@@ -20,8 +20,8 @@ class LearningWindow : public QDialog {
     Q_OBJECT
 
 public:
-    LearningWindow(CoursesManager &cManager, UserStats &uStats, QString courseName, QFont font, QWidget *parent = nullptr);
-    LearningWindow(CoursesManager &cManager, UserStats &uStats, int numberOfSelectedCourse, QFont font, QWidget *parent = nullptr);
+    LearningWindow(CoursesManager &cManager, UserStats &uStats, QString courseName, QWidget *parent = nullptr);
+    LearningWindow(CoursesManager &cManager, UserStats &uStats, int numberOfSelectedCourse, QWidget *parent = nullptr);
     ~LearningWindow();
     void setDefaultImage();
     void checkImage();
@@ -31,6 +31,7 @@ public:
     void updateStatusLabel();
     bool isEqualToCurrentDate(QDate date);
     int getProgressBarValue();
+    void answerRated();
 
 signals:
     void questionAvailable();
@@ -58,7 +59,7 @@ private:
     //QList <Course*> *coursesList_;
     CoursesManager *coursesManager_;
     UserStats *userStats_;
-    QFont font_;
+    //QFont font_;
 };
 
 #endif // LEARNINGWINDOW_H

@@ -139,8 +139,7 @@ void UserCalendarWindow::on_repeatButton_clicked() {
             break;
         }
     }
-    Settings *s = s->getInstance();
-    LearningWindow dialog(*coursesManager_, *userStats_, index, s->getFont(), this);
+    LearningWindow dialog(*coursesManager_, *userStats_, index, this);
     dialog.setWindowTitle("SuperMemo");
     if(dialog.exec()) {
         clearCalendar();

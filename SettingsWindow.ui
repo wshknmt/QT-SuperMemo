@@ -35,13 +35,14 @@
    <property name="geometry">
     <rect>
      <x>90</x>
-     <y>100</y>
-     <width>181</width>
-     <height>23</height>
+     <y>80</y>
+     <width>191</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="text">
-    <string>Wybierz czcionke</string>
+    <string>Wybierz czcionke dla tekstu 
+w ekranie uczenia się</string>
    </property>
   </widget>
   <widget class="QWidget" name="layoutWidget">

@@ -21,7 +21,8 @@ MainMenuWindow::MainMenuWindow(QWidget *parent) :
     ui_->newCourseButton->setEnabled(false);
     //ui_->questionsToRepeatCounter->setVisible(false);
     ui_->questionsToRepeatCounter->setText(QString(" "));
-    font_ = QFont( "MS Shell Dlg 2", 15 );
+    Settings *settings = settings->getInstance();
+    settings->setFont(QFont( "MS Shell Dlg 2", 15 ));
     //if(!isSaveEmpty())
     if(false)
         readFromFile();//crashuje sie
@@ -50,7 +51,7 @@ void MainMenuWindow::updateCoursesInComboBox() {
 }
 
 void MainMenuWindow::on_newCourseButton_clicked() {
-    LearningWindow dialog(user_->getCourseManager(), user_->getUserStats(), ui_->courseNameTextEdit->toPlainText(), font_, this);
+    LearningWindow dialog(user_->getCourseManager(), user_->getUserStats(), ui_->courseNameTextEdit->toPlainText(), this);
     dialog.setWindowTitle("SuperMemo");
     dialog.setDefaultImage();
     if(dialog.exec()) {
@@ -70,7 +71,7 @@ void MainMenuWindow::on_actionPrint_Courses_to_console_triggered() {
 }
 
 void MainMenuWindow::on_openCourseButton_clicked() {
-    LearningWindow dialog(user_->getCourseManager(), user_->getUserStats(), ui_->coursesComboBox->currentIndex(), font_, this);
+    LearningWindow dialog(user_->getCourseManager(), user_->getUserStats(), ui_->coursesComboBox->currentIndex(), this);
     dialog.setWindowTitle("SuperMemo");
     if(dialog.exec()) {
         updateProgressBar(ui_->coursesComboBox->currentIndex());
@@ -173,7 +174,7 @@ void MainMenuWindow::on_actionSettings_triggered() {
     SettingsWindow dialog(this);
     dialog.setWindowTitle("Ustawienia");
     if(dialog.exec()) {
-        font_ = dialog.getFont();
+        //font_ = dialog.getFont();
     }
 }
 
@@ -234,7 +235,7 @@ void MainMenuWindow::on_coursesComboBox_highlighted(int index) {
 void MainMenuWindow::on_extraReviewButton_clicked() {
     user_->getCourseManager().getCourse(ui_->coursesComboBox->currentIndex())->reviewRequest();
     updateProgressBar(ui_->coursesComboBox->currentIndex());
-    LearningWindow dialog(user_->getCourseManager(), user_->getUserStats(), ui_->coursesComboBox->currentIndex(), font_, this);
+    LearningWindow dialog(user_->getCourseManager(), user_->getUserStats(), ui_->coursesComboBox->currentIndex(), this);
     dialog.setWindowTitle("SuperMemo");
     if(dialog.exec()) {
         updateProgressBar(ui_->coursesComboBox->currentIndex());
@@ -256,4 +257,8 @@ void MainMenuWindow::on_actionWarpTime_triggered() {
     for(int i = 0; i < user_->getCourseManager().getCoursesNumber(); i++) {
         user_->getCourseManager().getCourse(i)->simulateTime(-7);
     }
+}
+
+void MainMenuWindow::on_exitButton_clicked() {
+    QCoreApplication::quit();
 }

@@ -15,7 +15,7 @@ class SettingsWindow : public QDialog
 public:
     explicit SettingsWindow(QWidget *parent = nullptr);
     ~SettingsWindow();
-    QFont getFont();
+   // QFont getFont();
 
 private slots:
     void on_chooseFontButton_clicked();

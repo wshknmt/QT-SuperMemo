@@ -15,7 +15,7 @@ public:
 private:
     Settings();
     static Settings* pInstance_;
-    bool isFullScreen_;
+    bool isFullScreen_ = false;
     QWidget *parent_;
     QFont font_;
 };
