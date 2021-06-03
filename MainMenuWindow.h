@@ -28,6 +28,7 @@ public:
     bool isSaveEmpty();
     void updateProgressBar(int number);
 
+
 private slots:
     void on_newCourseButton_clicked();
     void on_actionPrint_Courses_to_console_triggered();

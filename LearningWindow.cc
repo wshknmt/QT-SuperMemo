@@ -14,7 +14,6 @@ LearningWindow::LearningWindow(CoursesManager &cManager, UserStats &uStats, QStr
         course_ = coursesManager_->createCourse();
     else
         course_ = coursesManager_->createCourse(courseName);
-   // this->font_ = font;
     setDefaultValues();
 }
 
@@ -24,7 +23,6 @@ LearningWindow::LearningWindow(CoursesManager &cManager, UserStats &uStats, int 
 {
     coursesManager_ = &cManager;
     userStats_ = &uStats;
-   // this->font_ = font;
     setDefaultValues();
     course_ = coursesManager_->getCourse(numberOfSelectedCourse);
     course_->checkCards();
@@ -47,8 +45,8 @@ void LearningWindow::on_showAnswerButton_clicked() {
     ui_->deleteButton->setEnabled(false);
 }
 
-void LearningWindow::on_newQuestionAdded(QString question, QString answer, QPixmap image, QString soundPath) {
-    Card *newCard = new Card(question, answer, image, soundPath, QDate::currentDate());
+void LearningWindow::on_newQuestionAdded(QString question, QString answer, QString imagePath, QString soundPath) {
+    Card *newCard = new Card(question, answer, imagePath, soundPath, QDate::currentDate());
     course_->addCardToRepeat(newCard);
     course_->incrementCardsCounter();
     updateProgressBar();
@@ -114,8 +112,11 @@ void LearningWindow::on_startLearning() {
     ui_->showAnswerButton->setEnabled(true);
     ui_->questionTextBrowser->setText(card_->getQuestion());
     ui_->deleteButton->setEnabled(true);
-    if(!card_->getImage().isNull())
-        setImage(card_->getImage());
+    if(!card_->getImagePath().isEmpty()) {
+        QPixmap image;
+        image.load(card_->getImagePath());
+        setImage(image);
+    }
     else
         setDefaultImage();
     if(!card_->getSoundPath().isEmpty())
@@ -187,7 +188,7 @@ void LearningWindow::on_newQuestionButton_clicked() {
     NewQuestion dialog(this);
     dialog.setWindowTitle("Dodaj nowe pytanie");
     if(dialog.exec() ) {
-        on_newQuestionAdded(dialog.getQuestion(), dialog.getAnswer(), dialog.getImage(), dialog.getSoundPath());
+        on_newQuestionAdded(dialog.getQuestion(), dialog.getAnswer(), dialog.getImagePath(), dialog.getSoundPath());
     }
 }
 

@@ -16,7 +16,6 @@ public:
     ~NewQuestion();
     QString getQuestion();
     QString getAnswer();
-    QPixmap getImage();
     QString getImagePath();
     QString getSoundPath();
 
@@ -35,7 +34,6 @@ private:
     QString question_;
     QString answer_;
     QString imagePath_;
-    QPixmap image_;
     QString soundPath_;
 };
 

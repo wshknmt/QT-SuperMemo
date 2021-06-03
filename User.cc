@@ -27,3 +27,24 @@ CoursesManager &User::getCourseManager() {
 UserStats &User::getUserStats() {
     return userStats_;
 }
+
+void User::setCourseManager(CoursesManager &cManager) {
+    coursesManager_ = cManager;
+}
+
+void User::setUserStats(UserStats &uStats) {
+    userStats_ = uStats;
+}
+void User::serialize(std::fstream &file, bool bWrite) {
+    //https://stackoverflow.com/questions/32832604/reading-and-writing-classes-with-pointers-to-binary-files-in-c
+        if (bWrite) {
+            file.write((char*)&name_, sizeof(name_));
+            file.write((char*)&coursesManager_, sizeof(coursesManager_));
+            file.write((char*)&userStats_, sizeof(userStats_));
+
+        }
+        else {
+           return;
+        }
+
+}

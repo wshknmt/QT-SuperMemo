@@ -2,6 +2,7 @@
 #define USER_H
 
 #include <QObject>
+#include <fstream>
 #include "Course.h"
 #include "CoursesManager.h"
 #include "UserStats.h"
@@ -18,6 +19,9 @@ public:
     void setName(QString n);
     CoursesManager &getCourseManager();
     UserStats &getUserStats();
+    void setCourseManager(CoursesManager &cManager);
+    void setUserStats(UserStats &uStats);
+    void serialize(std::fstream &file, bool bWrite);
 private:
     QString name_;
     CoursesManager coursesManager_;

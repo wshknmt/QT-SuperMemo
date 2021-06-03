@@ -29,12 +29,10 @@ QString NewQuestion::getQuestion() {
 QString NewQuestion::getAnswer() {
     return answer_;
 }
-QPixmap NewQuestion::getImage() {
-    return image_;
-}
 QString NewQuestion::getImagePath() {
-    return " ";
+    return imagePath_;
 }
+
 QString NewQuestion::getSoundPath() {
     return soundPath_;
 }
@@ -73,7 +71,6 @@ void NewQuestion::on_imageAddButton_clicked() {
     imagePath_ = QFileDialog::getOpenFileName(this,
         "Otwórz zdjęcie", QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("Plik JPG (*.jpg *.jpeg);; Plik PNG  (*.png);; Plik BMP (*.bmp)") );
     if(imagePath_.size() != 0) {
-      image_.load(imagePath_);
       ui_->imageAddButton->setEnabled(false);
       ui_->imageAddButton->setText("Zdjęcie dodane");
     }

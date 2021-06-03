@@ -38,7 +38,7 @@ signals:
 
 private slots:
     void on_showAnswerButton_clicked();
-    void on_newQuestionAdded(QString, QString, QPixmap, QString);
+    void on_newQuestionAdded(QString, QString, QString, QString);
     void on_startLearning();
     void on_yesButton_clicked();
     void on_noButton_clicked();
@@ -55,11 +55,8 @@ private:
     Card *card_;
     Course *course_;
     QSound *sound_;
-   // int courseNumber_;
-    //QList <Course*> *coursesList_;
     CoursesManager *coursesManager_;
     UserStats *userStats_;
-    //QFont font_;
 };
 
 #endif // LEARNINGWINDOW_H

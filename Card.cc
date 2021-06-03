@@ -1,10 +1,10 @@
 #include <QTextStream>
 #include "Card.h"
 
-Card::Card(QString q, QString a, QPixmap i, QString s, QDate r) {
+Card::Card(QString q, QString a, QString i, QString s, QDate r) {
     question_ = q;
     answer_ = a;
-    image_ = i;
+    imagePath_ = i;
     soundPath_ = s;
     repeatDate_ = r;
 }
@@ -17,8 +17,8 @@ QString Card::getAnswer() const {
     return answer_;
 }
 
-QPixmap Card::getImage() const {
-    return image_;
+QString Card::getImagePath() const {
+    return imagePath_;
 }
 
 QString Card::getSoundPath() const {

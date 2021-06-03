@@ -122,7 +122,7 @@ void MainMenuWindow::userChanged() {
 }
 
 void MainMenuWindow::saveToFile() {
-    std::ofstream output_file;
+    /*std::ofstream output_file;
     output_file.open("save.txt", std::ios::trunc);
     for(int i=0; i < users_.size(); i++) {
         User u;
@@ -131,8 +131,20 @@ void MainMenuWindow::saveToFile() {
         output_file.write((char*)&u, sizeof(User));
     }
     output_file.close();
-    QTextStream(stdout) <<"saved"<< Qt::endl;
+    QTextStream(stdout) <<"saved"<< Qt::endl;*/
+
+    std::fstream file("save.dat", std::ios_base::out | std::ios_base::binary);
+    for(int i=0; i < users_.size(); i++) {
+        User u;
+        u.setName(users_[i]->getName());
+        u.setCourseManager(users_[i]->getCourseManager());
+        u.setUserStats(users_[i]->getUserStats());
+        u.serialize(file, true);
+        //u.setCoursesList(users[i]->getCoursesList());
+
+    }
 }
+
 
 void MainMenuWindow::readFromFile() {
 
@@ -167,7 +179,7 @@ bool MainMenuWindow::isSaveEmpty() {
 }
 
 void MainMenuWindow::on_actionSave_triggered() {
-    //saveToFile();
+    saveToFile();
 }
 
 void MainMenuWindow::on_actionSettings_triggered() {

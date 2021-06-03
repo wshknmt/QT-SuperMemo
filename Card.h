@@ -15,10 +15,10 @@ class Card : public QObject {
     Q_PROPERTY(QString soundPath READ getSoundPath)*/
 
 public:
-    explicit Card(QString q, QString a, QPixmap i, QString s, QDate r);
+    explicit Card(QString q, QString a, QString i, QString s, QDate r);
     QString getQuestion() const;
     QString getAnswer() const;
-    QPixmap getImage() const;
+    QString getImagePath() const;
     QString getSoundPath() const;
     QDate getRepeatDate();
     void setRepeatDate(QDate repeatDate);
@@ -29,10 +29,9 @@ signals:
 private:
     QString question_;
     QString answer_;
-    QPixmap image_;
+    QString imagePath_;
     QString soundPath_;
     QDate repeatDate_;
-
 };
 
 #endif // CARD_H
