@@ -1,2 +1,1 @@
 # QT-SuperMemo
-# Supermemo-TMP
