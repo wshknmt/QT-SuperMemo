@@ -26,8 +26,7 @@ MainMenuWindow::MainMenuWindow(QWidget *parent) :
     ui_->progressBar->setEnabled(false);
     ui_->newCourseButton->setEnabled(false);
     ui_->questionsToRepeatCounter->setText(QString(" "));
-    Settings *settings = settings->getInstance();
-    settings->setFont(QFont( "MS Shell Dlg 2", 15 ));
+    Settings::getInstance()->setFont(QFont( "MS Shell Dlg 2", 15 ));
     User *new_user = new User();
     users_.append(new_user);
     user_ = users_[0];

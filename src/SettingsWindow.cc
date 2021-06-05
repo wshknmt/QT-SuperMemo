@@ -12,9 +12,8 @@ SettingsWindow::SettingsWindow(QWidget *parent) :
     QDialog(parent), ui_(new Ui::SettingsWindow)
 {
     ui_->setupUi(this);
-    settings_ = settings_->getInstance();
-    settings_->setParent(parent);
-    if(settings_->isFullScreen())
+    Settings::getInstance()->setParent(parent);
+    if(Settings::getInstance()->isFullScreen())
         ui_->fullscreenCheckBox->setChecked(true);
 }
 
@@ -24,7 +23,7 @@ SettingsWindow::~SettingsWindow() {
 
 void SettingsWindow::on_chooseFontButton_clicked() {
     bool ok;
-    settings_->setFont(QFontDialog::getFont(&ok, QFont( "Comic Sans MS", 8 ),this,tr("Wybierz czcionkę") ));
+    Settings::getInstance()->setFont(QFontDialog::getFont(&ok, QFont( "Comic Sans MS", 8 ),this,tr("Wybierz czcionkę") ));
 }
 
 void SettingsWindow::on_closeButton_clicked() {
@@ -33,7 +32,7 @@ void SettingsWindow::on_closeButton_clicked() {
 
 void SettingsWindow::on_fullscreenCheckBox_stateChanged(int arg1) {
     if(arg1 == 2)
-        settings_->enableFullScreen();
+        Settings::getInstance()->enableFullScreen();
     else if(arg1 == 0)
-        settings_->disableFullScreen();
+        Settings::getInstance()->disableFullScreen();
 }

@@ -81,9 +81,8 @@ void LearningWindow::setDefaultValues() {
     ui_->yesButton->setIconSize(iconSize);
     ui_->almostButton->setIconSize(iconSize);
     ui_->noButton->setIconSize(iconSize);
-    Settings *settings = settings->getInstance();
-    ui_->answerTextBrowser->setFont(settings->getFont());
-    ui_->questionTextBrowser->setFont(settings->getFont());
+    ui_->answerTextBrowser->setFont(Settings::getInstance()->getFont());
+    ui_->questionTextBrowser->setFont(Settings::getInstance()->getFont());
 }
 
 void LearningWindow::setImage(QPixmap image) {

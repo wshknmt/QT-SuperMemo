@@ -18,6 +18,7 @@ class Course {
 public:
     Course(QString n);
     Course();
+    ~Course();
     void addCardToRepeat(Card* card);
     void addCardRepeated(Card* card);
     void removeFirstCardToRepeat();

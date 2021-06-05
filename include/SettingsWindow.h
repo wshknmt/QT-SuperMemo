@@ -31,7 +31,6 @@ private slots:
 
 private:
     Ui::SettingsWindow *ui_;
-    Settings *settings_;
 };
 
 #endif // SETTINGSWINDOW_H
