@@ -180,6 +180,7 @@ void LearningWindow::on_playButton_clicked() {
 void LearningWindow::on_stopButton_clicked() {
     sound_->stop();
     ui_->stopButton->setEnabled(false);
+    delete sound_;
     ui_->playButton->setEnabled(true);
 }
 
