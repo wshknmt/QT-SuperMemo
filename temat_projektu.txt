@@ -1,0 +1,10 @@
+Napisać program wspomagający proces uczenia w stylu pytanie-odpowiedź. Chodzi o coś
+podobnego do Supermemo lub Mnemosyne. Program dostosowuje czas powtórek do stopnia
+znajomości materiału. Zarówno pytaniem jak i odpowiedzą może być tekst (typowo) może również
+być ilustracja. Zarówno z pytaniem jak i z odpowiedzią może być związany plik dźwiękowy. Pytaniem
+może również być filmik (nie ma konieczności implementowania tej funkcjonalności, ale projekt
+oprogramowania powinien uwzględniać możliwość jego rozbudowy). Gotowy do oddania projekt
+powinien być wyposażony w przykładową bazę służącą do nauki (minimum 10 elementów, można
+również znaleźć realistyczne bazy tekstowe w formacie Q&A).
+
+ Przed rozpoczęciem realizacji projektu proszę zapoznać się z zawartością strony.

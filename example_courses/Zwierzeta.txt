@@ -1,12 +1,12 @@
 Zwierzęta
-Co to za zwierzę?;Wilk;../SuperMemo/example_courses/Images/wolf.jpg;../SuperMemo/example_courses/Sounds/wolf6.wav;
-Co to za zwierzę?;Wieloryb;../SuperMemo/example_courses/Images/whale.jpeg;../SuperMemo/example_courses/Sounds/whalesurfaces.wav;
-Co to za zwierzę?;Wąż;../SuperMemo/example_courses/Images/snake.jpg;../SuperMemo/example_courses/Sounds/snakehiss2.wav;
-Co to za zwierzę?;Niedźwiedź polarny;../SuperMemo/example_courses/Images/Polar_Bear.jpg;../SuperMemo/example_courses/Sounds/bear_polar.wav;
-Co to za zwierzę?;Świnia;../SuperMemo/example_courses/Images/pig.jpg;../SuperMemo/example_courses/Sounds/pig3.wav;
-Co to za zwierzę?;Małpa;../SuperMemo/example_courses/Images/monkey.jpeg;../SuperMemo/example_courses/Sounds/monkey1.wav;
-Co to za zwierzę?;Lew;../SuperMemo/example_courses/Images/lion.jpg;../SuperMemo/example_courses/Sounds/lioncub2.wav;
-Co to za zwierzę?;Nietoperz;../SuperMemo/example_courses/Images/bat.jpg;../SuperMemo/example_courses/Sounds/bat1.wav;
-Co to za zwierzę?;Kot;../SuperMemo/example_courses/Images/Cat03.jpg;../SuperMemo/example_courses/Sounds/cat_y.wav;
-Co to za zwierzę?;Pies;../SuperMemo/example_courses/Images/dog.jpg;../SuperMemo/example_courses/Sounds/dog.wav;
-Co to za zwierzę?;Słoń;../SuperMemo/example_courses/Images/elephant.jpg;../SuperMemo/example_courses/Sounds/elephant9.wav;
+Co to za zwierzę?;Wilk;example_courses/Images/wolf.jpg;example_courses/Sounds/wolf6.wav;
+Co to za zwierzę?;Wieloryb;example_courses/Images/whale.jpeg;example_courses/Sounds/whalesurfaces.wav;
+Co to za zwierzę?;Wąż;example_courses/Images/snake.jpg;example_courses/Sounds/snakehiss2.wav;
+Co to za zwierzę?;Niedźwiedź polarny;example_courses/Images/Polar_Bear.jpg;example_courses/Sounds/bear_polar.wav;
+Co to za zwierzę?;Świnia;example_courses/Images/pig.jpg;example_courses/Sounds/pig3.wav;
+Co to za zwierzę?;Małpa;example_courses/Images/monkey.jpeg;example_courses/Sounds/monkey1.wav;
+Co to za zwierzę?;Lew;example_courses/Images/lion.jpg;example_courses/Sounds/lioncub2.wav;
+Co to za zwierzę?;Nietoperz;example_courses/Images/bat.jpg;example_courses/Sounds/bat1.wav;
+Co to za zwierzę?;Kot;example_courses/Images/Cat03.jpg;example_courses/Sounds/cat_y.wav;
+Co to za zwierzę?;Pies;example_courses/Images/dog.jpg;example_courses/Sounds/dog.wav;
+Co to za zwierzę?;Słoń;example_courses/Images/elephant.jpg;example_courses/Sounds/elephant9.wav;
