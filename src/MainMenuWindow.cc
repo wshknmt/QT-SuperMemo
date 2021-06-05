@@ -38,6 +38,8 @@ MainMenuWindow::MainMenuWindow(QWidget *parent) :
 
 MainMenuWindow::~MainMenuWindow() {
     delete ui_;
+    for (User * uPtr : users_)
+        delete uPtr;
 }
 void MainMenuWindow::updateCoursesInComboBox() {
     ui_->coursesComboBox->clear();

@@ -34,6 +34,9 @@ private slots:
 private:
     Ui::TypesOfAnswerStatisticsWindow *ui_;
     UserStats *userStats_;
+    QPieSeries *series_;
+    QChart *chart_;
+    QChartView *chartview_;
 };
 
 #endif // TYPESOFANSWERSTATISTICSWINDOW_H

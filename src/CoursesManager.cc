@@ -9,6 +9,11 @@
 
 CoursesManager::CoursesManager() : coursesCounter_(0) {}
 
+CoursesManager::~CoursesManager() {
+    for (Course* cPtr : coursesList_)
+        delete cPtr;
+}
+
 QList<Course*> &CoursesManager::getCoursesList() {
     return coursesList_;
 }

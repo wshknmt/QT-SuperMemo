@@ -13,6 +13,7 @@
 class CoursesManager {
 public:
     CoursesManager();
+    ~CoursesManager();
     QList<Course*> &getCoursesList();
     Course* createCourse();
     Course* createCourse(QString name);

@@ -37,23 +37,22 @@ ActivityStatisticsWindow::ActivityStatisticsWindow(UserStats &uStats, QWidget *p
 
     std::sort(learningDates_.begin(), learningDates_.end(), datesComparison);
 
-    QBarSet *set = new QBarSet("aktywność");
+    set_ = new QBarSet("aktywność");
     for(int i = 0; i < learningDates_.size(); i++)
-        set->append(learningDates_[i].counter);
+        set_->append(learningDates_[i].counter);
 
-    QBarSeries *series = new QBarSeries();
-    series->append(set);
-    series->setLabelsVisible(true);
-    series->setLabelsPosition(QAbstractBarSeries::LabelsCenter);
+    series_ = new QBarSeries();
+    series_->append(set_);
+    series_->setLabelsVisible(true);
+    series_->setLabelsPosition(QAbstractBarSeries::LabelsCenter);
 
-
-    QChart *chart = new QChart();
-    chart->addSeries(series);
-    chart->setTitle("Aktywność użytkownika w poszczególnych datach");
-    QFont font = chart->titleFont();
+    chart_ = new QChart();
+    chart_->addSeries(series_);
+    chart_->setTitle("Aktywność użytkownika w poszczególnych datach");
+    QFont font = chart_->titleFont();
     font.setPointSize(13);
-    chart->setTitleFont(font);
-    chart->setAnimationOptions(QChart::AllAnimations);
+    chart_->setTitleFont(font);
+    chart_->setAnimationOptions(QChart::AllAnimations);
 
     QStringList categories;
     for(int i = 0; i < learningDates_.size(); i++) {
@@ -64,21 +63,22 @@ ActivityStatisticsWindow::ActivityStatisticsWindow(UserStats &uStats, QWidget *p
     }
 
 
-    QBarCategoryAxis *axis = new QBarCategoryAxis();
-    axis->append(categories);
-    chart->createDefaultAxes();
-    chart->setAxisX(axis, series);
-    chart->legend()->setVisible(true);
-    chart->legend()->setAlignment(Qt::AlignBottom);
+    axis_ = new QBarCategoryAxis();
+    axis_->append(categories);
+    chart_->createDefaultAxes();
+    chart_->setAxisX(axis_, series_);
+    chart_->legend()->setVisible(true);
+    chart_->legend()->setAlignment(Qt::AlignBottom);
 
-    QChartView *chartView = new QChartView(chart);
-    chartView->setRenderHint(QPainter::Antialiasing);
-    chartView->setParent(ui_->horizontalFrame);
-    chartView->setMinimumHeight(350);
-    chartView->setMinimumWidth(780);
+    chartView_ = new QChartView(chart_);
+    chartView_->setRenderHint(QPainter::Antialiasing);
+    chartView_->setParent(ui_->horizontalFrame);
+    chartView_->setMinimumHeight(350);
+    chartView_->setMinimumWidth(780);
 }
 
 ActivityStatisticsWindow::~ActivityStatisticsWindow() {
+    delete chartView_;
     delete ui_;
 }
 

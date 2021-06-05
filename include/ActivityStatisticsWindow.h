@@ -44,6 +44,11 @@ private:
     Ui::ActivityStatisticsWindow *ui_;
     QList<LearningDate> learningDates_;
     UserStats *userStats_;
+    QBarSet *set_;
+    QBarSeries *series_;
+    QChart *chart_;
+    QBarCategoryAxis *axis_;
+    QChartView *chartView_;
 };
 
 #endif // ACTIVITYSTATISTICSWINDOW_H
