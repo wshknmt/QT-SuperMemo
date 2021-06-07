@@ -8,10 +8,6 @@
 #ifndef COURSE_H
 #define COURSE_H
 
-// #include <QAbstractTableModel>
-// #include <QModelIndex>
-// #include <QVariant>
-
 #include "Card.h"
 
 class Course {

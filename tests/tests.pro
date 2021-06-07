@@ -17,11 +17,15 @@ VPATH += ../src \
     ../resources
 
 HEADERS += \
-    MsgProvider.h
+    CoursesManager.h \
+    Course.h \
+    Card.h
     
 SOURCES += \
-    msgProviderSuite.cc \
-    MsgProvider.cc
+    supermemoSuite.cc \
+    CoursesManager.cc \
+    Course.cc \
+    Card.cc
 
 INCLUDEPATH = ../include
 RCC_DIR = ../build
