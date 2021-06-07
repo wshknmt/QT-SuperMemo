@@ -69,7 +69,6 @@ void UserCalendarWindow::on_repeatListWidget_itemSelectionChanged() {
 }
 
 void UserCalendarWindow::on_userCalendar_selectionChanged() {
-    bool existInListWidget = false;
     ui_->repeatListWidget->clear();
     if(isEqualToCurrentDate(ui_->userCalendar->selectedDate()))
         ui_->repeatListWidget->setEnabled(true);
@@ -77,31 +76,27 @@ void UserCalendarWindow::on_userCalendar_selectionChanged() {
         ui_->repeatListWidget->setEnabled(false);
     if( isEqualToCurrentDate( ui_->userCalendar->selectedDate()) || ui_->userCalendar->selectedDate() > QDate::currentDate()) {
         for(int i=0; i < coursesManager_->getCoursesNumber(); ++i ) {
-            existInListWidget = false;
             Course *course = coursesManager_->getCourse(i);
-            for(int j = 0; j < course->getSizeCardsToRepeat(); ++j) {
+            int j = 0;
+            for(j = 0; j < course->getSizeCardsToRepeat(); ++j) {
                 Card *card = course->getCardToRepeat(j);
                 if(areDatesEqual(ui_->userCalendar->selectedDate(), card->getRepeatDate())) {
                     if( ui_->repeatListWidget->findItems(course->getName(), Qt::MatchExactly ).size() >= 1 ) {
-                        existInListWidget = true;
                         break;
                     } else {
                         ui_->repeatListWidget->addItem(course->getName());
-                        existInListWidget = true;
                         break;
                     }
                 } else if(isEqualToCurrentDate(ui_->userCalendar->selectedDate()) && card->getRepeatDate() < QDate::currentDate()) {
                     if( ui_->repeatListWidget->findItems(course->getName(), Qt::MatchExactly ).size() >= 1 ) {
-                        existInListWidget = true;
                         break;
                     } else {
                         ui_->repeatListWidget->addItem(course->getName());
-                        existInListWidget = true;
                         break;
                     }
                 }
             }
-            if(existInListWidget)
+           if(j < course->getSizeCardsToRepeat())
                 continue;
             for(int j = 0; j < course->getSizeCardsRepeated(); ++j) {
                 Card *card = course->getCardRepeated(j);

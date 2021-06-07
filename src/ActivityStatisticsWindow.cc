@@ -16,25 +16,6 @@ ActivityStatisticsWindow::ActivityStatisticsWindow(UserStats &uStats, QWidget *p
     userStats_ = &uStats;
     createDatesList();
 
-    /*-------------------tylko do testow-------------------------------*/
-    LearningDate learningDate;
-    learningDate.date = QDate::currentDate().addDays(-2);
-    learningDate.counter = 13;
-    learningDates_.append(learningDate);
-
-    learningDate.date = QDate::currentDate().addDays(-3);
-    learningDate.counter = 7;
-    learningDates_.append(learningDate);
-
-    learningDate.date = QDate::currentDate().addDays(-4);
-    learningDate.counter = 12;
-    learningDates_.append(learningDate);
-
-    learningDate.date = QDate::currentDate().addDays(-5);
-    learningDate.counter = 4;
-    learningDates_.append(learningDate);
-    /*------------------------------------------------------------------*/
-
     std::sort(learningDates_.begin(), learningDates_.end(), datesComparison);
 
     set_ = new QBarSet("aktywność");
