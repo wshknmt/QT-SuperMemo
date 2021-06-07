@@ -4,7 +4,6 @@
  * Project: Learning app
  * Description: Class implementing functions for questions answering window.
  */
-
 #include "LearningWindow.h"
 #include "ui_LearningWindow.h"
 #include "Card.h"
@@ -220,7 +219,9 @@ void LearningWindow::on_deleteButton_clicked() {
 }
 
 void LearningWindow::on_endButton_clicked() {
-    if(card_->getSoundPath().length() != 0 && ui_->playButton->isEnabled() == false)
+
+
+    if(ui_->stopButton->isEnabled() == true)
         sound_->stop();
     accept();
 }

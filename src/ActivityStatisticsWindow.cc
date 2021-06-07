@@ -38,7 +38,7 @@ ActivityStatisticsWindow::ActivityStatisticsWindow(UserStats &uStats, QWidget *p
     std::sort(learningDates_.begin(), learningDates_.end(), datesComparison);
 
     set_ = new QBarSet("aktywność");
-    for(int i = 0; i < learningDates_.size(); i++)
+    for(int i = 0; i < learningDates_.size(); ++i)
         set_->append(learningDates_[i].counter);
 
     series_ = new QBarSeries();
@@ -55,7 +55,7 @@ ActivityStatisticsWindow::ActivityStatisticsWindow(UserStats &uStats, QWidget *p
     chart_->setAnimationOptions(QChart::AllAnimations);
 
     QStringList categories;
-    for(int i = 0; i < learningDates_.size(); i++) {
+    for(int i = 0; i < learningDates_.size(); ++i) {
         QLocale locale = QLocale(QLocale::Polish, QLocale::Poland);
         QString polishDate = locale.toString(learningDates_[i].date, "d MMM yyyy");
         //categories.append(learningDates_[i].date.toString(Qt::RFC2822Date));
@@ -89,11 +89,11 @@ bool ActivityStatisticsWindow::areDatesEqual(QDate date1, QDate date2) {
 }
 
 void ActivityStatisticsWindow::createDatesList() {
-    for(int i = 0; i < userStats_->getSize(); i++) {
+    for(int i = 0; i < userStats_->getSize(); ++i) {
         bool existInList = false;
-        for(int j = 0; j < learningDates_.size(); j++) {
+        for(int j = 0; j < learningDates_.size(); ++j) {
             if(areDatesEqual(userStats_->getStat(i).first, learningDates_[j].date)) {
-                learningDates_[j].counter++;
+                ++learningDates_[j].counter;
                 existInList = true;
                 break;
             }

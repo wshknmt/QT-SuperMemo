@@ -31,21 +31,14 @@ public:
     void updateCoursesInComboBox();
     QList <User*> &getUsersList();
     void updateWindow();
-    void saveToFile();
-    void readFromFile();
-    bool isSaveEmpty();
     void updateProgressBar(int number);
     void writeObjectsToFile(std::fstream &file, Card *card);
     void createErrorMessageBox(QString text);
 
-
 private slots:
     void on_newCourseButton_clicked();
-    void on_actionPrint_Courses_to_console_triggered();
     void on_openCourseButton_clicked();
     void on_actionExit_triggered();
-    void on_actionChange_User_triggered();
-    void on_actionSave_triggered();
     void on_actionSettings_triggered();
     void on_openCalendarButton_clicked();
     void on_courseNameTextEdit_textChanged();
@@ -53,11 +46,11 @@ private slots:
     void on_coursesComboBox_highlighted(int index);
     void on_extraReviewButton_clicked();
     void on_activityStatsButton_clicked();
-    void on_actionWarpTime_triggered();
     void on_exitButton_clicked();
     void on_actionExport_triggered();
     void on_actionImport_triggered();
     void on_actionDelete_selected_course_triggered();
+    void on_actionChangeUser_triggered();
 
 private:
     Ui::MainMenuWindow *ui_;

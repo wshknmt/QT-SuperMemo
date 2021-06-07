@@ -42,16 +42,16 @@ bool UserCalendarWindow::areDatesEqual(QDate date1, QDate date2) const {
 }
 
 void UserCalendarWindow::markDates() {
-    for(int i=0; i < coursesManager_->getCoursesNumber(); i++ ) {
+    for(int i=0; i < coursesManager_->getCoursesNumber(); ++i ) {
         Course *course = coursesManager_->getCourse(i);
-        for(int j = 0; j < course->getSizeCardsToRepeat(); j++) {
+        for(int j = 0; j < course->getSizeCardsToRepeat(); ++j) {
             Card *card = course->getCardToRepeat(j);
             if(card->getRepeatDate() < QDate::currentDate())
                 markDate(QDate::currentDate());
             else
                 markDate(card->getRepeatDate());
         }
-        for(int j = 0; j < course->getSizeCardsRepeated(); j++) {
+        for(int j = 0; j < course->getSizeCardsRepeated(); ++j) {
             Card *card = course->getCardRepeated(j);
             if(card->getRepeatDate() < QDate::currentDate())
                 markDate(QDate::currentDate());
@@ -76,10 +76,10 @@ void UserCalendarWindow::on_userCalendar_selectionChanged() {
     else
         ui_->repeatListWidget->setEnabled(false);
     if( isEqualToCurrentDate( ui_->userCalendar->selectedDate()) || ui_->userCalendar->selectedDate() > QDate::currentDate()) {
-        for(int i=0; i < coursesManager_->getCoursesNumber(); i++ ) {
+        for(int i=0; i < coursesManager_->getCoursesNumber(); ++i ) {
             existInListWidget = false;
             Course *course = coursesManager_->getCourse(i);
-            for(int j = 0; j < course->getSizeCardsToRepeat(); j++) {
+            for(int j = 0; j < course->getSizeCardsToRepeat(); ++j) {
                 Card *card = course->getCardToRepeat(j);
                 if(areDatesEqual(ui_->userCalendar->selectedDate(), card->getRepeatDate())) {
                     if( ui_->repeatListWidget->findItems(course->getName(), Qt::MatchExactly ).size() >= 1 ) {
@@ -103,7 +103,7 @@ void UserCalendarWindow::on_userCalendar_selectionChanged() {
             }
             if(existInListWidget)
                 continue;
-            for(int j = 0; j < course->getSizeCardsRepeated(); j++) {
+            for(int j = 0; j < course->getSizeCardsRepeated(); ++j) {
                 Card *card = course->getCardRepeated(j);
                 if(areDatesEqual(ui_->userCalendar->selectedDate(), card->getRepeatDate())) {
                     if( ui_->repeatListWidget->findItems(course->getName(), Qt::MatchExactly ).size() >= 1 ) {
@@ -130,7 +130,7 @@ void UserCalendarWindow::on_userCalendar_selectionChanged() {
 void UserCalendarWindow::on_repeatButton_clicked() {
     QString courseName = ui_->repeatListWidget->selectedItems()[0]->text();
     int index = 0;
-    for(int i = 0; i < coursesManager_->getCoursesNumber(); i++) {
+    for(int i = 0; i < coursesManager_->getCoursesNumber(); ++i) {
         if(courseName == coursesManager_->getCourse(i)->getName()) {
             index = i;
             break;

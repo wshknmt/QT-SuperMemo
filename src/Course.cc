@@ -61,11 +61,11 @@ int Course::getSizeCardsRepeated() const {
 }
 
 void Course::incrementCardsCounter() {
-    cardsCounter_++;
+    ++cardsCounter_;
 }
 
 void Course::decrementCardsCounter() {
-    cardsCounter_--;
+    --cardsCounter_;
 }
 QString Course::getName() const {
     return name_;
@@ -92,7 +92,7 @@ bool Course::isEqualToCurrentDate(QDate date) const {
 }
 
 void Course::checkCards() {
-    for(int i = 0; i < cardsRepeated_.size(); i++) {
+    for(int i = 0; i < cardsRepeated_.size(); ++i) {
         if(cardsRepeated_[i]->getRepeatDate() < QDate::currentDate() || isEqualToCurrentDate(cardsRepeated_[i]->getRepeatDate())) {
             cardsToRepeat_.append(cardsRepeated_[i]);
             cardsRepeated_.removeAt(i);
@@ -102,12 +102,12 @@ void Course::checkCards() {
 }
 
 void Course::simulateTime(qint64 days) {
-    for(int i=0; i < cardsRepeated_.size(); i++)
+    for(int i=0; i < cardsRepeated_.size(); ++i)
         cardsRepeated_[i]->setRepeatDate(cardsRepeated_[i]->getRepeatDate().addDays(days));
 }
 
 void Course::reviewRequest() {
-    for(int i = 0; i < cardsRepeated_.size(); i++)
+    for(int i = 0; i < cardsRepeated_.size(); ++i)
         cardsToRepeat_.append(cardsRepeated_[i]);
     cardsRepeated_.clear();
 }

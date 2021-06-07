@@ -22,10 +22,10 @@ Stat UserStats::getStat(int index) const {
 }
 
 void UserStats::updateCounters() {
-    for(int i=0; i < getSize(); i++) {
-        if(stats_[i].second == AnswerType::GOOD) goodCounter_++;
-        else if(stats_[i].second == AnswerType::MIXED) mixedCounter_++;
-        else if(stats_[i].second == AnswerType::WRONG) wrongCounter_++;
+    for(int i=0; i < getSize(); ++i) {
+        if(stats_[i].second == AnswerType::GOOD) ++goodCounter_;
+        else if(stats_[i].second == AnswerType::MIXED) ++mixedCounter_;
+        else if(stats_[i].second == AnswerType::WRONG) ++wrongCounter_;
     }
 }
 

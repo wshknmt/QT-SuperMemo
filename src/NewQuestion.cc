@@ -22,7 +22,7 @@ NewQuestion::NewQuestion(QWidget *parent) :
     ui_->okButton->setEnabled(false);
     answer_ = "";
     question_ = "";
-    soundPath_.clear();
+    soundPath_ = "";
 }
 
 NewQuestion::~NewQuestion() {

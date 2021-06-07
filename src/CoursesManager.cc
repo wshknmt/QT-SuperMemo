@@ -21,19 +21,19 @@ QList<Course*> &CoursesManager::getCoursesList() {
 Course* CoursesManager::createCourse() {
     Course *course = new Course();
     coursesList_.append(course);
-    coursesCounter_++;
+    ++coursesCounter_;
     return course;
 }
 Course* CoursesManager::createCourse(QString name) {
     Course *course = new Course(name);
     coursesList_.append(course);
-    coursesCounter_++;
+    ++coursesCounter_;
     return course;
 }
 
 void CoursesManager::addCourse(Course *course) {
     coursesList_.append(course);
-    coursesCounter_++;
+    ++coursesCounter_;
 }
 
 void CoursesManager::deleteCourse(int courseNumber) {

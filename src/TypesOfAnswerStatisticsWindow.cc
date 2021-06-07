@@ -14,20 +14,20 @@ TypesOfAnswerStatisticsWindow::TypesOfAnswerStatisticsWindow(UserStats &uStats, 
     ui_->setupUi(this);
     userStats_->updateCounters();
 
-    QPieSeries *series = new QPieSeries();
+    series_ = new QPieSeries();
 
-    series->append("Poprawna odpowiedź", userStats_->getGoodCounter());
-    series->append("Prawie \npoprawna \nodpowiedź", userStats_->getMixedCounter());
-    series->append("Niepoprawna odpowiedź", userStats_->getWrongCounter());
+    series_->append("Poprawna odp.", userStats_->getGoodCounter());
+    series_->append("Prawie \npoprawna \nodp.", userStats_->getMixedCounter());
+    series_->append("Niepoprawna odp.", userStats_->getWrongCounter());
 
-    series->setLabelsVisible(true);
-    series->setLabelsPosition(QPieSlice::LabelOutside);
+    series_->setLabelsVisible(true);
+    series_->setLabelsPosition(QPieSlice::LabelOutside);
 
-    QPieSlice *gSlice = series->slices().at(0);
+    QPieSlice *gSlice = series_->slices().at(0);
     gSlice->setBrush(Qt::green);
-    QPieSlice *mSlice = series->slices().at(1);
+    QPieSlice *mSlice = series_->slices().at(1);
     mSlice->setBrush(Qt::yellow);
-    QPieSlice *wSlice = series->slices().at(2);
+    QPieSlice *wSlice = series_->slices().at(2);
     wSlice->setBrush(Qt::red);
 
     QPalette palette;
@@ -38,25 +38,28 @@ TypesOfAnswerStatisticsWindow::TypesOfAnswerStatisticsWindow(UserStats &uStats, 
     palette.setColor(QPalette::WindowText, Qt::red);
     ui_->label3->setPalette(palette);
 
-    ui_->label1->setText(QString("%1%").arg(100*gSlice->percentage(), 0, 'f', 1) + " poprawnych odpowiedzi");
-    ui_->label2->setText(QString("%1%").arg(100*mSlice->percentage(), 0, 'f', 1) + " prawie poprawnych odpowiedzi");
-    ui_->label3->setText(QString("%1%").arg(100*wSlice->percentage(), 0, 'f', 1) + " niepoprawnych odpowiedzi");
+    ui_->label1->setText(QString("%1%").arg(100*gSlice->percentage(), 0, 'f', 1) + " poprawnych odp.");
+    ui_->label2->setText(QString("%1%").arg(100*mSlice->percentage(), 0, 'f', 1) + " prawie poprawnych odp.");
+    ui_->label3->setText(QString("%1%").arg(100*wSlice->percentage(), 0, 'f', 1) + " niepoprawnych odp.");
 
-    QChart *chart = new QChart();
-    chart->addSeries(series);
-    chart->setTitle("Wykres poprawności udzielanych odpowiedzi");
-    QFont font = chart->titleFont();
+    chart_ = new QChart();
+    chart_->addSeries(series_);
+    chart_->setTitle("Wykres poprawności udzielanych odpowiedzi");
+    QFont font = chart_->titleFont();
     font.setPointSize(13);
-    chart->setTitleFont(font);
-    chart->setAnimationOptions(QChart::AllAnimations);
+    chart_->setTitleFont(font);
+    chart_->setAnimationOptions(QChart::AllAnimations);
 
     if(userStats_->getSize() != 0) {
-        QChartView *chartview = new QChartView(chart);
-        chartview->setParent(ui_->horizontalFrame);
+        chartview_ = new QChartView(chart_);
+        chartview_->setParent(ui_->horizontalFrame);
     }
 }
 
 TypesOfAnswerStatisticsWindow::~TypesOfAnswerStatisticsWindow() {
+    if(userStats_->getSize() != 0) {
+        delete chartview_;
+    }
     delete ui_;
 }
 
