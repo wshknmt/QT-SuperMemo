@@ -9,9 +9,9 @@
 
 #include "Course.h"
 
-Course::Course(QString n) : cardsCounter_(0), name_(n), progress_(0) {}
+Course::Course(QString n) : name_(n), progress_(0), cardsCounter_(0) {}
 
-Course::Course() : cardsCounter_(0), name_("default_course_name"), progress_(0) {}
+Course::Course() : name_("default_course_name"), progress_(0), cardsCounter_(0) {}
 
 Course::~Course() {
     for (Card* cPtr : cardsToRepeat_)
