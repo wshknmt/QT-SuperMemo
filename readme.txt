@@ -13,6 +13,7 @@ sudo apt-get install make
 sudo apt-get install qt5-default
 sudo apt-get install qtmultimedia5-dev
 sudo apt-get install libboost-test-dev
+sudo apt install libqt5charts5-dev
 
 W katalogu głównym projektu uruchomić narzędzie qmake:
 	qmake
